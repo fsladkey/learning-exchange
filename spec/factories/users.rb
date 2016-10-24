@@ -28,6 +28,7 @@ FactoryGirl.define do
     firstname { Faker::Name.first_name }
     lastname  { Faker::Name.last_name }
     username  { Faker::Internet.user_name }
+    password  "starwars"
     email  { Faker::Internet.email }
     zipcode  { Faker::Address.zip_code.first(5) }
     latitude  { Faker::Address.latitude }
