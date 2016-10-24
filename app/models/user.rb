@@ -24,6 +24,8 @@
 #
 
 class User < ApplicationRecord
+  include Commentable
+  # include Taggable
   #validations
   validates :username, presence: true, uniqueness: true
   validates :zipcode, :latitude, :longitude, presence: true, length: { is: 5 }
@@ -33,7 +35,6 @@ class User < ApplicationRecord
          :validatable, :omniauthable
 
   #associations
-  has_many :comments, foreign_key: :author_id
   has_many :memberships, foreign_key: :member_id
   has_many :groups, through: :memberships, source: :group
   has_many :created_events, class_name: :Event, foreign_key: :creator_id
