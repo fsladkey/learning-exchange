@@ -29,7 +29,7 @@ FactoryGirl.define do
     lastname  { Faker::Name.last_name }
     username  { Faker::Internet.user_name }
     email  { Faker::Internet.email }
-    zipcode  { Faker::Address.zip_code }
+    zipcode  { Faker::Address.zip_code.first(5) }
     latitude  { Faker::Address.latitude }
     longitude  { Faker::Address.longitude }
   end
