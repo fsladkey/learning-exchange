@@ -42,7 +42,12 @@
 | event_id        | integer |        |
 | inviter_id      | integer |        |
 | invitee_id      | integer |        |
-| status          | string  |        |
+
+## Attendance
+| Col             | Type    | misc   |
+| ----------------|---------| -------|
+| event_id        | integer |        |
+| user_id         | integer |        |
 
 ## Comments
 | Col              | Type    | misc   |
