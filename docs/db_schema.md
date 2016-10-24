@@ -3,6 +3,7 @@
 | ----------------|--------| -------|
 | firstname       | string |        |
 | lastname        | string |        |
+| email           | string |        |
 | username        | string |        |
 | password_digest | string |        |
 | session_token   | string |        |
@@ -50,6 +51,7 @@
 | commentable_id   | integer |        |
 | commentable_type | string  |        |
 | body             | text    |        |
+| deleted          | bool    |        |
 
 ## Tagging
 | Col           | Type    | misc   |
