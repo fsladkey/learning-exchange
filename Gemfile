@@ -19,6 +19,7 @@ gem 'gon'
 gem 'faker'
 gem 'factory_girl_rails'
 gem 'fuubar'
+gem 'pry-rails'
 
 group :development, :test do
   gem 'rspec-rails'
