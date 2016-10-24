@@ -17,6 +17,7 @@
 #
 
 class Event < ApplicationRecord
+  include Taggable
   validates :creator, :title, :city, :state,
             :zipcode, :latitude, :longitude, presence: true
 

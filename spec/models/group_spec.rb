@@ -25,5 +25,7 @@ RSpec.describe Group, type: :model do
     it { should have_many(:events) }
     it { should have_many(:memberships) }
     it { should have_many(:members).through(:memberships) }
+    it { should have_many(:taggings) }
+    it { should have_many(:tags).through(:taggings) }
   end
 end

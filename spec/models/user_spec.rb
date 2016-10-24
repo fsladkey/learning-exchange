@@ -68,6 +68,6 @@ RSpec.describe User, type: :model do
     it { should have_many(:received_invitations) }
     it { should have_many(:events_to_attend) }
     it { should have_many(:taggings) }
-    it { should have_many(:tags) }
+    it { should have_many(:tags).through(:taggings) }
   end
 end

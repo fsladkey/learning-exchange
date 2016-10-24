@@ -10,6 +10,7 @@
 #
 
 class Group < ApplicationRecord
+  include Taggable
   validates :name, presence: true
 
   has_many :events

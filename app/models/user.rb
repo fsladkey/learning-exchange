@@ -25,7 +25,7 @@
 
 class User < ApplicationRecord
   include Commentable
-  # include Taggable
+  include Taggable
   #validations
   validates :username, presence: true, uniqueness: true
   validates :zipcode, :latitude, :longitude, presence: true, length: { is: 5 }

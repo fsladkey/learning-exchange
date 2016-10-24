@@ -48,5 +48,7 @@ RSpec.describe Event, type: :model do
     it { should have_many(:invited_users) }
     it { should have_many(:attendances) }
     it { should have_many(:attending_users) }
+    it { should have_many(:taggings) }
+    it { should have_many(:tags).through(:taggings) }
   end
 end
