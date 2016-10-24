@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   #associations
   has_many :comments, foreign_key: :author_id
-  has_many :memberships
+  has_many :memberships, foreign_key: :member_id
   has_many :groups, through: :memberships, source: :group
   has_many :created_events, class_name: :Event, foreign_key: :creator_id
 

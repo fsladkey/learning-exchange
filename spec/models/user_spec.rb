@@ -70,5 +70,4 @@ RSpec.describe User, type: :model do
     it { should have_many(:taggings) }
     it { should have_many(:tags) }
   end
-
 end
