@@ -4,7 +4,6 @@ RSpec.describe Comment, type: :model do
   describe "validations" do
     it { should validate_presence_of(:author) }
     it { should validate_presence_of(:body) }
-    it { should validate_presence_of(:commentable) }
   end
 
   describe "columns" do

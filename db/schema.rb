@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024210721) do
+ActiveRecord::Schema.define(version: 20161024212343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20161024210721) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_attendances_on_event_id", using: :btree
     t.index ["user_id"], name: "index_attendances_on_user_id", using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "author_id"
+    t.boolean  "deleted",          default: false
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["author_id"], name: "index_comments_on_author_id", using: :btree
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
