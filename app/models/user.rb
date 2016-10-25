@@ -26,16 +26,22 @@
 class User < ApplicationRecord
   include Commentable
   include Taggable
-  #validations
+  # validations
   validates :username, presence: true, uniqueness: true
   validates :zipcode, length: { is: 5 }
   validates :latitude, :longitude, presence: true
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable,
-         :validatable, :omniauthable
+  devise(
+    :database_authenticatable,
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :trackable,
+    :validatable,
+    :omniauthable
+  )
 
-  #associations
+  # #associations
   has_many :memberships, foreign_key: :member_id
   has_many :groups, through: :memberships, source: :group
   has_many :created_events, class_name: :Event, foreign_key: :creator_id
