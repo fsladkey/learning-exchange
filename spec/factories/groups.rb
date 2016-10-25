@@ -11,6 +11,7 @@
 
 FactoryGirl.define do
   factory :group do
-    
+    name { Faker::Team.creature }
+    description { Faker::Hipster.sentence }
   end
 end

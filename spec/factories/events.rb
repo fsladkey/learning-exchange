@@ -18,6 +18,12 @@
 
 FactoryGirl.define do
   factory :event do
-    
+    title { Faker::Music.instrument }
+    description { Faker::Hipster.sentence }
+    state { Faker::Address.state }
+    city { Faker::Address.city }
+    zipcode { Faker::Address.zip_code }
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
   end
 end
