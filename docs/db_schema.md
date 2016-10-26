@@ -1,71 +1,26 @@
-## Users
-| Col             | Type   | misc   |
-| ----------------|--------| -------|
-| firstname       | string |        |
-| lastname        | string |        |
-| email           | string |        |
-| username        | string |        |
-| password_digest | string |        |
-| session_token   | string |        |
-| zipcode         | string | len(5) |
-| latitude        | float  |        |
-| longitude       | float  |        |
-
 ## Groups
-| Col             | Type   | misc   |
-| ----------------|--------| -------|
-| name            | string |        |
-| description     | string |        |
+`GET /api/groups/` (current users groups)
+`POST /api/groups/`
+`PATCH /api/groups/:id`
+`DELETE /api/groups/:id`
 
-## Membership
-| Col             | Type    | misc   |
-| ----------------|---------| -------|
-| group_id        | integer |        |
-| user_id         | integer |        |
+## Search
+`GET /api/search/search?query=lat=123&long=1234`
 
 ## Event
-| Col             | Type    | misc   |
-| ----------------|---------| -------|
-| title           | string  |        |
-| description     | text    |        |
-| group_id        | integer |        |
-| creator_id      | integer |        |
-| city            | string  |        |
-| state           | string  |        |
-| zipcode         | string  |        |
-| latitude        | float   |        |
-| longitude       | float   |        |
+`POST /api/events/`
+`PATCH /api/events/:id`
+`DELETE /api/events/:id`
 
 ## Invitations
-| Col             | Type    | misc   |
-| ----------------|---------| -------|
-| event_id        | integer |        |
-| inviter_id      | integer |        |
-| invitee_id      | integer |        |
+`POST /api/events/:id/invitations`
+`DELETE /api/invitations/:id`
 
 ## Attendance
-| Col             | Type    | misc   |
-| ----------------|---------| -------|
-| event_id        | integer |        |
-| user_id         | integer |        |
+`POST /api/events/:id/attendances`
+`DELETE /api/attendances/:id`
 
 ## Comments
-| Col              | Type    | misc   |
-| -----------------|---------| -------|
-| author_id        | integer |        |
-| commentable_id   | integer |        |
-| commentable_type | string  |        |
-| body             | text    |        |
-| deleted          | bool    |        |
-
-## Tagging
-| Col           | Type    | misc   |
-| --------------|---------| -------|
-| tag_id        | integer |        |
-| taggable_id   | integer |        |
-| taggable_type | string  |        |
-
-## Tag
-| Col           | Type    | misc   |
-| --------------|---------| -------|
-| name          | string  |        |
+`POST /api/comments`
+`PATCH /api/comments/:id`
+`DELETE /api/comments/:id`
