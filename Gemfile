@@ -23,6 +23,7 @@ gem 'pry-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'annotate'
   gem 'byebug', platform: :mri
 end
