@@ -34,14 +34,7 @@ path: `/profile/:username`
 ```html
 <App>
   <NavBar>
-    <Logo />
-    <SearchBar />
-    <UserInfo>
-      <ProfileLink />
-      <Notifications />
-      <Messages />
-      <LogOutForm />
-    </UserInfo>
+    ...
   </NavBar>
   <Body>
     <Profile>
@@ -54,7 +47,7 @@ path: `/profile/:username`
     </Profile>
   </Body>
   <Footer>
-    <Copyright />
+    ...
   </Footer>
 </App>
 ```
@@ -65,14 +58,7 @@ path: `/groups/:id`
 ```html
 <App>
   <NavBar>
-    <Logo />
-    <SearchBar />
-    <UserInfo>
-      <ProfileLink />
-      <Notifications />
-      <Messages />
-      <LogOutForm />
-    </UserInfo>
+    ...
   </NavBar>
   <Body>
     <Announcements />
@@ -80,7 +66,7 @@ path: `/groups/:id`
     <Chat />
   </Body>
   <Footer>
-    <Copyright />
+    ...
   </Footer>
 </App>
 ```
@@ -92,15 +78,7 @@ path: `/events/:id`
 ```html
 <App>
   <NavBar>
-    <Logo />
-    <SearchBar />
-    <UserInfo>
-      <ProfileLink />
-      <Notifications />
-      <Messages />
-      <AttendingUsers />
-      <LogOutForm />
-    </UserInfo>
+    ...
   </NavBar>
   <Body>
     <Announcements />
@@ -108,7 +86,7 @@ path: `/events/:id`
     <Comments />
   </Body>
   <Footer>
-    <Copyright />
+    ...
   </Footer>
 </App>
 ```
