@@ -7,14 +7,14 @@ RSpec.describe StaticPagesController, type: :controller do
       it "renders the root template" do
         allow(controller).to receive(:current_user) { User.new }
         get :root
-        expect(response).to render_template("root")
+        expect(controller).to render_template("root")
       end
     end
 
     describe "when a user is not logged in" do
       it "redirects to /welcome" do
         get :root
-        expect(response).to redirect_to("/welcome")
+        expect(controller).to redirect_to("/welcome")
       end
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe StaticPagesController, type: :controller do
 
       it "redirects the root template" do
         get :welcome
-        expect(response).to redirect_to("/")
+        expect(controller).to redirect_to("/")
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe StaticPagesController, type: :controller do
 
       it "renders welcome" do
         get :welcome
-        expect(response).to render_template("welcome")
+        expect(controller).to render_template("welcome")
       end
     end
   end

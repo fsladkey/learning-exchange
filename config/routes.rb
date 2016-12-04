@@ -4,22 +4,24 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  namespace :api, defaults: { format: :json } do
+  namespace :api, defaults: { format: 'json' } do
     resources :search, only: [:index]
     resources :messages, only: [:update, :delete]
-    resources :groups, expect: [:new, :edit]
-    resources :events, expect: [:new, :edit]
+    resources :groups, except: [:new, :edit]
+    resources :events, except: [:new, :edit]
     resources :notifications, only: [:update]
 
-    resource :users do
+    resources :users, only: [:show] do
       resources :messages, only: [:create]
     end
 
-    resource :groups do
+    resource :user, only: [:update, :destroy]
+
+    resources :groups do
       resources :messages, only: [:create]
     end
 
-    resource :events do
+    resources :events do
       resources :comments, only: [:create]
     end
 
