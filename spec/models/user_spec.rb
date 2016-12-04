@@ -69,5 +69,9 @@ RSpec.describe User, type: :model do
     it { should have_many(:events_to_attend) }
     it { should have_many(:taggings) }
     it { should have_many(:tags).through(:taggings) }
+    it { should have_many(:in_follows) }
+    it { should have_many(:out_follows) }
+    it { should have_many(:followed_users).through(:out_follows) }
+    it { should have_many(:followers).through(:in_follows) }
   end
 end

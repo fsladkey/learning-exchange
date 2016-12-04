@@ -41,10 +41,14 @@ class User < ApplicationRecord
     :omniauthable
   )
 
-  # #associations
+  #associations
   has_many :memberships, foreign_key: :member_id
   has_many :groups, through: :memberships, source: :group
   has_many :created_events, class_name: :Event, foreign_key: :creator_id
+  has_many :in_follows, class_name: :Follow, foreign_key: :followed_user_id
+  has_many :out_follows, class_name: :Follow, foreign_key: :following_user_id
+  has_many :followers, through: :in_follows, source: :following_user
+  has_many :followed_users, through: :out_follows, source: :followed_user
 
   has_many(
     :received_invitations,
@@ -60,7 +64,7 @@ class User < ApplicationRecord
 
   has_many(
     :events_to_attend,
-    -> { where(status: "accepted") },
+    -> { where(status: :accepted) },
     through: :received_invitations,
     source: :event
   )
