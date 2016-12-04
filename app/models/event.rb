@@ -21,7 +21,7 @@ class Event < ApplicationRecord
   validates :creator, :title, :city, :state,
             :zipcode, :latitude, :longitude, presence: true
 
-  belongs_to :group
+  belongs_to :group, optional: true
   belongs_to :creator, class_name: :User
 
   has_many :invitations
