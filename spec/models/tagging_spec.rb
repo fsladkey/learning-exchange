@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: taggings
+#
+#  id            :integer          not null, primary key
+#  tag_id        :integer          not null
+#  taggable_type :string
+#  taggable_id   :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Tagging, type: :model do
