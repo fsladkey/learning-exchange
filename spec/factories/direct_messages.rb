@@ -12,6 +12,6 @@
 
 FactoryGirl.define do
   factory :direct_message do
-    body: Faker::Hipster.sentance
+    body { Faker::Hipster.sentance }
   end
 end

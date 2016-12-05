@@ -13,6 +13,6 @@
 
 FactoryGirl.define do
   factory :chat_message do
-    body: Faker::Hipster.sentance
+    body { Faker::Hipster.sentance }
   end
 end
