@@ -69,4 +69,8 @@ class User < ApplicationRecord
     source: :event
   )
 
+  def fullname
+    "#{firstname} #{lastname}"
+  end
+
 end

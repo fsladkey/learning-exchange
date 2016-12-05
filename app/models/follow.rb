@@ -10,7 +10,12 @@
 #
 
 class Follow < ApplicationRecord
+  include Notifiable
   validates :followed_user, :following_user, presence: true
   belongs_to :followed_user, class_name: :User
   belongs_to :following_user, class_name: :User
+
+  def user_to_notify
+    followed_user
+  end
 end
