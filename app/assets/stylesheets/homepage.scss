@@ -1,0 +1,56 @@
+@import "variables";
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  height: 300px;
+  img {
+    width: 100%;
+  }
+}
+
+.homepage {
+  position: relative;
+}
+
+.welcome-group {
+  top: 35px;
+  left: 35px;
+  padding: 30px;
+  color: $blue;
+  position: absolute;
+  h1 {
+    font-size: 45px;
+    padding: 20px;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7)
+  }
+}
+
+.megasearch {
+  margin-top: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  label, input {
+    display: block;
+  }
+  input {
+    font-size: 20px;
+    padding: 10px;
+    width: 90%;
+  }
+}
+
+#map {
+  z-index: -1;
+  width: 100%;
+  height: 400px;
+  margin-top: -400px;
+  transition: all 1s;
+}
+
+#map.active {
+  margin-top: 0px;
+}
