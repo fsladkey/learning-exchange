@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204040520) do
+ActiveRecord::Schema.define(version: 20161204143443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20161204040520) do
     t.index ["user_id"], name: "index_attendances_on_user_id", using: :btree
   end
 
+  create_table "chat_messages", force: :cascade do |t|
+    t.integer  "sender_id",      null: false
+    t.integer  "chattable_id",   null: false
+    t.string   "chattable_type", null: false
+    t.string   "body",           null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["chattable_id"], name: "index_chat_messages_on_chattable_id", using: :btree
+    t.index ["chattable_type"], name: "index_chat_messages_on_chattable_type", using: :btree
+    t.index ["sender_id"], name: "index_chat_messages_on_sender_id", using: :btree
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "author_id"
@@ -34,6 +46,16 @@ ActiveRecord::Schema.define(version: 20161204040520) do
     t.datetime "updated_at",                       null: false
     t.index ["author_id"], name: "index_comments_on_author_id", using: :btree
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.integer  "sender_id",   null: false
+    t.integer  "receiver_id", null: false
+    t.text     "body",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["receiver_id"], name: "index_direct_messages_on_receiver_id", using: :btree
+    t.index ["sender_id"], name: "index_direct_messages_on_sender_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -88,6 +110,18 @@ ActiveRecord::Schema.define(version: 20161204040520) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_memberships_on_group_id", using: :btree
     t.index ["member_id"], name: "index_memberships_on_member_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",                         null: false
+    t.integer  "notifiable_id",                   null: false
+    t.string   "notifiable_type",                 null: false
+    t.boolean  "seen",            default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
+    t.index ["notifiable_type"], name: "index_notifications_on_notifiable_type", using: :btree
+    t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|
