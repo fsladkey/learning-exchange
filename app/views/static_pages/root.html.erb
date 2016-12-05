@@ -1,0 +1,25 @@
+<!-- GOOGLE MAPS API -->
+<% api_key = ENV["google_maps_api_key"] %>
+<% google_maps_src = "https://maps.googleapis.com/maps/api/js?key=#{api_key}" %>
+<script src="<%= google_maps_src %>"></script>
+
+<!-- BOOTSTRAP CURRENT USER -->
+<script>
+  <% if user_signed_in? %>
+    window.getCurrentUser = () => {
+      window.getCurrentUser = null;
+      return <%= render("api/users/user.json", user: current_user).html_safe %>
+    }
+  <% end %>
+</script>
+
+<!-- STATIC URLS -->
+<script>
+  window.LearningExchangeStatics = {}
+  <% (7).times do |num| %>
+    <% key = "slideshow_#{(num + 1)}" %>
+    window.LearningExchangeStatics['<%= key %>'] = '<%= asset_url(key + ".jpg") %>'
+  <% end %>
+</script>
+
+<div id="content"></div>
