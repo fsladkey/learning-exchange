@@ -29,4 +29,5 @@ Rails.application.routes.draw do
     get "session/groups", to: "groups#current_user_groups"
   end
 
+  get "/*path", to: "static_pages#root"
 end
