@@ -2,8 +2,9 @@ import { combineReducers } from 'redux'
 import genericReducer from './generic_reducer'
 import currentUser from './session_reducer'
 import dropdown from './dropdown_reducer'
+import mapFocus from './map_focus_reducer'
 
-const reducers = { currentUser, dropdown }
+const reducers = { currentUser, dropdown, mapFocus }
 
 ;[
   'groups',

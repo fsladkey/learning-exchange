@@ -64,6 +64,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:memberships) }
     it { should have_many(:groups) }
     it { should have_many(:created_events) }
+    it { should have_many(:notifications) }
     it { should have_many(:sent_invitations) }
     it { should have_many(:received_invitations) }
     it { should have_many(:events_to_attend) }

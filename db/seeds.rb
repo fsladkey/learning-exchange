@@ -14,6 +14,11 @@ FactoryGirl.create(
 end
 user_ids = User.pluck(:id)
 
+30.times do
+  FactoryGirl.create(:tag)
+end
+tag_ids = Tag.pluck(:id)
+
 #Groups
 puts "creating groups..."
 Group.delete_all
@@ -52,4 +57,12 @@ puts "creating attendances..."
 Attendance.delete_all
 20.times do
   Attendance.create!(user_id: user_ids.sample, event_id: event_ids.sample)
+end
+
+#Attendances
+puts "creating direct messages..."
+DirectMessage.delete_all
+30.times do
+  ids = user_ids.sample(2)
+  FactoryGirl.create!(:direct_message, sender_id: ids.first, receiver_id: ids.last)
 end
