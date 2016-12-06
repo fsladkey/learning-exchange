@@ -21,4 +21,8 @@ class Invitation < ApplicationRecord
   def user_to_notify
     invitee
   end
+
+  def notification_message
+    "#{inviter.fullname} has invited you to #{event.title}."
+  end
 end

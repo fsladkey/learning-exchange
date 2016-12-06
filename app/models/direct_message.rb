@@ -19,4 +19,9 @@ class DirectMessage < ApplicationRecord
   def user_to_notify
     receiver
   end
+
+  def notification_message
+    "#{sender.fullname} has sent you a direct message."
+  end
+  
 end
