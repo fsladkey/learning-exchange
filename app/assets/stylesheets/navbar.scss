@@ -45,9 +45,10 @@
   background-color: $orange;
   padding: 2px 8px;
   border-radius: 50%;
+  margin-left: 5px;
 }
 
-button:hover .counter {
+button:hover .counter, a:hover .counter {
   background-color: $white;
   color: $orange;
 }

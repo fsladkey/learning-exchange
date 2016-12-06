@@ -4,7 +4,7 @@ const stopProp = e => e.stopPropagation()
 
 const NotificationList = ({ notifications }) => {
   const notificationItems = notifications.map(notification => {
-    return <Notification notification={ notification }/>
+    return <li key={ notification.id }>{ notification.notifiable_type }</li>
   })
 
   return (
@@ -19,7 +19,7 @@ const NotificationDropdown = ({ notifications }) => {
   if (notifications.length === 0) {
     content = <p>No notifications to display</p>
   } else {
-    content = <NotiicationList notifications={ notifications }/>
+    content = <NotificationList notifications={ notifications }/>
   }
 
   return (

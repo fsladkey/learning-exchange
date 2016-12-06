@@ -3,8 +3,9 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import Notifications from './notifications'
 import LogOutForm from './log_out_form'
+import Counter from './counter'
 
-function UserInfo({ currentUser }) {
+function UserInfo({ currentUser, directMessages }) {
   return (
     <ul className="user-info flex-row">
       <li>
@@ -14,7 +15,10 @@ function UserInfo({ currentUser }) {
         <Notifications />
       </li>
       <li>
-        <Link to="/messages">Direct Messages</Link>
+        <Link to="/messages">
+          Direct Messages
+          <Counter count={ currentUser.received_messages.length } />
+        </Link>
       </li>
       <li>
         <LogOutForm />
@@ -24,4 +28,5 @@ function UserInfo({ currentUser }) {
 }
 
 const mapStateToProps = ({ currentUser }) => ({ currentUser })
+
 export default connect(mapStateToProps)(UserInfo)

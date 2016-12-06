@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setDropdown } from '../../actions/dropdown_actions'
 import NotificationDropdown from './notifications_dropdown'
+import Counter from './counter'
 
 class Notifications extends Component {
   constructor(props) {
@@ -26,15 +27,16 @@ class Notifications extends Component {
     const { notifications } = this.props
     return (
       <button onClick={ this.toggleDropdown }>
-        Notifications <span className="counter">{ notifications.length }</span>
+        Notifications
+        <Counter count={ notifications.length } />
         { this.dropDown() }
       </button>
     )
   }
 }
 
-function mapStateToProps({ dropdown }) {
-  return { showDropdown: dropdown === 'notifications', notifications: [] }
+function mapStateToProps({ dropdown, currentUser: { notifications } }) {
+  return { showDropdown: dropdown === 'notifications', notifications }
 }
 
 export default connect(mapStateToProps, { setDropdown })(Notifications)
