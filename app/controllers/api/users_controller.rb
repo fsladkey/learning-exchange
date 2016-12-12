@@ -1,5 +1,9 @@
 class Api::UsersController < Api::ApiController
 
+  def index
+    @users = User.within(10, origin: current_user)
+  end
+
   def show
     @user = User.find(params[:id])
   end
@@ -26,9 +30,7 @@ class Api::UsersController < Api::ApiController
       :username,
       :firstname,
       :lastname,
-      :zipcode,
-      :latitude,
-      :longitude
+      :zipcode
     )
   end
 

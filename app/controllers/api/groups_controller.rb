@@ -8,7 +8,7 @@
 class Api::GroupsController < Api::ApiController
 
   def index
-    @groups = Group.all
+    @groups = Group.within(10, origin: current_user)
   end
 
   def current_user_groups
@@ -45,7 +45,7 @@ class Api::GroupsController < Api::ApiController
   end
 
   def group_params
-    params.require(:group).permit(:name, :desciption)
+    params.require(:group).permit(:name, :desciption, :zipcode)
   end
 
 end

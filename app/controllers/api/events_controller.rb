@@ -1,7 +1,7 @@
 class Api::EventsController < Api::ApiController
 
   def index
-    @events = Event.all
+    @events = Event.within(10, origin: current_user)
   end
 
   def current_user_events
@@ -40,14 +40,10 @@ class Api::EventsController < Api::ApiController
   def event_params
     params.require(:event).permit(
       :id,
-      :title,
+      :name,
       :description,
       :group_id,
-      :state,
-      :city,
-      :zipcode,
-      :latitude,
-      :longitude,
+      :address
     )
   end
 

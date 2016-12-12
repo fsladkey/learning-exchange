@@ -19,9 +19,10 @@
 #  firstname              :string
 #  lastname               :string
 #  zipcode                :string
-#  latitude               :float            not null
-#  longitude              :float            not null
+#  latitude               :float
+#  longitude              :float
 #
+ny_zips = ["10001", "11215", "12137"]
 
 FactoryGirl.define do
   factory :user do
@@ -30,8 +31,6 @@ FactoryGirl.define do
     username  { Faker::Internet.user_name }
     password  "starwars"
     email  { Faker::Internet.email }
-    zipcode  { Faker::Address.zip_code.first(5) }
-    latitude  { Faker::Address.latitude }
-    longitude  { Faker::Address.longitude }
+    zipcode  { ny_zips.sample }
   end
 end

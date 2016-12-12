@@ -51,34 +51,35 @@ RSpec.describe Api::EventsController, type: :controller do
 
     describe "POST create" do
       it "creates a new group with valid params" do
-        event_params = build(:event, title: "Title").as_json
+        event_params = build(:event, name: "name").as_json
         post :create, params: { event: event_params }
+
         expect(controller).to render_template(:show)
-        expect(Event.exists?(title: "Title")).to be(true)
+        expect(Event.exists?(name: "name")).to be(true)
       end
 
       it "rejects invalid params" do
-        post :create, params: { event: { title: "Description" } }
+        post :create, params: { event: { name: "Description" } }
         expect(controller).to respond_with(422)
-        expect(Event.exists?(title: "Title")).to be(false)
+        expect(Event.exists?(name: "name")).to be(false)
       end
 
     end
 
     describe "PATCH update" do
       it "updates a group with valid params" do
-        event = create(:event, title: "Original", creator: current_user)
+        event = create(:event, name: "Original", creator: current_user)
         patch :update, params: {
           id: event.id,
-          event: { title: "Updated" }
+          event: { name: "Updated" }
         }
         expect(controller).to render_template(:show)
-        expect(Event.find(event.id).title).to eq("Updated")
+        expect(Event.find(event.id).name).to eq("Updated")
       end
 
       it "renders 422 with invalid params" do
         event = create(:event, creator: current_user)
-        patch :update, params: { id: event.id, event: { title: "" } }
+        patch :update, params: { id: event.id, event: { name: "" } }
         expect(controller).to respond_with(422)
       end
     end

@@ -19,17 +19,19 @@
 #  firstname              :string
 #  lastname               :string
 #  zipcode                :string
-#  latitude               :float            not null
-#  longitude              :float            not null
+#  latitude               :float
+#  longitude              :float
 #
 
 class User < ApplicationRecord
   include Commentable
   include Taggable
+  include Searchable
+  include Geocodable
+
   # validations
   validates :username, presence: true, uniqueness: true
-  validates :zipcode, presence: true, length: { is: 5 }
-  validates :latitude, :longitude, presence: true
+  validates :zipcode, presence: true, length: { is: 5 }, numericality: true
 
   devise(
     :database_authenticatable,
@@ -77,13 +79,16 @@ class User < ApplicationRecord
 
   has_many(
     :events_to_attend,
-    -> { where(status: :accepted) },
     through: :received_invitations,
     source: :event
   )
 
   def fullname
     "#{firstname} #{lastname}"
+  end
+
+  def self.fields_to_query
+    [:username, :firstname, :lastname, :email]
   end
 
 end

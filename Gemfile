@@ -21,6 +21,8 @@ gem 'faker'
 gem 'factory_girl_rails'
 gem 'fuubar'
 gem 'pry-rails'
+gem 'geocoder'
+gem 'geokit-rails'
 
 group :development, :test do
   gem 'rspec-rails'

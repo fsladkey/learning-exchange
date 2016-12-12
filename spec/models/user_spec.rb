@@ -19,8 +19,8 @@
 #  firstname              :string
 #  lastname               :string
 #  zipcode                :string
-#  latitude               :float            not null
-#  longitude              :float            not null
+#  latitude               :float
+#  longitude              :float
 #
 
 require 'rails_helper'
@@ -34,8 +34,6 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:zipcode) }
     it { should validate_length_of(:zipcode) }
-    it { should validate_presence_of(:latitude) }
-    it { should validate_presence_of(:longitude) }
   end
 
   describe "columns" do

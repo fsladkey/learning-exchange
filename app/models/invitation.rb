@@ -23,6 +23,6 @@ class Invitation < ApplicationRecord
   end
 
   def notification_message
-    "#{inviter.fullname} has invited you to #{event.title}."
+    "#{inviter.fullname} has invited you to #{event.name}."
   end
 end

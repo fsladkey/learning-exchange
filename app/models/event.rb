@@ -3,13 +3,11 @@
 # Table name: events
 #
 #  id          :integer          not null, primary key
-#  title       :string           not null
+#  name        :string           not null
 #  description :text
 #  group_id    :integer
 #  creator_id  :integer          not null
-#  state       :string
-#  city        :string
-#  zipcode     :string
+#  address     :string
 #  latitude    :float
 #  longitude   :float
 #  created_at  :datetime         not null
@@ -18,8 +16,12 @@
 
 class Event < ApplicationRecord
   include Taggable
-  validates :creator, :title, :city, :state,
-            :zipcode, :latitude, :longitude, presence: true
+  include Geocodable
+  include Searchable
+  validates :creator, :name, :address, presence: true
+
+  before_validation :geocode
+  geocoded_by :address
 
   belongs_to :group, optional: true
   belongs_to :creator, class_name: :User
@@ -33,5 +35,13 @@ class Event < ApplicationRecord
     through: :attendances,
     source: :user
   )
+
+  def self.fields_to_query
+    [:name]
+  end
+
+  def locator
+    :address
+  end
 
 end

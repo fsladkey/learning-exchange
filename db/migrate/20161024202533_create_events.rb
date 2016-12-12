@@ -1,13 +1,11 @@
 class CreateEvents < ActiveRecord::Migration[5.0]
   def change
     create_table :events do |t|
-      t.string :title, null: false
+      t.string :name, null: false
       t.text :description
       t.integer :group_id
       t.integer :creator_id, null: false
-      t.string :state
-      t.string :city
-      t.string :zipcode
+      t.string :address
       t.float :latitude
       t.float :longitude
 

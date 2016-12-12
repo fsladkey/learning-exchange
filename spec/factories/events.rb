@@ -3,27 +3,22 @@
 # Table name: events
 #
 #  id          :integer          not null, primary key
-#  title       :string           not null
+#  name        :string           not null
 #  description :text
 #  group_id    :integer
 #  creator_id  :integer          not null
-#  state       :string
-#  city        :string
-#  zipcode     :string
+#  address     :string
 #  latitude    :float
 #  longitude   :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+ny_zips = ["10001", "11215", "12137"]
 
 FactoryGirl.define do
   factory :event do
-    title { Faker::Music.instrument }
+    name { Faker::Music.instrument }
     description { Faker::Hipster.sentence }
-    state { Faker::Address.state }
-    city { Faker::Address.city }
-    zipcode { Faker::Address.zip_code }
-    latitude { Faker::Address.latitude }
-    longitude { Faker::Address.longitude }
+    address { ny_zips.sample }
   end
 end

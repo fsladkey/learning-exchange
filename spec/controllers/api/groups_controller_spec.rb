@@ -50,7 +50,7 @@ RSpec.describe Api::GroupsController, type: :controller do
     describe "POST create" do
       it "creates a new group with valid params" do
         post :create, params: {
-          group: { name: "Group name", description: "Description" }
+          group: { name: "Group name", description: "Description", zipcode: "11215" }
         }
         expect(controller).to render_template(:show)
         expect(Group.exists?(name: "Group name")).to be(true)

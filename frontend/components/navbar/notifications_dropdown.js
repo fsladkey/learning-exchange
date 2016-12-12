@@ -1,18 +1,7 @@
 import React from 'react'
+import NotificationList from './notification_list'
 
 const stopProp = e => e.stopPropagation()
-
-const NotificationList = ({ notifications }) => {
-  const notificationItems = notifications.map(notification => {
-    return <li key={ notification.id }>{ notification.notifiable_type }</li>
-  })
-
-  return (
-    <ul>
-      { notificationItems }
-    </ul>
-  )
-}
 
 const NotificationDropdown = ({ notifications }) => {
   let content

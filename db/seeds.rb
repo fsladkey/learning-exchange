@@ -7,15 +7,20 @@ FactoryGirl.create(
   lastname: "Sladkey",
   username: "fsladkey",
   email: "fsladkey@gmail.com",
-  zipcode: 11215
+  password: "starwars",
+  zipcode: '11215'
 )
 50.times do
-  FactoryGirl.create(:user)
+  user = FactoryGirl.build(:user)
+  next unless user.valid?
+  user.save!
 end
 user_ids = User.pluck(:id)
 
 30.times do
-  FactoryGirl.create(:tag)
+  tag = FactoryGirl.build(:tag)
+  next unless tag.valid?
+  tag.save!
 end
 tag_ids = Tag.pluck(:id)
 
@@ -59,10 +64,10 @@ Attendance.delete_all
   Attendance.create!(user_id: user_ids.sample, event_id: event_ids.sample)
 end
 
-#Attendances
+#Direct Message
 puts "creating direct messages..."
 DirectMessage.delete_all
 30.times do
   ids = user_ids.sample(2)
-  FactoryGirl.create!(:direct_message, sender_id: ids.first, receiver_id: ids.last)
+  FactoryGirl.create(:direct_message, sender_id: ids.first, receiver_id: ids.last)
 end

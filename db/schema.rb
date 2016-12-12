@@ -59,13 +59,11 @@ ActiveRecord::Schema.define(version: 20161204143443) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",       null: false
+    t.string   "name",        null: false
     t.text     "description"
     t.integer  "group_id"
     t.integer  "creator_id",  null: false
-    t.string   "state"
-    t.string   "city"
-    t.string   "zipcode"
+    t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at",  null: false
@@ -88,6 +86,9 @@ ActiveRecord::Schema.define(version: 20161204143443) do
   create_table "groups", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
+    t.string   "zipcode",     null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -158,8 +159,8 @@ ActiveRecord::Schema.define(version: 20161204143443) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "zipcode"
-    t.float    "latitude",                            null: false
-    t.float    "longitude",                           null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["latitude"], name: "index_users_on_latitude", using: :btree
     t.index ["longitude"], name: "index_users_on_longitude", using: :btree
