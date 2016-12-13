@@ -44,15 +44,24 @@
 }
 
 #map {
-  z-index: -1;
-  opacity: 0;
-  width: 100%;
   height: 400px;
-  margin-top: -400px;
-  transition: all 1s;
 }
 
-#map.active {
+
+.results-container {
+  position: relative;
+  z-index: -1;
+  pointer-events: none;
+  margin-top: -400px;
+  transition: all 1s;
+  display: flex;
+  article, div {
+    width: 50%;
+    white-space: pre-wrap;
+  }
+}
+
+.results-container.active {
+  pointer-events: auto;
   margin-top: 0px;
-  opacity: 1;
 }

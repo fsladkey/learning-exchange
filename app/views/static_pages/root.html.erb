@@ -1,7 +1,10 @@
 <!-- GOOGLE MAPS API -->
 <% api_key = ENV["google_maps_api_key"] %>
 <% google_maps_src = "https://maps.googleapis.com/maps/api/js?key=#{api_key}" %>
+<% marker_cluster = "https://developers.google.com/maps/documentation/" %>
+<% marker_cluster += "javascript/examples/markerclusterer/markerclusterer.js" %>
 <script src="<%= google_maps_src %>"></script>
+<script src="<%= marker_cluster %>"></script>
 
 <!-- BOOTSTRAP CURRENT USER -->
 <script>

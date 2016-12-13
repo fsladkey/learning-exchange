@@ -1,11 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import SlideShow from './slide_show'
 import MegaSearch from './mega_search'
 import Map from './map'
+import SearchResults from './search_results'
 
 const fadeIn = node => $(node).hide().fadeIn()
 
-export default function HomePage(props) {
+function HomePage({ mapFocus }) {
+  const className = mapFocus ? "active" : ''
   return (
     <section ref={ fadeIn } className='homepage'>
       <section className="welcome-group">
@@ -13,7 +16,16 @@ export default function HomePage(props) {
         <MegaSearch />
       </section>
       <SlideShow />
-      <Map />
+      <section className={ className + " results-container" }>
+        <SearchResults />
+        <Map />
+      </section>
     </section>
   )
 }
+
+const mapStateToProps = ({ mapFocus }) => {
+  return { mapFocus }
+}
+
+export default connect(mapStateToProps)(HomePage)
