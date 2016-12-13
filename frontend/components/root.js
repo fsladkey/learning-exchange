@@ -12,27 +12,32 @@ import EventShow from './events/event_show'
 import GroupForm from './groups/group_form'
 import GroupShow from './groups/group_show'
 
-export default function Root(props) {
+let store;
+document.addEventListener("DOMContentLoaded", () => {
   const preloadedState = {}
   if (window.getCurrentUser) {
     preloadedState.currentUser = window.getCurrentUser()
   }
-  const store = configureStore(preloadedState)
-  window.store = store
+  store = configureStore(preloadedState)
+})
 
+const routes = (
+  <Route path="/" component={ App }>
+    <IndexRoute component={ HomePage } />
+    <Route path="profile" component={ CurrentUserProfile } />
+    <Route path="profile/:username" component={ UserProfile } />
+    <Route path="messages" component={ Messages } />
+    <Route path="events/new" component={ EventForm } />
+    <Route path="events/:id" component={ EventShow } />
+    <Route path="groups/new" component={ GroupForm } />
+    <Route path="groups/:id" component={ GroupShow } />
+  </Route>
+)
+
+export default function Root(props) {
   return (
     <Provider store={ store }>
-      <Router history={ browserHistory }>
-        <Route path="/" component={ App }>
-          <IndexRoute component={ HomePage } />
-          <Route path="profile" component={ CurrentUserProfile } />
-          <Route path="profile/:username" component={ UserProfile } />
-          <Route path="messages" component={ Messages } />
-          <Route path="events/new" component={ EventForm } />
-          <Route path="events/:id" component={ EventShow } />
-          <Route path="groups/new" component={ GroupForm } />
-          <Route path="groups/:id" component={ GroupShow } />
-        </Route>
+      <Router history={ browserHistory } routes={ routes }>
       </Router>
     </Provider>
   )

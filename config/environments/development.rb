@@ -1,11 +1,17 @@
 Rails.application.configure do
+  config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
+  config.asset_host = Proc.new { |source|
+    if source =~ /bundle\.js$/i
+      "http://localhost:8080"
+    end
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-  
+
   config.generators.helper = false
   config.generators.stylesheets = false
   config.generators.javascripts = false

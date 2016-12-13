@@ -10,7 +10,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'omniauth'
-gem 'geocoder'
 gem 'letter_opener'
 gem 'figaro'
 
@@ -37,6 +36,11 @@ group :test do
 end
 
 group :development do
+  gem 'foreman'
+  gem "guard", ">= 2.2.2", :require => false
+  gem "guard-livereload",  :require => false
+  gem "rb-fsevent",        :require => false
+  gem "rack-livereload"
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'

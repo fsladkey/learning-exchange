@@ -18,11 +18,14 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   context: __dirname,
   entry: [
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
     path.join(__dirname, 'frontend', 'entry.js')
   ],
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'app', 'assets', 'javascripts')
+    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    publicPath: 'http://localhost:8080/javascripts'
   },
   plugins: plugins,
   module: {
@@ -30,10 +33,8 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'latest']
-        }
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=latest'],
+        include: path.join(__dirname, 'frontend'),
       }
     ]
   },
@@ -41,5 +42,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     root: path.resolve('./node_modules')
-  }
+  },
+  devServer: { stats: 'errors-only' }
 };

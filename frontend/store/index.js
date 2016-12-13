@@ -9,5 +9,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default (preloadedState = {}) => {
-  return createStore(rootReducer, preloadedState, applyMiddleware(...middlewares))
+  const store = createStore(
+    rootReducer,
+    preloadedState,
+    applyMiddleware(...middlewares)
+  )
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers/index');
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+  return store
 }
