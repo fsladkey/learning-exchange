@@ -1,3 +1,3 @@
 # learning-exchange
 
-More info coming soon.
+To start developing run `foreman start -f Procfile.dev`
