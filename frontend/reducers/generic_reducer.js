@@ -10,7 +10,7 @@ const genericReducer = (type, reducer = defaultReducer) => (state = Map({}), act
   switch (action.type) {
     case RECEIVE_GENERIC_RESOURCES:
       if (action.resourceType === type) {
-        newItems = Map(action.resource)
+        const newItems = Map(action.resources)
         return state.merge(newItems)
       }
     case REMOVE_GENERIC_RESOURCE:

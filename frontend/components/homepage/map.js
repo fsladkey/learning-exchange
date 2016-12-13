@@ -9,17 +9,16 @@ class Map extends Component {
   }
 
   render() {
-    const className = this.props.mapFocus ? "active" : ""
+    const className = this.props.mapFocus ? "active" : ''
     return (
-      <div
-        id="map"
-        className={ className }
-        ref={ map => this.map = map }
-        />
+      <div>
+        <div id="map" className={ className } ref={ map => this.map = map }/>
+        { JSON.stringify(this.props.searchResults) }
+      </div>
     )
   }
 }
 
-const mapStateToProps = ({ mapFocus }) => ({ mapFocus })
+const mapStateToProps = ({ mapFocus, searchResults }) => ({ mapFocus, searchResults })
 
 export default connect(mapStateToProps)(Map)

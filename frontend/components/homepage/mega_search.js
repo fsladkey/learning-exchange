@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setMapFocus } from '../../actions/map_focus_actions'
+import { fetchSearchResults } from '../../actions/search_actions'
 
 class MegaSearch extends Component {
   constructor(props) {
@@ -10,7 +11,9 @@ class MegaSearch extends Component {
   }
 
   handleChange(e) {
-    this.setState({ query: e.currentTarget.value })
+    this.setState({ query: e.currentTarget.value }, () => {
+      this.props.fetchSearchResults(this.state)
+    })
   }
 
   render() {
@@ -32,4 +35,4 @@ class MegaSearch extends Component {
   }
 }
 
-export default connect(null, { setMapFocus })(MegaSearch)
+export default connect(null, { setMapFocus, fetchSearchResults })(MegaSearch)
