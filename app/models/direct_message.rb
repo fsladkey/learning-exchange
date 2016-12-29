@@ -11,6 +11,7 @@
 #
 
 class DirectMessage < ApplicationRecord
+  # TODO: Rework into conversations :(
   include Notifiable
   validates :sender, :receiver, presence: true
   belongs_to :sender, class_name: :User
@@ -22,6 +23,10 @@ class DirectMessage < ApplicationRecord
 
   def notification_message
     "#{sender.fullname} has sent you a direct message."
+  end
+
+  def other_user(current_user)
+    current_user.id == sender.id ? receiver : sender
   end
 
 end

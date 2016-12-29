@@ -7,18 +7,20 @@ export const REMOVE_GENERIC_RESOURCE = "REMOVE_GENERIC_RESOURCE"
 
 export const receiveResources = (resources, resourceType) => ({
   type: RECEIVE_GENERIC_RESOURCES,
-  resourceType,
-  resources
+  resources,
+  resourceType
 })
 
 export const removeResource = (resource, resourceType) => ({
   type: RECEIVE_GENERIC_RESOURCES,
-  resourceType,
-  id: resource.id
+  id: resource.id,
+  resourceType
 })
 
 export const receiveResource = (resource, resourceType) => {
-  return receiveResources({ [resource.id]: resource }, resourceType)
+  for (let id in resource) {
+    return receiveResources({ [id]: resource[id] }, resourceType)
+  }
 }
 
 const dispatchSingleResult = (dispatch, resourceType) => response => {
@@ -48,17 +50,17 @@ const fetchAll = resourceType => data => dispatch => {
 }
 
 const post = resourceType => data => dispatch => {
-  APIUtil.post(`/api/${resourceType}s`, { [resourceType]: data })
+  return APIUtil.post(`/api/${resourceType}s`, { [resourceType]: data })
     .then(dispatchSingleResult(dispatch, resourceType))
 }
 
 const patch = resourceType => data => dispatch => {
-  APIUtil.patch(`/api/${resourceType}s/${data.id}`, { [resourceType]: data })
+  return APIUtil.patch(`/api/${resourceType}s/${data.id}`, { [resourceType]: data })
     .then(dispatchSingleResult(dispatch, resourceType))
 }
 
 const destroy = resourceType => id => dispatch => {
-  APIUtil.destroy(`/api/${resourceType}s/${data.id}`, { [resourceType]: data })
+  return APIUtil.destroy(`/api/${resourceType}s/${data.id}`, { [resourceType]: data })
     .then(dispatch(removeResource, resourceType))
 }
 
