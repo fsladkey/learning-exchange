@@ -6,6 +6,7 @@ import LogOutForm from './log_out_form'
 import Counter from './counter'
 
 function UserInfo({ currentUser, directMessages }) {
+  console.log(arguments[0]);
   return (
     <ul className="user-info flex-row">
       <li>

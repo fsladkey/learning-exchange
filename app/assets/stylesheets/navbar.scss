@@ -5,6 +5,8 @@
 }
 
 .nav {
+  position: relative;
+  z-index: 5;
   background-color: $blue;
   color: $white;
   box-shadow: 1px 1px 3px $blue;
@@ -17,6 +19,7 @@
   }
   li {
     border-left: 2px solid $white;
+    position: relative;
     &:last-child {
       border-right: 2px solid $white;
     }
@@ -31,14 +34,18 @@
 .notification-dropdown {
   cursor: auto;
   position: absolute;
-  z-index: 100;
+  text-align: left;
   top: 100%;
-  left: 0px;
+  left: 50%;
+  transform: translateX(-50%);
   border: 1px solid grey;
   border-radius: 5px;
   background-color: white;
   color: black;
-  padding: 15px 25px;
+  padding: 5px 15px;
+  li {
+    margin: 10px;
+  }
 }
 
 .counter {

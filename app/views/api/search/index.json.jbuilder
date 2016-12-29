@@ -1,12 +1,12 @@
 json.events @events do |event|
-  json.extract! event, :id, :name, :latitude, :longitude
-  json.title event.name
+  json.partial! "search_result", result: event
+  json.extract! event, :name, :description#, :date
 end
 json.groups @groups do |group|
-  json.extract! group, :id, :name, :latitude, :longitude
-  json.title group.name
+  json.partial! "search_result", result: group
+  json.extract! group, :name, :description
 end
 json.users @users do |user|
-  json.extract! user, :id, :username, :fullname, :latitude, :longitude
-  json.title user.username
+  json.partial! "search_result", result: user
+  json.extract! user, :username, :fullname, :email
 end

@@ -37,7 +37,7 @@ class Event < ApplicationRecord
   )
 
   def self.fields_to_query
-    [:name]
+    [:name, :description]
   end
 
   def locator

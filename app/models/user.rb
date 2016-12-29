@@ -83,12 +83,17 @@ class User < ApplicationRecord
     source: :event
   )
 
+  def self.fields_to_query
+    [:username, :firstname, :lastname, :email]
+  end
+
   def fullname
     "#{firstname} #{lastname}"
   end
 
-  def self.fields_to_query
-    [:username, :firstname, :lastname, :email]
+
+  def all_messages
+    DirectMessage.where("sender_id = :id OR receiver_id = :id", id: id)
   end
 
 end
