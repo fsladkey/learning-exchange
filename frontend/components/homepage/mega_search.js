@@ -1,26 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setMapFocus } from '../../actions/map_focus_actions'
-import { fetchSearchResults, clearSearchResults } from '../../actions/search_actions'
+import { setQuery } from '../../actions/search_actions'
 
 class MegaSearch extends Component {
-  constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this)
-    this.state = { query: "" }
-  }
-
-  handleChange(e) {
-    this.setState({ query: e.currentTarget.value }, () => {
-      this.state.query ?
-        this.props.fetchSearchResults(this.state) :
-        this.props.clearSearchResults();
-    })
+  handleChange = (e) => {
+    this.props.setQuery(e.currentTarget.value)
   }
 
   render() {
-    const { setMapFocus } = this.props
-    const { query } = this.state
+    const { setMapFocus, query } = this.props
     return (
       <form className="megasearch">
         <input
@@ -38,6 +27,6 @@ class MegaSearch extends Component {
 }
 
 export default connect(
-  null,
-  { setMapFocus, fetchSearchResults, clearSearchResults }
+  ({ query }) => ({ query }),
+  { setMapFocus, setQuery }
 )(MegaSearch)

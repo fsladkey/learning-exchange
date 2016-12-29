@@ -5,7 +5,7 @@ import { closeDropdown } from '../actions/dropdown_actions'
 
 const handleClick = (closeDropdown, dropdown) => dropdown && closeDropdown()
 
-function App({ children, closeDropdown, dropdown }) {
+function App({ children, closeDropdown, dropdown, currentUser }) {
   return (
     <div onClick={ (e) => handleClick(closeDropdown, dropdown) } id="app">
       <NavBar />

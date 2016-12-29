@@ -16,7 +16,8 @@ class Map extends Component {
   }
 
   render() {
-    const className = this.props.mapFocus ? "active" : ''
+    let className = 'result-pane'
+    className += this.props.mapFocus ? "active" : ''
     return (
       <div id="map" className={ className } ref={ map => this.mapNode = map }/>
     )

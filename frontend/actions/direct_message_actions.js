@@ -1,3 +1,3 @@
 import { createResourceActions } from './generic_actions'
 
-export default createResourceActions('group')
+export default createResourceActions('direct_message')

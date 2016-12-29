@@ -1,0 +1,42 @@
+@import "variables";
+
+.welcome-page {
+  h1 {
+    padding: 10px;
+    background-color: $blue;
+    color: $white;
+    margin-bottom: 20px;
+  }
+
+  text-align: center;
+  font-size: 18px;
+  form {
+    padding: 40px;
+    width: 390px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: auto;
+    background-color: white;
+    label {
+      display: none;
+    }
+    input, button {
+      border-radius: 5px;
+    }
+    input {
+      border: 1px solid #ccc;
+      font-size: 18px;
+      box-sizing: border-box;
+      padding: 20px;
+      display: block;
+      width: 100%;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 20px 170px;
+      background-color: $orange;
+      color: $white;
+    }
+  }
+}

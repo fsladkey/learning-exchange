@@ -4,14 +4,23 @@ import currentUser from './session_reducer'
 import dropdown from './dropdown_reducer'
 import mapFocus from './map_focus_reducer'
 import searchResults from './search_results_reducer'
+import query from './query_reducer'
+import { routerReducer } from 'react-router-redux'
 
-const reducers = { currentUser, dropdown, mapFocus, searchResults }
+const reducers = {
+  currentUser,
+  dropdown,
+  mapFocus,
+  searchResults,
+  query,
+  routing: routerReducer
+}
 
 ;[
   'groups',
   'events',
   'users',
-  'directMessages',
+  'direct_messages',
   'chatMessages',
   'notifications'
 ].forEach(type => reducers[type] = genericReducer(type))
