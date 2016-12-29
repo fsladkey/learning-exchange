@@ -33,7 +33,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=latest'],
+        loaders: [
+          'react-hot',
+          'babel?presets[]=react,presets[]=latest,plugins[]=transform-class-properties'
+        ],
         include: path.join(__dirname, 'frontend'),
       }
     ]

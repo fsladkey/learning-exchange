@@ -10,10 +10,9 @@ Rails.application.routes.draw do
     resources :groups, except: [:new, :edit]
     resources :events, except: [:new, :edit]
     resources :notifications, only: [:update]
+    resources :direct_messages, only: [:index, :create]
 
-    resources :users, only: [:show] do
-      resources :messages, only: [:create]
-    end
+    resources :users, only: [:show]
 
     resource :user, only: [:update, :destroy]
 

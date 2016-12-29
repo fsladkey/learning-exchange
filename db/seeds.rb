@@ -1,3 +1,13 @@
+#Tags
+Tag.delete_all
+Tagging.delete_all
+30.times do
+  tag = FactoryGirl.build(:tag)
+  next unless tag.valid?
+  tag.save!
+end
+tags = Tag.all.to_a
+
 #Users
 puts "creating users..."
 User.delete_all
@@ -14,30 +24,26 @@ FactoryGirl.create(
   user = FactoryGirl.build(:user)
   next unless user.valid?
   user.save!
+  user.tags = tags.sample(3)
 end
-user_ids = User.pluck(:id)
+users = User.all.to_a
 
-30.times do
-  tag = FactoryGirl.build(:tag)
-  next unless tag.valid?
-  tag.save!
-end
-tag_ids = Tag.pluck(:id)
 
 #Groups
 puts "creating groups..."
 Group.delete_all
 10.times do
-  FactoryGirl.create(:group)
+  group = FactoryGirl.create(:group)
+  group.tags = tags.sample(3)
 end
-group_ids = Group.pluck(:id)
+groups = Group.all.to_a
 
 #Memberships
 puts "creating memberships..."
 Membership.delete_all
 User.all.each do |user|
-  group_ids.sample(2).each do |group_id|
-    Membership.create!(member_id: user.id, group_id: group_id)
+  groups.sample(2).each do |group|
+    group.memberships.create!(member: user)
   end
 end
 
@@ -45,29 +51,47 @@ end
 puts "creating events..."
 Event.delete_all
 20.times do
-  FactoryGirl.create(:event, group_id: group_ids.sample, creator_id: user_ids.sample)
+  event = FactoryGirl.create(:event, group: groups.sample, creator: users.sample)
+  event.tags = tags.sample(3)
 end
-event_ids = Event.pluck(:id)
+events = Event.all.to_a
 
 #Invitations
 puts "creating invitations..."
 Invitation.delete_all
-20.times do
-  id1, id2 = user_ids.sample(2)
-  Invitation.create!(inviter_id: id1, invitee_id: id2, event_id: event_ids.sample)
+2.times { events.sample.invitations.create(inviter: users.sample, invitee: User.first) }
+events.each do |event|
+  3.times do
+    u1, u2 = users.sample(2)
+    event.invitations.create!(inviter: u1, invitee: u2)
+  end
 end
 
 #Attendances
 puts "creating attendances..."
 Attendance.delete_all
-20.times do
-  Attendance.create!(user_id: user_ids.sample, event_id: event_ids.sample)
+2.times { Attendance.create(user: User.first, event: events.sample) }
+Invitation.all do |inv|
+  if rand(2) == 0
+    Attendance.create(user: inv.invitee, event: events.sample)
+  end
 end
 
 #Direct Message
 puts "creating direct messages..."
 DirectMessage.delete_all
+2.times do
+  user = users.sample
+  3.times { FactoryGirl.create(:direct_message, sender: User.first, receiver: user) }
+  3.times { FactoryGirl.create(:direct_message, sender: user, receiver: User.first) }
+end
+2.times do
+  user = users.sample
+  3.times { FactoryGirl.create(:direct_message, sender: user, receiver: User.first) }
+  3.times { FactoryGirl.create(:direct_message, sender: User.first, receiver: user) }
+end
+
 30.times do
-  ids = user_ids.sample(2)
-  FactoryGirl.create(:direct_message, sender_id: ids.first, receiver_id: ids.last)
+  u1, u2 = users.sample(2)
+  FactoryGirl.create(:direct_message, sender: u1, receiver: u2)
 end

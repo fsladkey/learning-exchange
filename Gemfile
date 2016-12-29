@@ -12,6 +12,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'letter_opener'
 gem 'figaro'
+gem 'redis-rails'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
