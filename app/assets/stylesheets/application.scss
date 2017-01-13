@@ -15,7 +15,7 @@ body {
   background-color: $white;
 }
 
-button {
+button, a {
   cursor: pointer;
 }
 
@@ -24,6 +24,7 @@ h1 {
 }
 
 .content-container {
+  height: 100%;
   max-width: 1200px;
   min-width: 731px;
   margin: auto;

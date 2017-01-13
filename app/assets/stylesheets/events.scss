@@ -1,0 +1,31 @@
+@import "variables";
+
+.event-header {
+  background-color: #ddd;
+  padding: 20px;
+  h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+.sub-nav {
+  background-color: $blue;
+  color: $white;
+  font-weight: bold;
+  ul {
+    display: flex;
+    justify-content: center;
+    a {
+      display: block;
+      padding: 10px;
+      margin-right: 5px;
+      border-bottom: 1px solid transparent;
+      &:hover {
+        background-color: #eee;
+        color: $blue;
+        border-bottom: 1px solid $orange;
+      }
+    }
+  }
+}

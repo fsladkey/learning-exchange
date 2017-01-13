@@ -14,6 +14,9 @@ import EventForm from './events/event_form'
 import EventShow from './events/event_show'
 import GroupForm from './groups/group_form'
 import GroupShow from './groups/group_show'
+import GroupChat from './groups/group_chat'
+import GroupMembers from './groups/group_members'
+import GroupEvents from './groups/group_events'
 import PageMissing from './error/page_missing'
 
 const store = configureStore()
@@ -35,7 +38,11 @@ const routes = (
     <Route path="events/new" component={ EventForm } />
     <Route path="events/:id" component={ EventShow } />
     <Route path="groups/new" component={ GroupForm } />
-    <Route path="groups/:id" component={ GroupShow } />
+    <Route path="groups/:id" component={ GroupShow }>
+      <IndexRoute component={ GroupChat } />
+      <Route path="events" component={ GroupEvents } />
+      <Route path="members" component={ GroupMembers } />
+    </Route>
     <Route path="*" component={ PageMissing } />
   </Route>
 )
