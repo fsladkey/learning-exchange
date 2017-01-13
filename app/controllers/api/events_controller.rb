@@ -4,6 +4,10 @@ class Api::EventsController < Api::ApiController
     @events = Event.within(10, origin: current_user)
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+
   def current_user_events
     @events = current_user.events_to_attend
     render :index

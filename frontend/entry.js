@@ -4,7 +4,6 @@ import Root from './components/root'
 import Welcome from './components/welcome'
 import Immutable from 'immutable'
 if (process.env.NODE_ENV !== 'production') {
-  debugger
   require('immutable-devtools')(Immutable)
 }
 

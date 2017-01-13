@@ -15,7 +15,7 @@ ny_zips = ["10001", "11215", "112137"]
 
 FactoryGirl.define do
   factory :group do
-    name { Faker::Team.creature }
+    name { Faker::Team.creature.capitalize }
     description { Faker::Hipster.sentence }
     zipcode { ny_zips.sample }
   end

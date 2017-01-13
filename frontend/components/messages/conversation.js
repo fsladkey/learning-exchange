@@ -14,16 +14,32 @@ function Message({ message, currentUser }) {
   )
 }
 
-function MessageList({ messages, currentUser }) {
-  return (
-    <ul>
+class MessageList extends Component {
+
+  scrollToBottom() {
+    this.node.scrollTop = this.node.scrollHeight;
+  }
+
+  componentDidMount() {
+    this.scrollToBottom()
+  }
+
+  componentWillReceiveProps() {
+    setTimeout(() => this.scrollToBottom(), 10)
+  }
+
+  render() {
+    const { messages, currentUser } = this.props
+    return (
+      <ul ref={ node => this.node = node } className="message-list">
       {
         messages.map(message =>
           <Message key={ message.id } message={ message } currentUser={ currentUser }/>
         )
       }
-    </ul>
-  )
+      </ul>
+    )
+  }
 }
 
 function Conversation({ currentUser, conversation }) {

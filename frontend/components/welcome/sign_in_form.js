@@ -1,6 +1,7 @@
 import React from 'react'
 
 const csrf_token = document.getElementsByName('csrf-token')[0].content
+//TODO: Add Spinner
 export default function SignInForm(props) {
   return (
     <form className="sign-in-form" action="/users/sign_in" method="POST">

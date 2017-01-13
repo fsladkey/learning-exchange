@@ -1,0 +1,17 @@
+@import "variables";
+
+.tag-list {
+  display: flex;
+  margin-bottom: 10px;
+  a {
+    display: block;
+    padding: 5px 10px;
+    margin-right: 20px;
+    background-color: $orange;
+    color: $white;
+    border-radius: 10px;
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}

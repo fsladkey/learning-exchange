@@ -11,6 +11,10 @@ class Api::GroupsController < Api::ApiController
     @groups = Group.within(10, origin: current_user)
   end
 
+  def show
+    @group = group
+  end
+
   def current_user_groups
     @groups = current_user.groups
     render :index

@@ -9,3 +9,7 @@ end
 json.events user.events_to_attend do |event|
   json.extract! event, :id, :name
 end
+
+json.tags user.tags do |tag|
+  json.extract! tag, :id, :name
+end

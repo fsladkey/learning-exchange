@@ -1,0 +1,32 @@
+@import "variables";
+
+.profile {
+  height: 100%;
+  display: flex;
+}
+
+.profile-header {
+  padding: 10px;
+  hgroup {
+    display: flex;
+    h4 {
+      margin-right: 20px;
+    }
+  }
+  h3 {
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.profile-sidebar {
+  margin-left: auto;
+  height: 100%;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  padding: 20px;
+}
+.profile-comments {
+  padding: 10px;
+}
