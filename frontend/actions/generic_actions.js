@@ -17,16 +17,10 @@ export const removeResource = (resource, resourceType) => ({
   resourceType
 })
 
-export const receiveResource = (resource, resourceType) => {
-  for (let id in resource) {
-    return receiveResources({ [id]: resource[id] }, resourceType)
-  }
-}
-
-const dispatchSingleResult = (dispatch, resourceType) => response => {
+export const dispatchSingleResult = (dispatch, resourceType) => response => {
   const result = normalize(response, schemas[resourceType])
   for (let resourceType in result.entities) {
-    dispatch(receiveResource(result.entities[resourceType], resourceType))
+    dispatch(receiveResources(result.entities[resourceType], resourceType))
   }
   return response
 }

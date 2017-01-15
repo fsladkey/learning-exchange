@@ -83,6 +83,12 @@ class User < ApplicationRecord
     source: :event
   )
 
+  has_many(
+    :authored_comments,
+    class_name: "Comment",
+    foreign_key: :author_id,
+  )
+
   def self.fields_to_query
     [:username, :firstname, :lastname, :email]
   end

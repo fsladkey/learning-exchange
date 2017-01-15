@@ -1,8 +1,15 @@
-import { Schema, arrayOf } from 'normalizr';
-const group = new Schema('groups', { idAttribute: 'id' })
-const event = new Schema('events', { idAttribute: 'id' })
-const user = new Schema('users', { idAttribute: 'id' })
-const direct_message = new Schema('direct_messages', { idAttribute: 'id' })
-const schemas = { group, event, user, direct_message }
+import { schema } from 'normalizr';
 
-export default schemas
+const group = new schema.Entity('groups')
+const event = new schema.Entity('events')
+const comment = new schema.Entity('comments')
+const user = new schema.Entity('users', { comments: [ comment ] })
+const direct_message = new schema.Entity('direct_messages')
+
+export default {
+  group,
+  event,
+  comment,
+  user,
+  direct_message
+}

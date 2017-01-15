@@ -1,6 +1,9 @@
 import { createSelector } from 'reselect'
 import { Map, List } from 'immutable'
 
+const createdAtAsc = (a, b) => new Date(a.created_at) - new Date(b.created_at)
+const createdAtDesc = (b, a) => new Date(a.created_at) - new Date(b.created_at)
+
 export const allResults = ({ searchResults }) => {
   return searchResults.reduce((all, results) => all.concat(results))
 }
@@ -28,9 +31,13 @@ export const currentConversation = ({ direct_messages }, username) => {
       result.messages.push(dm)
     }
   })
-  debugger
-  result.messages = result.messages.sort((a, b) => {
-    return new Date(a.created_at) - new Date(b.created_at)
-  })
+  result.messages = result.messages.sort((a, b) => createdAtAsc)
   return result
+}
+
+export const userComments = ({ comments }, userId) => {
+  return comments.filter(comment =>
+    comment.commentable_id === userId &&
+    comment.commentable_type === 'User'
+  ).sort(createdAtDesc)
 }

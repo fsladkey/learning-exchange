@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :events, except: [:new, :edit]
     resources :notifications, only: [:update]
     resources :direct_messages, only: [:index, :create]
+    resources :comments, only: [:create]
 
     resources :users, only: [:show]
 

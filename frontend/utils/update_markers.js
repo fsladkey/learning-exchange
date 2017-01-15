@@ -4,7 +4,7 @@ export default function updateMarkers(component, objects) {
   component.markers.forEach(marker => marker.setMap(null))
   component.markers = []
   objects.forEach(object => {
-    const latLng = { lat: object.get('latitude'), lng: object.get('longitude') };
+    const latLng = { lat: object.latitude, lng: object.longitude };
     if (latLng.lat && latLng.lng) {
       const marker = new google.maps.Marker({
         position: latLng,

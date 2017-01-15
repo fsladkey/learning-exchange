@@ -1,4 +1,4 @@
-json.extract! event, :id, :name, :description
+json.extract! event, :id, :name, :description, :lat, :lng
 
 json.tags event.tags do |tag|
   json.extract! tag, :id, :name

@@ -3,7 +3,10 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import configureStore from '../store'
 import { receiveCurrentUser } from '../actions/session_actions'
+import { dispatchSingleResult } from '../actions/generic_actions'
 import { syncHistoryWithStore } from 'react-router-redux'
+import { normalize } from 'normalizr'
+import schemas from '../utils/schemas'
 import App from './app'
 import HomePage from './homepage'
 import Messages from './messages'
@@ -11,19 +14,24 @@ import Conversation from './messages/conversation'
 import CurrentUserProfile from './profile/current_user_profile'
 import UserProfile from './profile/user_profile'
 import EventForm from './events/event_form'
+import EventChat from './events/event_chat'
+import EventMembers from './events/event_members'
 import EventShow from './events/event_show'
 import GroupForm from './groups/group_form'
 import GroupShow from './groups/group_show'
 import GroupChat from './groups/group_chat'
 import GroupMembers from './groups/group_members'
 import GroupEvents from './groups/group_events'
+import TagShow from './tags/tag_show'
 import PageMissing from './error/page_missing'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 document.addEventListener("DOMContentLoaded", () => {
   if (window.getCurrentUser) {
-    store.dispatch(receiveCurrentUser(window.getCurrentUser()))
+    const currentUser = window.getCurrentUser()
+    dispatchSingleResult(store.dispatch, 'user')(currentUser)
+    store.dispatch(receiveCurrentUser(currentUser))
   }
 })
 
@@ -36,18 +44,23 @@ const routes = (
       <Route path=":username" component={ Conversation } />
     </Route>
     <Route path="events/new" component={ EventForm } />
-    <Route path="events/:id" component={ EventShow } />
+    <Route path="events/:id" component={ EventShow }>
+      <IndexRoute component={ EventChat } />
+      <Route path="members" component={ EventMembers } />
+    </Route>
     <Route path="groups/new" component={ GroupForm } />
     <Route path="groups/:id" component={ GroupShow }>
       <IndexRoute component={ GroupChat } />
       <Route path="events" component={ GroupEvents } />
       <Route path="members" component={ GroupMembers } />
     </Route>
+    <Route path="tags/:tagname" component={ TagShow } />
     <Route path="*" component={ PageMissing } />
   </Route>
 )
 
 export default function Root(props) {
+  // TODO: remove
   window.store = store
   return (
     <Provider store={ store }>
