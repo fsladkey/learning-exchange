@@ -1,10 +1,9 @@
 import { createStore, applyMiddleware } from 'redux'
 import welcomeReducer from '../reducers/welcome'
-import createLogger from 'redux-logger'
 
 const middlewares = []
 if (process.env.NODE_ENV !== 'production') {
-  middlewares.push(createLogger())
+  middlewares.push(require('redux-logger')())
 }
 
 export default (preloadedState = {}) => {
