@@ -30,10 +30,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'latest']
-        }
+        loaders: [
+          'babel?presets[]=react,presets[]=latest,plugins[]=transform-class-properties'
+        ],
+        include: path.join(__dirname, 'frontend'),
       }
     ]
   },
