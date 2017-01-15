@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SlideShow from './slide_show'
 import MegaSearch from './mega_search'
-import Map from './map'
+import SearchMap from './search_map'
 import SearchResults from './search_results'
 
 const fadeIn = node => $(node).hide().fadeIn()
@@ -18,7 +18,7 @@ function HomePage({ mapFocus }) {
       <SlideShow />
       <section className={ className + " results-container" }>
         <SearchResults />
-        <Map />
+        <SearchMap />
       </section>
     </section>
   )

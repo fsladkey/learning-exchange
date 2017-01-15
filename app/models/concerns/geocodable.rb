@@ -24,4 +24,12 @@ module Geocodable
     send(locator)
   end
 
+  def lat
+    latitude
+  end
+
+  def lng
+    longitude
+  end
+
 end

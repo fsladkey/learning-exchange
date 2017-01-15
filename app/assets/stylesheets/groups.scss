@@ -8,24 +8,3 @@
     margin-bottom: 10px;
   }
 }
-
-.group-nav {
-  background-color: $blue;
-  color: $white;
-  font-weight: bold;
-  ul {
-    display: flex;
-    justify-content: center;
-    a {
-      display: block;
-      padding: 10px;
-      margin-right: 5px;
-      border-bottom: 1px solid transparent;
-      &:hover {
-        background-color: #eee;
-        color: $blue;
-        border-bottom: 1px solid $orange;
-      }
-    }
-  }
-}
