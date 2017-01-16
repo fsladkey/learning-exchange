@@ -8,7 +8,8 @@ import SearchResults from './search_results'
 const fadeIn = node => $(node).hide().fadeIn()
 
 function HomePage({ mapFocus }) {
-  const className = mapFocus ? "active" : ''
+  // const className = mapFocus ? "active" : ''
+  const className = true ? "active" : ''
   return (
     <section ref={ fadeIn } className='homepage'>
       <section className="welcome-group">
