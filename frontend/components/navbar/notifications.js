@@ -28,7 +28,6 @@ class Notifications extends Component {
     return (
       <button onClick={ this.toggleDropdown }>
         Notifications
-        <Counter count={ notifications.length } />
         { this.dropDown() }
       </button>
     )

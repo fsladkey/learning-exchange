@@ -20,7 +20,7 @@ const reducers = {
   'groups',
   'events',
   'users',
-  'direct_messages',
+  'conversations',
   'chat_messages',
   'notifications',
   'comments'
