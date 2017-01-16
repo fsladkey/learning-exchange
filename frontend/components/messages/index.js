@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router'
-import actions from '../../actions/direct_message_actions'
+import actions from '../../actions/conversation_actions'
 import { conversations } from '../../reducers/selectors'
 
 function ConversationItem({ messages }) {
   return <li>{ JSON.stringify(messages) }</li>
 }
 
-function ConversationPreview({ messages, user, params: { username } }) {
+function ConversationPreview({ convo, user, params: { username } }) {
   const className = user.username === username ? "active" : ""
   return (
     <li>
@@ -22,27 +22,27 @@ function ConversationPreview({ messages, user, params: { username } }) {
 class Messages extends Component {
 
   firstConvo() {
-    return JSON.parse(this.props.conversations.keys().next().value)
+    return this.props.conversations.values().next().value
   }
 
   componentDidMount() {
-    this.props.fetchMessages().then(action => {
-      const firstUser = this.firstConvo().username
-      this.props.router.push(`/messages/${firstUser}`)
+    this.props.fetchConversations().then(action => {
+      const firstUser = this.firstConvo()
+      firstUser && this.props.router.push(`/messages/${firstUser.other_user.username}`)
     })
   }
 
   render() {
     const { currentUser, conversations, children, params } = this.props
-    const firstConvo = this.props.conversations.keys().next().value
+    const firstConvo = this.firstConvo()
     const body = firstConvo ? children : null
-    const convoItems = conversations.keySeq().map((user) => {
+    const convoItems = conversations.valueSeq().map((convo) => {
       return (
         <ConversationPreview
-          key={ user }
-          messages={ conversations.get(user) }
+          key={ convo.id }
           params={ params }
-          user={ JSON.parse(user) }
+          user={ convo.other_user }
+          convo={ convo }
           />
       )
     })
@@ -61,13 +61,10 @@ class Messages extends Component {
     )
   }
 }
-const mapStateToProps = (state, props) => {
-  return {
-    currentUser: state.currentUser,
-    conversations: conversations(state)
-  }
+const mapStateToProps = (state) => {
+  return { currentUser: state.currentUser, conversations: conversations(state) }
 }
 export default connect(
   mapStateToProps,
-  { fetchMessages: actions.fetchAllDirectMessages }
+  { fetchConversations: actions.fetchAllConversations }
 )(withRouter(Messages))

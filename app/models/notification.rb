@@ -15,4 +15,15 @@ class Notification < ApplicationRecord
   validates :user, :notifiable, presence: true
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
+
+  def url
+    case notifiable_type
+    when "DirectMessage"
+      "/messages"
+    when "Invitation"
+      "/events/#{notifiable.event_id}"
+    when "Follow"
+      "/profile/#{notifiable.follower.username}"
+    end
+  end
 end

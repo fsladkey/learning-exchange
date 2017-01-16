@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import actions from '../../actions/direct_message_actions'
+import actions from '../../actions/conversation_actions'
 import { conversations } from '../../reducers/selectors'
 
 class MessageForm extends Component {
@@ -22,7 +22,8 @@ class MessageForm extends Component {
     e.preventDefault();
     this.props.sendMessage({
       body: this.state.body,
-      receiver_id: this.props.receiver_id
+      receiver_id: this.props.receiver_id,
+      conversation_id: this.props.conversation_id
     }).then(this.clearForm)
   }
 
@@ -50,5 +51,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { sendMessage: actions.createDirectMessage  }
+  { sendMessage: actions.createConversation  }
 )(MessageForm)

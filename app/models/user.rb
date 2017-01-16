@@ -46,6 +46,12 @@ class User < ApplicationRecord
   #associations
   has_many :memberships, foreign_key: :member_id
   has_many :notifications
+  has_many(
+    :recent_notifications,
+    -> { order(created_at: :desc).limit(10) },
+    foreign_key: :user_id,
+    class_name: "Notification"
+  )
   has_many :groups, through: :memberships, source: :group
   has_many :created_events, class_name: :Event, foreign_key: :creator_id
   has_many :in_follows, class_name: :Follow, foreign_key: :followed_user_id
@@ -105,6 +111,15 @@ class User < ApplicationRecord
 
   def all_messages
     DirectMessage.where("sender_id = :id OR receiver_id = :id", id: id)
+  end
+
+  def conversations
+    Conversation.where(user_1_id: id).or(Conversation.where(user_2_id: id)).includes(:direct_messages)
+  end
+
+  def conversation_with(other_user)
+    c = conversations.where(user_1_id: other_user.id).or(conversations.where(user_2_id: other_user.id))
+    c.empty? ? Conversation.create!(user_1_id: id, user_2_id: other_user.id) : c.first
   end
 
 end

@@ -9,7 +9,7 @@ function Conversation({ currentUser, conversation }) {
     <section className="converation-detail">
       <h3>{ conversation.other_user.fullname }</h3>
       <MessageList messages={ conversation.messages } currentUser={ currentUser }/>
-      <MessageForm receiver_id={ conversation.other_user.id }/>
+      <MessageForm receiver_id={ conversation.other_user.id } conversation_id={ conversation.id }/>
     </section>
   )
 }
