@@ -69,5 +69,5 @@ const mapStateToProps = (state, props) => {
 }
 export default connect(
   mapStateToProps,
-  { fetchMessages: actions.fetchAllDirect_messages }
+  { fetchMessages: actions.fetchAllDirectMessages }
 )(withRouter(Messages))

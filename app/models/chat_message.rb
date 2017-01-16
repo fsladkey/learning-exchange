@@ -16,13 +16,5 @@ class ChatMessage < ApplicationRecord
   belongs_to :sender, class_name: :User
   belongs_to :chattable, polymorphic: true
 
-  after_create :broadcast
-
-  def broadcast
-    message = ApplicationController.render(
-      partial: 'api/chat_messages/chat_message',
-      locals: { message: self }
-    )
-    ActionCable.server.broadcast("#{chattable_type}_#{chattable_id}", message)
-  end
+  after_create { ChatMessageBroadcastJob.perform_later self }
 end
