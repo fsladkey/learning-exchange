@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import actions from '../../actions/direct_message_actions'
 import { conversations } from '../../reducers/selectors'
 
-class Conversation extends Component {
+class MessageForm extends Component {
 
   constructor(props) {
     super(props)
@@ -45,11 +45,10 @@ class Conversation extends Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.currentUser,
-    conversations: conversations(state)
   }
 }
 
 export default connect(
   mapStateToProps,
-  { sendMessage: actions.createDirect_message  }
-)(Conversation)
+  { sendMessage: actions.createDirectMessage  }
+)(MessageForm)

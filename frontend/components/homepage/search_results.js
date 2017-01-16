@@ -98,6 +98,7 @@ function SearchResultItem({ item, type, query }) {
       return <li key={ tag }>{ hl(tag, query) }</li>
     })
   }
+  
   return (
     <li key={ item.get('id') } className="search-result-item">
     <Link to={ url }>

@@ -8,7 +8,7 @@ export default function updateMarkers(component, objects) {
     if (latLng.lat && latLng.lng) {
       const marker = new google.maps.Marker({
         position: latLng,
-        title: object.get('title'),
+        title: object.title,
         map: component.map
       });
       component.markers.push(marker)

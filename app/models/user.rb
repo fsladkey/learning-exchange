@@ -60,6 +60,11 @@ class User < ApplicationRecord
   )
 
   has_many(
+    :chat_messages,
+    foreign_key: :sender_id
+  )
+
+  has_many(
     :received_messages,
     class_name: :DirectMessage,
     foreign_key: :receiver_id

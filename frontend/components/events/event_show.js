@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Actions from '../../actions/event_actions'
+import actions from '../../actions/event_actions'
 import EventMap from './event_map'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
@@ -34,5 +34,5 @@ const mapStateToProps = ({ events }, { params }) => ({
 
 export default connect(
   mapStateToProps,
-  { fetchEvent: Actions.fetchOneEvent }
+  { fetchEvent: actions.fetchOneEvent }
 )(EventShow)

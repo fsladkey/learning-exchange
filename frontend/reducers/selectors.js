@@ -37,7 +37,14 @@ export const currentConversation = ({ direct_messages }, username) => {
 
 export const userComments = ({ comments }, userId) => {
   return comments.filter(comment =>
-    comment.commentable_id === userId &&
+    comment.commentable_id === parseInt(userId) &&
     comment.commentable_type === 'User'
   ).sort(createdAtDesc)
+}
+
+export const groupMessages = ({ chat_messages }, groupId) => {
+  return chat_messages.filter(message =>
+    message.chattable_id === parseInt(groupId) &&
+    message.chattable_type === 'Group'
+  ).sort(createdAtAsc)
 }

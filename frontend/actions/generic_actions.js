@@ -1,6 +1,8 @@
 import schemas from '../utils/schemas'
 import { normalize, arrayOf } from 'normalizr'
 import * as APIUtil from '../utils/api_util'
+import pluralize from 'pluralize'
+import camelcase from 'camelcase'
 
 export const RECEIVE_GENERIC_RESOURCES = "RECEIVE_GENERIC_RESOURCES"
 export const REMOVE_GENERIC_RESOURCE = "REMOVE_GENERIC_RESOURCE"
@@ -26,7 +28,8 @@ export const dispatchSingleResult = (dispatch, resourceType) => response => {
 }
 
 const dispatchArrayResult = (dispatch, resourceType) => response => {
-  const result = normalize(response, arrayOf(schemas[resourceType]))
+  const schema = { resourceType: [ schemas[resourceType] ]}
+  const result = normalize(response, [ schemas[resourceType] ])
   for (let resourceType in result.entities) {
     dispatch(receiveResources(result.entities[resourceType], resourceType))
   }
@@ -34,38 +37,37 @@ const dispatchArrayResult = (dispatch, resourceType) => response => {
 }
 
 const fetchOne = resourceType => id => dispatch => {
-  return APIUtil.fetch(`/api/${resourceType}s/${id}`)
+  return APIUtil.fetch(`/api/${pluralize(resourceType)}/${id}`)
     .then(dispatchSingleResult(dispatch, resourceType))
 }
 
 const fetchAll = resourceType => data => dispatch => {
-  return APIUtil.fetch(`/api/${resourceType}s`)
+  return APIUtil.fetch(`/api/${pluralize(resourceType)}`, data)
     .then(dispatchArrayResult(dispatch, resourceType))
 }
 
 const post = resourceType => data => dispatch => {
-  return APIUtil.post(`/api/${resourceType}s`, { [resourceType]: data })
+  return APIUtil.post(`/api/${pluralize(resourceType)}`, { [resourceType]: data })
     .then(dispatchSingleResult(dispatch, resourceType))
 }
 
 const patch = resourceType => data => dispatch => {
-  return APIUtil.patch(`/api/${resourceType}s/${data.id}`, { [resourceType]: data })
+  return APIUtil.patch(`/api/${pluralize(resourceType)}/${data.id}`, { [resourceType]: data })
     .then(dispatchSingleResult(dispatch, resourceType))
 }
 
 const destroy = resourceType => id => dispatch => {
-  return APIUtil.destroy(`/api/${resourceType}s/${data.id}`, { [resourceType]: data })
+  return APIUtil.destroy(`/api/${pluralize(resourceType)}/${data.id}`, { [resourceType]: data })
     .then(dispatch(removeResource, resourceType))
 }
 
 
 export function createResourceActions(resourceType) {
-  const resourceName =  resourceType[0].toUpperCase() + resourceType.slice(1)
   return {
-    [`fetchOne${resourceName}`]: fetchOne(resourceType),
-    [`fetchAll${resourceName}s`]: fetchAll(resourceType),
-    [`create${resourceName}`]: post(resourceType),
-    [`update${resourceName}`]: patch(resourceType),
-    [`destroy${resourceName}`]: destroy(resourceType),
+    [camelcase(`fetch_one_${resourceType}`)]: fetchOne(resourceType),
+    [camelcase(`fetch_all_${pluralize(resourceType)}`)]: fetchAll(resourceType),
+    [camelcase(`create_${resourceType}`)]: post(resourceType),
+    [camelcase(`update_${resourceType}`)]: patch(resourceType),
+    [camelcase(`destroy_${resourceType}`)]: destroy(resourceType),
   }
 }

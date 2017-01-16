@@ -21,7 +21,7 @@ const reducers = {
   'events',
   'users',
   'direct_messages',
-  'chatMessages',
+  'chat_messages',
   'notifications',
   'comments'
 ].forEach(type => reducers[type] = genericReducer(type))

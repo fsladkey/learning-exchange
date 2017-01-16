@@ -12,7 +12,8 @@ module Taggable
   end
 
   def tag_names
-    attributes[:tag_names] || nil
+    attributes["tag_names"] || nil
+    attributes["tag_names"] || nil
   end
 
 end

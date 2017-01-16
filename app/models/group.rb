@@ -16,6 +16,7 @@ class Group < ApplicationRecord
   include Taggable
   include Geocodable
   include Searchable
+  include Chattable
   validates :name, :zipcode, presence: true
 
   has_many :events

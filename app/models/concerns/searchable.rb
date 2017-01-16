@@ -4,14 +4,10 @@ module Searchable
   module ClassMethods
 
     def search(params)
-      ids = Rails.cache.fetch("#{table_name}-#{params.to_json}", expires_in: 1.minute) do
-        result = with_tags
-        result = result.query(params[:query]) if params[:query]
-        origin = params[:origin]
-        result = result.near(origin.to_s) if params[:zipcode]
-        result.limit(params[:limit] || 5).pluck(:id)
-      end
-      find(ids)
+      result = with_tags
+      result = result.query(params[:query]) if params[:query]
+      result = result.near(params[:origin].to_s) if params[:zipcode]
+      result.limit(params[:limit] || 5)
     end
 
     def query(query)
