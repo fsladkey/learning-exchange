@@ -40,7 +40,8 @@ class User < ApplicationRecord
     :rememberable,
     :trackable,
     :validatable,
-    :omniauthable
+    :omniauthable,
+    omniauth_providers: [:facebook, :google_oauth2]
   )
 
   #associations
@@ -104,6 +105,20 @@ class User < ApplicationRecord
     [:username, :firstname, :lastname, :email]
   end
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      debugger
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.zipcode = "12345"
+      user.username = auth.info.name.gsub(" ", "").underscore
+      user.firstname = auth.info.first_name || auth.info.name.split(' ').first
+      user.lastname = auth.info.last_name || auth.info.name.split(' ').last
+      # user.image = auth.info.image
+    end
+  end
+
+
   def fullname
     "#{firstname} #{lastname}"
   end
@@ -118,8 +133,9 @@ class User < ApplicationRecord
   end
 
   def conversation_with(other_user)
-    c = conversations.where(user_1_id: other_user.id).or(conversations.where(user_2_id: other_user.id))
-    c.empty? ? Conversation.create!(user_1_id: id, user_2_id: other_user.id) : c.first
+    # c = conversations.where(user_1_id: other_user.id).or(conversations.where(user_2_id: other_user.id))
+    # c.empty? ? Conversation.create!(user_1_id: id, user_2_id: other_user.id) : c.first
+    Conversation.find_or_create_by_users(self, other_user)
   end
 
 end

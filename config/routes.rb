@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "static_pages#root"
   get "welcome", to: "static_pages#welcome"
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   namespace :api, defaults: { format: :json } do
     resources :search, only: [:index]

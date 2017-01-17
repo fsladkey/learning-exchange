@@ -17,12 +17,25 @@ class DirectMessage < ApplicationRecord
   belongs_to :receiver, class_name: :User
   belongs_to :conversation, touch: true
 
+  before_validation :ensure_conversation
+
   def user_to_notify
     receiver
   end
 
   def notification_message
     "#{sender.fullname} has sent you a direct message."
+  end
+
+  private
+
+  def ensure_conversation
+    if (!conversation_id)
+      self.conversation_id = Conversation.find_or_create_by_users(
+        sender,
+        receiver
+      ).id
+    end
   end
 
 end

@@ -11,7 +11,7 @@ function CommentItem({ comment }) {
         <Link to={ `/profile/${comment.author.username}`}>
           { comment.author.fullname }
         </Link>
-        <h5>{ comment.pretty_time }</h5>
+        <p>{ comment.pretty_time }</p>
       </h4>
       <p>{ comment.body }</p>
     </li>
@@ -21,12 +21,9 @@ function CommentItem({ comment }) {
 function CommentItems({ showAll, comments }) {
   if (!showAll) {
     let idx = 0
-    comments = comments.filter(comment => {
-      idx++
-      return idx > 5
-    })
+    comments = comments.filter(comment => idx++ < 5)
   }
-  const commentItems = comments.map(comment =>
+  const commentItems = comments.valueSeq().map(comment =>
     <CommentItem comment={ comment } key={ comment.id } />
   )
 
@@ -37,8 +34,8 @@ function CommentItems({ showAll, comments }) {
   )
 }
 
-function ShowAllButton({ showAll, onClick }) {
-  if (showAll) return null
+function ShowAllButton({ showAll, onClick, comments }) {
+  if (showAll || comments.size <= 5) return null
   return (<button onClick={ onClick }>Show all</button>)
 }
 
@@ -60,7 +57,7 @@ class ProfileComments extends Component  {
       <section className="profile-comments">
         <CommentForm user={ user } editable={ editable }/>
         <CommentItems comments={ comments } showAll={ this.state.showAll }/>
-        <ShowAllButton onClick={ this.showAll } showAll={ this.state.showAll }/>
+        <ShowAllButton comments={ comments } onClick={ this.showAll } showAll={ this.state.showAll }/>
       </section>
     )
   }

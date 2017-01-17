@@ -23,6 +23,9 @@ gem 'fuubar'
 gem 'pry-rails'
 gem 'geocoder'
 gem 'geokit-rails'
+gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'rspec-rails'

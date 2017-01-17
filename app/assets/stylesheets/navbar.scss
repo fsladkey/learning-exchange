@@ -40,16 +40,22 @@
   min-width: 200px;
   transform: translateX(-50%);
   border: 1px solid grey;
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   background-color: white;
   color: black;
+  overflow: hidden;
   li {
+    cursor: pointer;
     background-color: #ddd;
     display: flex;
     padding: 10px 20px;
     border-bottom: 1px solid #aaa;
     &.new  {
       background-color: white;
+    }
+    &:hover  {
+      background-color: #aaa;
     }
     .badge {
       font-size: 12px;

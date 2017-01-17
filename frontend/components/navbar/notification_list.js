@@ -19,6 +19,7 @@ class NotificationList extends Component {
       let badge = null
       if (!notification.seen) {
         className = 'new'
+        //TODO: Consider using pseudo content
         badge = <span className="badge">New</span>
       }
       return (

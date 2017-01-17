@@ -14,7 +14,6 @@ function UserInfo({ currentUser, directMessages }) {
       </li>
       <li>
         <Notifications />
-        <Counter count={ currentUser.new_notifications } />
       </li>
       <li>
         <Link to="/messages">

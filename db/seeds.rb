@@ -16,7 +16,7 @@ FactoryGirl.create(
   firstname: "Fred",
   lastname: "Sladkey",
   username: "fsladkey",
-  email: "fsladkey@gmail.com",
+  email: "fsladkey@fred.com",
   password: "starwars",
   zipcode: '11215'
 )
@@ -80,6 +80,7 @@ end
 #Direct Message
 puts "creating direct messages..."
 DirectMessage.delete_all
+Conversation.delete_all
 2.times do
   user = users.sample
   3.times { FactoryGirl.create(:direct_message, sender: User.first, receiver: user) }

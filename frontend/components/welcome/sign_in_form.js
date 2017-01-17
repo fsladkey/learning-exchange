@@ -10,6 +10,15 @@ export default function SignInForm(props) {
       name="authenticity_token"
       value={ csrf_token }
       />
+      <a className="oath facebook" href="/users/auth/facebook">
+      <i className="fa fa-facebook" aria-hidden="true"/>
+        Sign In with Facebook
+      </a>
+      <a className="oath google" href="/users/auth/google_oauth2">
+        <i className="fa fa-google" aria-hidden="true"/>
+        Sign In with Google
+      </a>
+      <hr />
       <label htmlFor="email-input">Email</label>
       <input id="email-input" type="text" name="user[email]" placeholder="Email Address"/>
       <label htmlFor="password-input">Password</label>
