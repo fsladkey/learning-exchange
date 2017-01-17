@@ -79,6 +79,13 @@ class User < ApplicationRecord
   )
 
   has_many(
+    :unseen_messages,
+    -> { where(seen: false) },
+    class_name: :DirectMessage,
+    foreign_key: :receiver_id
+  )
+
+  has_many(
     :received_invitations,
     class_name: :Invitation,
     foreign_key: :invitee_id

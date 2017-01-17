@@ -22,6 +22,7 @@ const reducers = {
   'users',
   'conversations',
   'chat_messages',
+  'direct_messages',
   'notifications',
   'comments'
 ].forEach(type => reducers[type] = genericReducer(type))

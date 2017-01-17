@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import Notifications from './notifications'
 import LogOutForm from './log_out_form'
 import Counter from './counter'
+import { numUnseenMessages } from '../../reducers/selectors'
 
-function UserInfo({ currentUser, directMessages }) {
+function UserInfo({ currentUser, numUnseenMessages }) {
   return (
     <ul className="user-info flex-row">
       <li>
@@ -17,7 +18,7 @@ function UserInfo({ currentUser, directMessages }) {
       <li>
         <Link to="/messages">
           Direct Messages
-          <Counter count={ currentUser.received_messages.length } />
+          <Counter count={ numUnseenMessages } />
         </Link>
       </li>
       <li>
@@ -27,6 +28,9 @@ function UserInfo({ currentUser, directMessages }) {
   )
 }
 
-const mapStateToProps = ({ currentUser }) => ({ currentUser })
+const mapStateToProps = (state) => ({
+  currentUser: state.currentUser,
+  numUnseenMessages: numUnseenMessages(state)
+ })
 
 export default connect(mapStateToProps)(UserInfo)

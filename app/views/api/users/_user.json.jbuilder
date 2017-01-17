@@ -4,8 +4,10 @@ json.medium_avatar user.avatar.url(:medium)
 json.notifications user.recent_notifications do |notification|
   json.partial! "api/notifications/notification.json", notification: notification
 end
-json.new_notifications user.recent_notifications.to_a.count { |n| !n.seen? }
-json.received_messages user.received_messages
+# TODO: Change to unseen messages
+json.unseen_messages user.unseen_messages do |message|
+  json.partial! "api/direct_messages/direct_message.json", message: message
+end
 
 json.groups user.groups do |group|
   json.extract! group, :id, :name

@@ -24,6 +24,12 @@ export const curentProfile = ({ users }, username) => {
   ).values().next().value
 }
 
+export const numUnseenMessages = ({ direct_messages, currentUser }) => {
+  return direct_messages.reduce((sum, dm) => {
+    return sum + (!dm.seen && dm.receiver_id === currentUser.id ? 1 : 0)
+  }, 0)
+}
+
 export const commentsByType = type => ({ comments }, userId) => {
   return comments.filter(comment =>
     comment.commentable_id === parseInt(userId) &&

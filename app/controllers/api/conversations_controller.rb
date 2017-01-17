@@ -4,6 +4,7 @@ class Api::ConversationsController < ApplicationController
   end
 
   def create
+    # TODO: Move to direct messages controller
     message = current_user.sent_messages.new(message_params)
     if message.save
       @conversation = message.conversation

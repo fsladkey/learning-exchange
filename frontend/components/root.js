@@ -7,6 +7,7 @@ import { dispatchSingleResult } from '../actions/generic_actions'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { normalize } from 'normalizr'
 import schemas from '../utils/schemas'
+import actions from '../actions/conversation_actions'
 import App from './app'
 import HomePage from './homepage'
 import Messages from './messages'
@@ -35,13 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+const markAsRead = (nextState) => {
+  store.dispatch(
+    actions.updateConversation({ id: nextState.params.username })
+  )
+}
+
 const routes = (
   <Route path="/" component={ App }>
     <IndexRoute component={ HomePage } />
     <Route path="profile" component={ CurrentUserProfile } />
     <Route path="profile/:username" component={ UserProfile } />
     <Route path="messages" component={ Messages }>
-      <Route path=":username" component={ Conversation } />
+      <Route path=":username" component={ Conversation } onEnter={ markAsRead }/>
     </Route>
     <Route path="events/new" component={ EventForm } />
     <Route path="events/:id" component={ EventShow }>
