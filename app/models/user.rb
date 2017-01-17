@@ -101,6 +101,9 @@ class User < ApplicationRecord
     foreign_key: :author_id,
   )
 
+  has_attached_file :avatar, styles: { medium: "200x200>", thumb: "50x50>" }, default_url: "missing_:style.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
   def self.fields_to_query
     [:username, :firstname, :lastname, :email]
   end
@@ -114,7 +117,7 @@ class User < ApplicationRecord
       user.username = auth.info.name.gsub(" ", "").underscore
       user.firstname = auth.info.first_name || auth.info.name.split(' ').first
       user.lastname = auth.info.last_name || auth.info.name.split(' ').last
-      # user.image = auth.info.image
+      user.avatar = open(auth.info.image)
     end
   end
 

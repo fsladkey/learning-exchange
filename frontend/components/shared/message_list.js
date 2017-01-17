@@ -27,7 +27,6 @@ export default class MessageList extends Component {
 
   render() {
     const { messages, currentUser } = this.props
-    console.log(currentUser);
     return (
       <ul ref={ node => this.node = node } className="message-list">
       {
