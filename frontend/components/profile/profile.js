@@ -3,11 +3,21 @@ import ProfileComments from './profile_comments'
 import ProfileSidebar from './profile_sidebar'
 import TagList from '../shared/tag_list'
 
+function getInitials(user) {
+  return `${user.firstname[0]} ${user.lastname[0]}`.toUpperCase()
+}
+
+const fadeIn = node => $(node).hide().fadeIn()
+
 function ProfileHeader({ user }) {
+  const initials = user.medium_avatar ? '' : getInitials(user)
   return (
     <section className="profile-header sub-header">
       <div className="profile-header-row">
-        <img className="profile-image"/>
+        <div className="profile-image">
+          <strong>{ initials }</strong>
+          <img src={ user.medium_avatar }/>
+        </div>
         <section>
           <h1>{ user.fullname}</h1>
           <hgroup>
@@ -24,7 +34,7 @@ function ProfileHeader({ user }) {
 
 export default function UserProfile({ user, editable }) {
   return (
-    <section className="profile">
+    <section className="profile" ref={ fadeIn }>
       <div className="profile-left">
         <ProfileHeader user={ user }/>
         <ProfileComments user={ user } editable={ editable }/>

@@ -11,12 +11,12 @@ tags = Tag.all.to_a
 #Users
 puts "creating users..."
 User.delete_all
-FactoryGirl.create(
+fred = FactoryGirl.create(
   :user,
   firstname: "Fred",
   lastname: "Sladkey",
   username: "fsladkey",
-  email: "fsladkey@fred.com",
+  email: "fsladkey@gmail.com",
   password: "starwars",
   zipcode: '11215'
 )
@@ -81,18 +81,38 @@ end
 puts "creating direct messages..."
 DirectMessage.delete_all
 Conversation.delete_all
-2.times do
-  user = users.sample
-  3.times { FactoryGirl.create(:direct_message, sender: User.first, receiver: user) }
-  3.times { FactoryGirl.create(:direct_message, sender: user, receiver: User.first) }
-end
-2.times do
-  user = users.sample
-  3.times { FactoryGirl.create(:direct_message, sender: user, receiver: User.first) }
-  3.times { FactoryGirl.create(:direct_message, sender: User.first, receiver: user) }
-end
 
 30.times do
   u1, u2 = users.sample(2)
   FactoryGirl.create(:direct_message, sender: u1, receiver: u2)
+end
+
+# Guest User
+guest = FactoryGirl.create(
+  :user,
+  firstname: "Guest",
+  lastname: "User",
+  username: "guest",
+  email: "guest@example.com",
+  password: "starwars",
+  zipcode: '11215'
+)
+
+guest.tags = tags.sample(3)
+3.times do
+  guest.groups << Group.all.sample
+  guest.events_to_attend << Event.all.sample
+end
+
+[fred, guest].each do |guest|
+  2.times do
+    user = users.sample
+    3.times { FactoryGirl.create(:direct_message, sender: guest, receiver: user) }
+    3.times { FactoryGirl.create(:direct_message, sender: user, receiver: guest) }
+  end
+  2.times do
+    user = users.sample
+    3.times { FactoryGirl.create(:direct_message, sender: user, receiver: guest) }
+    3.times { FactoryGirl.create(:direct_message, sender: guest, receiver: user) }
+  end
 end

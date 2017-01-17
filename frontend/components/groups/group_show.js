@@ -5,6 +5,8 @@ import GroupNav from './group_nav'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
 
+const fadeIn = node => $(node).hide().fadeIn()
+
 class GroupShow extends Component {
   componentDidMount() {
     this.props.fetchGroup(this.props.params.id).then()
@@ -14,7 +16,7 @@ class GroupShow extends Component {
     const { group, children } = this.props
     if (!group) return <Spinner />
     return (
-      <section>
+      <section ref={ fadeIn }>
         <section className="sub-header">
           <h2>{ group.name }</h2>
           <TagList tags={ group.tags }/>

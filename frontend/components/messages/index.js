@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router'
 import actions from '../../actions/conversation_actions'
 import { conversations } from '../../reducers/selectors'
 
+const fadeIn = node => $(node).hide().fadeIn()
+
 function ConversationItem({ messages }) {
   return <li>{ JSON.stringify(messages) }</li>
 }
@@ -47,7 +49,7 @@ class Messages extends Component {
       )
     })
     return (
-      <section className="messages">
+      <section className="messages" ref={ fadeIn }>
       <h1>Conversations</h1>
       <div>
         <nav>

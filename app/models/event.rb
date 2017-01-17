@@ -27,7 +27,7 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: :User
 
   has_many :invitations
-  has_many :attendances
+  has_many :attendances, inverse_of: :event
 
   has_many :invited_users, through: :invitations, source: :invitee
   has_many(

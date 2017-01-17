@@ -5,6 +5,8 @@ import EventMap from './event_map'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
 
+const fadeIn = node => $(node).hide().fadeIn()
+
 class EventShow extends Component {
   componentDidMount() {
     this.props.fetchEvent(this.props.params.id).then()
@@ -14,7 +16,7 @@ class EventShow extends Component {
     const { event, children } = this.props
     if (!event) return <Spinner />
     return (
-      <section>
+      <section ref={ fadeIn }>
         <section className="sub-header">
           <h2>{ event.name }</h2>
           <TagList tags={ event.tags }/>

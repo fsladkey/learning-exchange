@@ -30,7 +30,7 @@ class User < ApplicationRecord
   include Geocodable
 
   # validations
-  validates :username, presence: true, uniqueness: true
+  validates :username, :email, presence: true, uniqueness: true
   validates :zipcode, presence: true, length: { is: 5 }, numericality: true
 
   devise(
@@ -46,6 +46,7 @@ class User < ApplicationRecord
 
   #associations
   has_many :memberships, foreign_key: :member_id
+  has_many :attendances, inverse_of: :user
   has_many :notifications
   has_many(
     :recent_notifications,
@@ -90,8 +91,14 @@ class User < ApplicationRecord
   )
 
   has_many(
+    :events_invited_to,
+    through: :invitations,
+    source: :event
+  )
+
+  has_many(
     :events_to_attend,
-    through: :received_invitations,
+    through: :attendances,
     source: :event
   )
 
@@ -101,7 +108,7 @@ class User < ApplicationRecord
     foreign_key: :author_id,
   )
 
-  has_attached_file :avatar, styles: { medium: "200x200>", thumb: "50x50>" }, default_url: "missing_:style.png"
+  has_attached_file :avatar, styles: { medium: "200x200#", thumb: "50x50#" }, default_url: ""
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   def self.fields_to_query
@@ -109,23 +116,40 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      debugger
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    return user if user
+    user = find_by(email: auth.info.email)
+    return combine_omniauth(user, auth) if user
+
+    create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.zipcode = "12345"
       user.username = auth.info.name.gsub(" ", "").underscore
       user.firstname = auth.info.first_name || auth.info.name.split(' ').first
       user.lastname = auth.info.last_name || auth.info.name.split(' ').last
-      user.avatar = open(auth.info.image)
+      user.avatar = process_uri(auth.info.image)
     end
+  end
+
+  def self.combine_omniauth(user, auth)
+    # TODO: Consult about security
+    user.tap do |user|
+      user.uid = auth.uid
+      user.provider = auth.provider
+      user.email ||= auth.info.email
+      user.firstname ||= auth.info.first_name || auth.info.name.split(' ').first
+      user.lastname ||= auth.info.last_name || auth.info.name.split(' ').last
+      user.avatar ||= process_uri(auth.info.image)
+    end
+    user.save
+    user
   end
 
 
   def fullname
     "#{firstname} #{lastname}"
   end
-
 
   def all_messages
     DirectMessage.where("sender_id = :id OR receiver_id = :id", id: id)
@@ -136,9 +160,15 @@ class User < ApplicationRecord
   end
 
   def conversation_with(other_user)
-    # c = conversations.where(user_1_id: other_user.id).or(conversations.where(user_2_id: other_user.id))
-    # c.empty? ? Conversation.create!(user_1_id: id, user_2_id: other_user.id) : c.first
     Conversation.find_or_create_by_users(self, other_user)
+  end
+
+  private
+
+  def self.process_uri(uri)
+    avatar_url = URI.parse(uri)
+    avatar_url.scheme = 'https'
+    avatar_url
   end
 
 end
