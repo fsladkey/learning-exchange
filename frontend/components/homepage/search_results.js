@@ -89,8 +89,15 @@ function CategoryResults({ type, results, query }) {
   )
 }
 
+const urlPrefix = {
+  "Users": "profile",
+  "Events": "events",
+  "Groups": "groups",
+}
+
 function SearchResultItem({ item, type, query }) {
-  const url = `/${type.toLowerCase()}/${item.get('id')}`
+
+  const url = `/${urlPrefix[type]}/${item.get('id')}`
   const ResultContent = searchResultItems[type]
   let tagItems
   if (item.get('tag_names')) {
@@ -98,7 +105,7 @@ function SearchResultItem({ item, type, query }) {
       return <li key={ tag }>{ hl(tag, query) }</li>
     })
   }
-  
+
   return (
     <li key={ item.get('id') } className="search-result-item">
     <Link to={ url }>

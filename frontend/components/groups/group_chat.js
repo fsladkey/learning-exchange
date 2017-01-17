@@ -8,9 +8,8 @@ class GroupChat extends Component {
   render() {
     return (
       <Chat
-      resourceType="Group"
-        channelName="GroupChannel"
-        channelId={ this.props.params.id }
+        resourceType="Group"
+        resourceId={ this.props.params.id }
         messages={ this.props.messages }
         fetchMessges={ this.props.fetchMessages }
         sendMessge={ this.props.sendMessage }

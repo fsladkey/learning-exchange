@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUser } from '../../actions/user_actions'
+import actions from '../../actions/user_actions'
+import { curentProfile } from '../../reducers/selectors'
 import Profile from './profile'
 
 class UserProfile extends Component {
 
   componentDidMount() {
-    this.props.fetchUser(this.props.params.id)
+    this.props.fetchUser(this.props.params.username)
   }
 
   render() {
@@ -18,5 +19,10 @@ class UserProfile extends Component {
   }
 }
 
-const mapStateToProps = ({ users }, { params }) => ({ user: users[params.id] })
-export default connect(mapStateToProps, { fetchUser })(UserProfile)
+const mapStateToProps = (state, { params }) => ({
+  user: curentProfile(state, params.username)
+})
+export default connect(
+  mapStateToProps,
+  { fetchUser: actions.fetchOneUser }
+)(UserProfile)

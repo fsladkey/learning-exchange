@@ -18,6 +18,12 @@ export const currentConversation = ({ conversations }, username) => {
   ).values().next().value
 }
 
+export const curentProfile = ({ users }, username) => {
+  return users.filter(user =>
+    user.username === username
+  ).values().next().value
+}
+
 export const commentsByType = type => ({ comments }, userId) => {
   return comments.filter(comment =>
     comment.commentable_id === parseInt(userId) &&

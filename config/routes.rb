@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :notifications, only: [:update]
     resources :conversations, only: [:show, :index, :create, :update], param: :username
 
-    resources :users, only: [:show]
+    resources :users, only: [:show], param: :username
     resource :user, only: [:update, :destroy]
 
     get "session/events", to: "events#current_user_events"
