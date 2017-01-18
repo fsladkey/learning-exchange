@@ -2,12 +2,14 @@
 #
 # Table name: direct_messages
 #
-#  id          :integer          not null, primary key
-#  sender_id   :integer          not null
-#  receiver_id :integer          not null
-#  body        :text             not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :integer          not null, primary key
+#  sender_id       :integer          not null
+#  receiver_id     :integer          not null
+#  body            :text             not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  seen            :boolean          default(FALSE)
+#  conversation_id :integer
 #
 
 FactoryGirl.define do

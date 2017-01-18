@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: conversations
+#
+#  id         :integer          not null, primary key
+#  user_1_id  :integer
+#  user_2_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Conversation < ApplicationRecord
   has_many :direct_messages, -> { order(:created_at) }
   belongs_to :user_1, class_name: "User"

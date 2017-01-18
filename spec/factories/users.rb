@@ -21,7 +21,14 @@
 #  zipcode                :string
 #  latitude               :float
 #  longitude              :float
+#  provider               :string
+#  uid                    :string
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #
+
 ny_zips = ["10001", "11215", "12137"]
 
 FactoryGirl.define do
