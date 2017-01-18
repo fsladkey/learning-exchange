@@ -51,7 +51,7 @@ class Messages extends Component {
     return (
       <section className="messages" ref={ fadeIn }>
       <h1>Conversations</h1>
-      <div>
+      <div className="convo-container">
         <nav>
           <ul className="conversation-list">
             { convoItems }

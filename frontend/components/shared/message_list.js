@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
+import UserPhoto from '../shared/user_photo'
 
 function Message({ message, currentUser }) {
-  const className = message.sender_id === currentUser.id ?
-    "current-user message" :
-    "other-user message"
+  if (message.sender_id === currentUser.id) {
+    return (
+      <li className="message-item">
+        <UserPhoto user={ currentUser } className="thumb" />
+        <p className="current-user message">{ message.body }</p>
+      </li>
+    )
+  }
   return (
-    <li className={ className }>
-      { message.body }
+    <li className="message-item">
+      <p className="other-user message">{ message.body }</p>
+      <UserPhoto user={ message.sender } className="thumb" />
     </li>
   )
 }

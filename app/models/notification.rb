@@ -19,7 +19,7 @@ class Notification < ApplicationRecord
   def url
     case notifiable_type
     when "DirectMessage"
-      "/messages"
+      "/messages/#{notifiable.sender.username}"
     when "Invitation"
       "/events/#{notifiable.event_id}"
     when "Follow"

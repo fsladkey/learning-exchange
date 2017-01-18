@@ -2,22 +2,16 @@ import React from 'react'
 import ProfileComments from './profile_comments'
 import ProfileSidebar from './profile_sidebar'
 import TagList from '../shared/tag_list'
+import UserPhoto from '../shared/user_photo'
 
-function getInitials(user) {
-  return `${user.firstname[0]} ${user.lastname[0]}`.toUpperCase()
-}
 
 const fadeIn = node => $(node).hide().fadeIn()
 
 function ProfileHeader({ user }) {
-  const initials = user.medium_avatar ? '' : getInitials(user)
   return (
     <section className="profile-header sub-header">
       <div className="profile-header-row">
-        <div className="profile-image">
-          <strong>{ initials }</strong>
-          <img src={ user.medium_avatar }/>
-        </div>
+        <UserPhoto user={ user } className="medium" />
         <section>
           <h1>{ user.fullname}</h1>
           <hgroup>

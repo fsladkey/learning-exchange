@@ -10,7 +10,7 @@
   nav {
     border-right: 1px solid #aaa;
   }
-  div {
+  .convo-container {
     display: flex;
     border: 1px solid #aaa;
     background-color: white;
@@ -45,40 +45,49 @@
   }
 }
 
-.message {
-  border-radius: 5px;
-  padding: 10px;
-  margin: 15px;
-  display: block;
-  &.current-user {
-    background-color: lightblue;
-    text-align: left;
-    position: relative;
-    border-bottom-left-radius: 0;
-    &:after {
-      content: "";
-      border: 5px solid lightblue;
-      border-right: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      position: absolute;
-      top: 100%;
-      left: 0px;
+.message-item {
+  display: flex;
+  p {
+    flex-grow: 1;
+  }
+  .message {
+    border-radius: 5px;
+    padding: 10px;
+    margin: 15px;
+    display: block;
+    &.current-user {
+      background-color: lightblue;
+      text-align: left;
+      position: relative;
+      border-bottom-left-radius: 0;
+      &:after {
+        content: "";
+        border: 5px solid lightblue;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        position: absolute;
+        top: 100%;
+        left: 0px;
+      }
+    }
+    &.other-user {
+      background-color: lightgreen;
+      text-align: right;
+      position: relative;
+      border-bottom-right-radius: 0;
+      &:after {
+        content: "";
+        border: 5px solid lightgreen;
+        border-left: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        position: absolute;
+        top: 100%;
+        right: 0px;
+      }
     }
   }
-  &.other-user {
-    background-color: lightgreen;
-    text-align: right;
-    position: relative;
-    border-bottom-right-radius: 0;
-    &:after {
-      content: "";
-      border: 5px solid lightgreen;
-      border-left: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      position: absolute;
-      top: 100%;
-      right: 0px;
-    }
+  .user-photo {
+    margin: 10px;
   }
 }
 
