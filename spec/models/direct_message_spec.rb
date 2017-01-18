@@ -13,6 +13,11 @@
 require 'rails_helper'
 
 RSpec.describe DirectMessage, type: :model do
+  subject do
+    sender = create(:user)
+    receiver = create(:user)
+    create(:direct_message, sender: sender, receiver: receiver)
+  end
   describe "validations" do
     it { should validate_presence_of(:sender) }
     it { should validate_presence_of(:receiver) }

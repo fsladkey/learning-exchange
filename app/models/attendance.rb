@@ -12,6 +12,6 @@
 class Attendance < ApplicationRecord
   validates :user, :event, presence: :true
 
-  belongs_to :user, inverse_of: :attendance
-  belongs_to :event, inverse_of: :attendance
+  belongs_to :user, inverse_of: :attendances
+  belongs_to :event, inverse_of: :attendances
 end

@@ -7,8 +7,8 @@ RSpec.describe Api::UsersController, type: :controller do
     end
 
     it "rejects unauthorized requests" do
-      user = create(:user)
-      get :show, params: { id: user.id }
+      user = build(:user)
+      get :show, params: { username: user.username }
       expect(controller).to respond_with(401)
     end
 
@@ -23,7 +23,7 @@ RSpec.describe Api::UsersController, type: :controller do
     describe "GET show" do
       it "renders the show template" do
         user = create(:user)
-        get :show, params: { id: user.id }
+        get :show, params: { username: user.username }
         expect(controller).to render_template(:show)
       end
     end
