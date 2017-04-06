@@ -20,16 +20,23 @@ function Message({ message, currentUser }) {
 
 export default class MessageList extends Component {
 
-  scrollToBottom() {
-    this.node.scrollTop = this.node.scrollHeight;
+  scrollToBottom = (speed, prev) => {
+    // if (this.node.scrollTop === prev) return;
+    if (this.node.scrollTop < this.node.scrollHeight) {
+      console.log(this.node.scrollTop, this.node.scrollHeight);
+      this.node.scrollTop++
+      setTimeout(() => {}
+        // this.scrollToBottom(speed, this.node.scrollTop), speed
+      )
+    }
   }
 
   componentDidMount() {
-    this.scrollToBottom()
+    this.scrollToBottom(1)
   }
 
   componentWillReceiveProps() {
-    setTimeout(() => this.scrollToBottom(), 10)
+    setTimeout(() => this.scrollToBottom(1), 10)
   }
 
   render() {
