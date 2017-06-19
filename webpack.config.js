@@ -1,11 +1,15 @@
 var webpack = require('webpack');
 var path = require('path');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV':
       JSON.stringify(process.env.NODE_ENV || 'development')
-  })
+  }),
+  new CopyWebpackPlugin([
+    { from: 'node_modules/react-big-calendar/lib/css/react-big-calendar.css', to: 'vendor/assets/stylesheets/react-big-calendar.css' },
+  ])
 ]
 
 if (process.env.NODE_ENV === 'production') {
@@ -26,20 +30,22 @@ module.exports = {
   },
   plugins: plugins,
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: [
-          'babel?presets[]=react,presets[]=latest,plugins[]=transform-class-properties'
-        ],
-        include: path.join(__dirname, 'frontend'),
-      }
-    ]
+        exclude: [/node_modules/],
+        use: [{
+          loader: 'babel-loader',
+          options: { 
+            presets: ['latest', 'react'],
+            plugins: [require('babel-plugin-transform-class-properties')]
+          },
+        }],
+      },
+    ],
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['', '.js'],
-    root: path.resolve('./node_modules')
+    extensions: ['.js', "*"]
   }
 };
