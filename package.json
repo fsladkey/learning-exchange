@@ -9,6 +9,9 @@
     "postinstall": "./node_modules/.bin/webpack",
     "test": "jest"
   },
+  "engines": {
+    "node": "v7.9.0"
+  },
   "author": "Fred Sladkey",
   "license": "ISC",
   "dependencies": {
