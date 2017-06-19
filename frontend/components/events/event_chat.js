@@ -7,7 +7,7 @@ class EventChat extends Component {
 
   render() {
     // TODO: Protect on back end?
-    if (!isEventCreator) return null
+    if (!this.props.isEventCreator) return null
     return (
       <Chat
         resourceType="Event"
