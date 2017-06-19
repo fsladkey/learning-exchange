@@ -12,12 +12,13 @@ const plugins = [
   ])
 ]
 
-if (process.env.NODE_ENV === 'production') {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    })
-  )
-}
+// Having some issues uglifying es2015 features like 'let'. Just not gonna bother uglifying right now
+// if (process.env.NODE_ENV === 'production') {
+//   plugins.push(new webpack.optimize.UglifyJsPlugin({
+//       compress: { warnings: false }
+//     })
+//   )
+// }
 
 module.exports = {
   context: __dirname,
