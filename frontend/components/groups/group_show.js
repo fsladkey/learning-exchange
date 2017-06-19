@@ -4,8 +4,7 @@ import Actions from '../../actions/group_actions'
 import GroupNav from './group_nav'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
-
-const fadeIn = node => $(node).hide().fadeIn()
+import { fadeIn } from '../../utils/misc'
 
 class GroupShow extends Component {
   componentDidMount() {

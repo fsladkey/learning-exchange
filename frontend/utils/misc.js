@@ -1,3 +1,5 @@
+// import $ from "jquery"
+
 export function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -17,3 +19,8 @@ export function noCaseSplit(string, splitVal) {
   }
   return result
 }
+
+export const fadeIn = node => $(node).hide().fadeIn();
+
+export const preventDefault = e => e.preventDefault()
+export const stopProp = e => e.stopPropagation()

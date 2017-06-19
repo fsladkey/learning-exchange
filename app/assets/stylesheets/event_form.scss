@@ -1,0 +1,20 @@
+@import "variables";
+
+.event-form {
+    background-color: $white;
+    padding: 30px;
+    width: 400px;
+    border-radius: 5px;
+    h2 {
+        font-size: 26px;
+    }
+    label, input, textarea, h2, p {
+        margin-bottom: 10px;
+    }
+    input, textarea {
+        width: 100%;
+    }
+    label {
+        display: block;
+    }
+}

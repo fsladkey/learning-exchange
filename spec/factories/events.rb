@@ -19,6 +19,7 @@ FactoryGirl.define do
   factory :event do
     name { Faker::Music.instrument }
     description { Faker::Hipster.sentence }
+    date { rand(10).days.from_now }
     address { ny_zips.sample }
   end
 end

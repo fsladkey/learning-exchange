@@ -23,9 +23,9 @@ function CommentItems({ showAll, comments }) {
     let idx = 0
     comments = comments.filter(comment => idx++ < 5)
   }
-  const commentItems = comments.valueSeq().map(comment =>
-    <CommentItem comment={ comment } key={ comment.id } />
-  )
+  const commentItems = comments.valueSeq().map(comment => {
+    return <CommentItem comment={ comment } key={ comment.id } />
+  })
 
   return (
     <ul>

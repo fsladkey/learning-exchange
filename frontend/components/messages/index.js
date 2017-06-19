@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router'
 import actions from '../../actions/conversation_actions'
 import { conversations } from '../../reducers/selectors'
-
-const fadeIn = node => $(node).hide().fadeIn()
+import { fadeIn } from '../../utils/misc'
 
 function ConversationItem({ messages }) {
   return <li>{ JSON.stringify(messages) }</li>

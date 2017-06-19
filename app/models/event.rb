@@ -18,7 +18,7 @@ class Event < ApplicationRecord
   include Taggable
   include Geocodable
   include Searchable
-  validates :creator, :name, :address, presence: true
+  validates :creator, :group, :name, :address, :start, :end, presence: true
 
   before_validation :geocode
   geocoded_by :address

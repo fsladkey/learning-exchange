@@ -11,8 +11,7 @@ tags = Tag.all.to_a
 #Users
 puts "creating users..."
 User.delete_all
-fred = FactoryGirl.create(
-  :user,
+fred = User.create(
   firstname: "Fred",
   lastname: "Sladkey",
   username: "fsladkey",
@@ -20,18 +19,42 @@ fred = FactoryGirl.create(
   password: "starwars",
   zipcode: '11215'
 )
-50.times do
-  user = FactoryGirl.build(:user)
-  next unless user.valid?
-  user.save!
-  user.tags = tags.sample(3)
-end
+sophia = User.create!(
+  firstname: "Sophia",
+  lastname: "Sayigh",
+  email: "sophia@sayigh.net",
+  password: "changeme",
+  zipcode: '02474'
+)
+nadia = User.create!(
+  firstname: "Nadia",
+  lastname: "Sladkey",
+  email: "nsladkey@gmail.com",
+  password: "changeme",
+  zipcode: '02474'
+)
+milva = User.create!(
+  firstname: "Milva",
+  lastname: "McDonald",
+  email: "milva@shirim.com",
+  password: "changeme",
+  zipcode: '02155'
+)
+tracy = User.create!(
+  firstname: "Tracy",
+  middlename: "Barsamian",
+  lastname: "Ventola",
+  email: "tracybarsamian@hotmail.com",
+  password: "changeme",
+  zipcode: '02474'
+)
 users = User.all.to_a
 
 
 #Groups
 puts "creating groups..."
 Group.delete_all
+ahem = Group.create(name: "AHEM", description: "The very first group!", zipcode: "02474")
 10.times do
   group = FactoryGirl.create(:group)
   group.tags = tags.sample(3)
@@ -41,78 +64,58 @@ groups = Group.all.to_a
 #Memberships
 puts "creating memberships..."
 Membership.delete_all
-User.all.each do |user|
-  groups.sample(2).each do |group|
-    group.memberships.create!(member: user)
-  end
-end
+users.each { |u| ahem.add_member(u) }
 
 #Events
 puts "creating events..."
 Event.delete_all
-20.times do
-  event = FactoryGirl.create(:event, group: groups.sample, creator: users.sample)
-  event.tags = tags.sample(3)
-end
+event_1 = ahem.events.create(
+  name: "Kick Butt", 
+  description: "gonna kick some butt", 
+  address: "24 avon pl arlington MA", 
+  start: 5.days.from_now,
+  end: 5.days.from_now  + 2.hours,
+  creator: fred
+)
+event_2 = ahem.events.create(
+  name: "Chew Bubblegum", 
+  description: "gonna chew some bubblegum", 
+  address: "24 avon pl arlington MA", 
+  start: 3.days.from_now,
+  end: 3.days.from_now + 2.hours,
+  creator: fred
+)
 events = Event.all.to_a
 
 #Invitations
 puts "creating invitations..."
 Invitation.delete_all
-2.times { events.sample.invitations.create(inviter: users.sample, invitee: User.first) }
-events.each do |event|
-  3.times do
-    u1, u2 = users.sample(2)
-    event.invitations.create!(inviter: u1, invitee: u2)
-  end
-end
+users.each { |u| fred.invite(u, event_1) }
+users.each { |u| fred.invite(u, event_2) }
 
 #Attendances
 puts "creating attendances..."
 Attendance.delete_all
-2.times { Attendance.create(user: User.first, event: events.sample) }
-Invitation.all do |inv|
-  if rand(2) == 0
-    Attendance.create(user: inv.invitee, event: events.sample)
-  end
-end
+fred.attend(event_1)
+fred.attend(event_2)
 
 #Direct Message
 puts "creating direct messages..."
 DirectMessage.delete_all
 Conversation.delete_all
 
-30.times do
-  u1, u2 = users.sample(2)
-  FactoryGirl.create(:direct_message, sender: u1, receiver: u2)
-end
+# 30.times do
+#   u1, u2 = users.sample(2)
+#   FactoryGirl.create(:direct_message, sender: u1, receiver: u2)
+# end
 
 # Guest User
-guest = FactoryGirl.create(
-  :user,
-  firstname: "Guest",
-  lastname: "User",
-  username: "guest",
-  email: "guest@example.com",
-  password: "starwars",
-  zipcode: '11215'
-)
-
-guest.tags = tags.sample(3)
-3.times do
-  guest.groups << Group.all.sample
-  guest.events_to_attend << Event.all.sample
-end
-
-[fred, guest].each do |guest|
-  2.times do
-    user = users.sample
-    3.times { FactoryGirl.create(:direct_message, sender: guest, receiver: user) }
-    3.times { FactoryGirl.create(:direct_message, sender: user, receiver: guest) }
-  end
-  2.times do
-    user = users.sample
-    3.times { FactoryGirl.create(:direct_message, sender: user, receiver: guest) }
-    3.times { FactoryGirl.create(:direct_message, sender: guest, receiver: user) }
-  end
-end
+# guest = FactoryGirl.create(
+#   :user,
+#   firstname: "Guest",
+#   lastname: "User",
+#   username: "guest",
+#   email: "guest@example.com",
+#   password: "starwars",
+#   zipcode: '11215'
+# )

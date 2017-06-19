@@ -4,8 +4,7 @@ import actions from '../../actions/event_actions'
 import EventMap from './event_map'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
-
-const fadeIn = node => $(node).hide().fadeIn()
+import { fadeIn } from '../../utils/misc'
 
 class EventShow extends Component {
   componentDidMount() {

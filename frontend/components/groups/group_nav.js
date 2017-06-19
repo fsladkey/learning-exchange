@@ -7,10 +7,7 @@ export default function GroupNav({ group }) {
     <nav className="sub-nav">
       <ul>
         <li>
-          <Link to={ url }>Chat</Link>
-        </li>
-        <li>
-          <Link to={ url + "events" }>Events</Link>
+          <Link to={ url }>Events</Link>
         </li>
         <li>
           <Link to={ url + "members" }>Members</Link>

@@ -44,7 +44,7 @@ const markAsRead = (nextState) => {
 
 const routes = (
   <Route path="/" component={ App }>
-    <IndexRoute component={ HomePage } />
+    <IndexRoute component={ CurrentUserProfile } />
     <Route path="profile" component={ CurrentUserProfile } />
     <Route path="profile/:username" component={ UserProfile } />
     <Route path="messages" component={ Messages }>
@@ -57,7 +57,7 @@ const routes = (
     </Route>
     <Route path="groups/new" component={ GroupForm } />
     <Route path="groups/:id" component={ GroupShow }>
-      <IndexRoute component={ GroupChat } />
+      <IndexRoute component={ GroupEvents } />
       <Route path="events" component={ GroupEvents } />
       <Route path="members" component={ GroupMembers } />
     </Route>
@@ -67,8 +67,7 @@ const routes = (
 )
 
 export default function Root(props) {
-  // TODO: remove
-  window.store = store
+  window.store = store;
   return (
     <Provider store={ store }>
       <Router history={ history } routes={ routes }>

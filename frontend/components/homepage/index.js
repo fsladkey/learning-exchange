@@ -4,8 +4,7 @@ import SlideShow from './slide_show'
 import MegaSearch from './mega_search'
 import SearchMap from './search_map'
 import SearchResults from './search_results'
-
-const fadeIn = node => $(node).hide().fadeIn()
+import { fadeIn } from '../../utils/misc'
 
 function HomePage({ mapFocus }) {
   // const className = mapFocus ? "active" : ''

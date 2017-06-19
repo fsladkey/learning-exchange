@@ -26,4 +26,8 @@ class Group < ApplicationRecord
   def self.fields_to_query
     [:name, :description]
   end
+
+  def add_member(user)
+    memberships.create(member: user)
+  end
 end

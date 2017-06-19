@@ -47,7 +47,9 @@ class Api::EventsController < Api::ApiController
       :name,
       :description,
       :group_id,
-      :address
+      :address,
+      :start,
+      :end
     )
   end
 

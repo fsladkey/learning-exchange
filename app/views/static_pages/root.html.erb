@@ -1,10 +1,10 @@
 <!-- GOOGLE MAPS API -->
 <% api_key = ENV["google_maps_api_key"] %>
-<% google_maps_src = "https://maps.googleapis.com/maps/api/js?key=#{api_key}" %>
-<% marker_cluster = "https://developers.google.com/maps/documentation/" %>
-<% marker_cluster += "javascript/examples/markerclusterer/markerclusterer.js" %>
+<% google_maps_src = "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{api_key}" %>
+<% marker_cluster_src = "https://developers.google.com/maps/documentation/" %>
+<% marker_cluster_src += "javascript/examples/markerclusterer/markerclusterer.js" %>
 <script src="<%= google_maps_src %>"></script>
-<script src="<%= marker_cluster %>"></script>
+<script src="<%= marker_cluster_src %>"></script>
 
 <!-- BOOTSTRAP CURRENT USER -->
 <script>
@@ -22,6 +22,7 @@
   <% (7).times do |num| %>
     <% key = "slideshow_#{(num + 1)}" %>
     window.LearningExchangeStatics['<%= key %>'] = '<%= asset_url(key + ".jpg") %>'
+    window.LearningExchangeStatics.GoogleAPIKey
   <% end %>
 </script>
 

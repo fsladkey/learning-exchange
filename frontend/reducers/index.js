@@ -5,15 +5,19 @@ import dropdown from './dropdown_reducer'
 import mapFocus from './map_focus_reducer'
 import searchResults from './search_results_reducer'
 import query from './query_reducer'
-import { routerReducer } from 'react-router-redux'
+import modal from './modal_reducer'
+import eventForm from './event_form_reducer'
+import { routerReducer as routing } from 'react-router-redux'
 
 const reducers = {
   currentUser,
   dropdown,
   mapFocus,
-  searchResults,
+  modal,
   query,
-  routing: routerReducer
+  routing,
+  searchResults,
+  eventForm
 }
 
 ;[

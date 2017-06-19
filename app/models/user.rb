@@ -123,6 +123,7 @@ class User < ApplicationRecord
 
   has_attached_file :avatar, styles: { medium: "200x200#", thumb: "50x50#" }, default_url: ""
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  after_initialize :ensure_username
 
   def self.fields_to_query
     [:username, :firstname, :lastname, :email]
@@ -159,9 +160,25 @@ class User < ApplicationRecord
     user
   end
 
+  def attend(event)
+    events_to_attend << event 
+  end
+
+  def accept_invitation(invitation)
+    attend(invitation.event)
+    invitation.destroy
+  end
+
+  def ensure_username
+    self.username ||= begin
+      email_handle = email.split("@").first
+      email_handle = "#{email_handle}#{id}" if User.exists?(username: email_handle)
+      email_handle
+    end
+  end
 
   def fullname
-    "#{firstname} #{lastname}"
+    middlename ? "#{firstname} #{middlename} #{lastname}" : "#{firstname} #{lastname}"
   end
 
   def all_messages
@@ -174,6 +191,10 @@ class User < ApplicationRecord
 
   def conversation_with(other_user)
     Conversation.find_or_create_by_users(self, other_user)
+  end
+
+  def invite(user, event)
+    sent_invitations.create(invitee: user, event: event)
   end
 
   private

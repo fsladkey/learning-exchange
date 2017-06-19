@@ -29,9 +29,11 @@ class CommentForm extends Component {
 
   render() {
     const { user, editable } = this.props
-    const placeholder = editable ?
-      'Leave a comment on your profile' :
-      `Leave a comment for ${user.firstname}`
+    if (!editable) return null
+    // const placeholder = editable ?
+    //   'Write a post on your profile' :
+    //   `Leave a comment for ${user.firstname}`
+    const placeholder = 'Write a post on your profile';
     return (
       <form className="comment-form" onSubmit={ this.handleSubmit }>
         <textarea

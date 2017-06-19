@@ -1,13 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import NavBar from './navbar'
+import Modal from './shared/modal'
 import { closeDropdown } from '../actions/dropdown_actions'
-
-const handleClick = (closeDropdown, dropdown) => dropdown && closeDropdown()
+import { setModal } from '../actions/modal_actions'
 
 function App({ children, closeDropdown, dropdown, currentUser }) {
+  const handleClick = (e) => {
+    dropdown && closeDropdown()
+  }
+
   return (
-    <div onClick={ (e) => handleClick(closeDropdown, dropdown) } id="app">
+    <div onClick={ handleClick } id="app">
+      <Modal />
       <NavBar />
       <main className="content-container">
         { children }
@@ -16,6 +21,6 @@ function App({ children, closeDropdown, dropdown, currentUser }) {
   )
 }
 
-const mapStateToProps = ({ dropdown }) => ({ dropdown })
+const mapStateToProps = ({ dropdown, modal }) => ({ dropdown, modal })
 
-export default connect(mapStateToProps, { closeDropdown })(App)
+export default connect(mapStateToProps, { closeDropdown, setModal })(App)

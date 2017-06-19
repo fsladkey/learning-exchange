@@ -3,9 +3,7 @@ import ProfileComments from './profile_comments'
 import ProfileSidebar from './profile_sidebar'
 import TagList from '../shared/tag_list'
 import UserPhoto from '../shared/user_photo'
-
-
-const fadeIn = node => $(node).hide().fadeIn()
+import { fadeIn } from '../../utils/misc'
 
 function ProfileHeader({ user }) {
   return (
@@ -17,6 +15,9 @@ function ProfileHeader({ user }) {
           <hgroup>
             <h4>{ user.username }</h4>
             <h4>{ user.email }</h4>
+          </hgroup>
+          <hgroup>
+            <h4>{ user.zipcode }</h4>
           </hgroup>
         </section>
       </div>
