@@ -10,10 +10,7 @@ const plugins = [
   }),
   new CopyWebpackPlugin([
     { from: 'node_modules/react-big-calendar/lib/css/react-big-calendar.css', to: 'vendor/assets/stylesheets/react-big-calendar.css' },
-  ]),
-  new BabelEnginePlugin({
-    presets: ['env']
-  })
+  ])
 ]
 
 if (process.env.NODE_ENV === 'production') {
