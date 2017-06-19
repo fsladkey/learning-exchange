@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const BabelEnginePlugin = require('babel-engine-plugin')
 
 const plugins = [
   new webpack.DefinePlugin({
