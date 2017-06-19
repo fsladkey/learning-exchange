@@ -1,15 +1,19 @@
-var webpack = require('webpack');
-var path = require('path');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const BabelEnginePlugin = require('babel-engine-plugin')
 
-var plugins = [
+const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV':
       JSON.stringify(process.env.NODE_ENV || 'development')
   }),
   new CopyWebpackPlugin([
     { from: 'node_modules/react-big-calendar/lib/css/react-big-calendar.css', to: 'vendor/assets/stylesheets/react-big-calendar.css' },
-  ])
+  ]),
+  new BabelEnginePlugin({
+    presets: ['env']
+  })
 ]
 
 if (process.env.NODE_ENV === 'production') {
@@ -48,4 +52,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', "*"]
   }
-};
+}
