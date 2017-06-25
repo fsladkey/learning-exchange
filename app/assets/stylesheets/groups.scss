@@ -13,3 +13,21 @@
   height: 550px;
   background-color: white;
 }
+.group-member-list {
+  display: flex;
+  flex-wrap: wrap;
+  .group-member {
+    a {
+      display: flex;
+      flex-direction: row;
+    }
+    width: calc(50% - 20px);
+    border: 1px solid #ddd;
+    background-color: white;
+    margin: 10px;
+    padding: 5px;
+    h4 {
+      align-self: center;
+    }
+  }
+}

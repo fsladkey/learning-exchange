@@ -5,5 +5,5 @@ json.tags event.tags do |tag|
 end
 
 json.attending_users event.attending_users do |user|
-  json.extract! user, :id, :fullname, :username
+  json.extract! user, :id, :fullname, :firstname, :lastname, :username
 end
