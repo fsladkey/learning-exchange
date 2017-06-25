@@ -7,6 +7,7 @@ import searchResults from './search_results_reducer'
 import query from './query_reducer'
 import modal from './modal_reducer'
 import eventForm from './event_form_reducer'
+import attendanceReducer from './attendance_reducer'
 import { routerReducer as routing } from 'react-router-redux'
 
 const reducers = {
@@ -28,7 +29,9 @@ const reducers = {
   'chat_messages',
   'direct_messages',
   'notifications',
-  'comments'
+  'comments',
 ].forEach(type => reducers[type] = genericReducer(type))
+
+reducers.attendances = genericReducer('attendances', attendanceReducer)
 
 export default combineReducers(reducers)

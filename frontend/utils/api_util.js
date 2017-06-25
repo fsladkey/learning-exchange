@@ -10,9 +10,9 @@ export function patch(url, data) {
   return $.ajax({ url, data, method: "PATCH" })
 }
 
-// export function delete(url, data) {
-//   return $.ajax({ url, data, method: "PATCH" })
-// }
+export function destroy(url) {
+  return $.ajax({ url, method: "DELETE" })
+}
 
 export function search(data) {
   return fetch('api/search', data)

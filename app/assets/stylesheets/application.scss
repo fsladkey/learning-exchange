@@ -102,3 +102,16 @@ h1 {
     font-size: 12px;
   }
 }
+
+.lx-button {
+    border-radius: 5px;
+    background-color: $orange;
+    padding: 15px 30px;
+    margin: 10px;
+    color: $white;
+    background-color: $orange;
+    transition: all 0.6s;
+    &:hover {
+      background-color: $dark-orange;
+    }
+}

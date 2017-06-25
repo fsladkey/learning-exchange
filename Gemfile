@@ -29,6 +29,8 @@ gem 'font-awesome-rails'
 gem "paperclip", "~> 5.0.0"
 
 group :development, :test do
+  gem 'binding_of_caller'
+  gem 'better_errors'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'annotate'

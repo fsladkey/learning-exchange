@@ -44,6 +44,18 @@ const messagesByType = type => ({ chat_messages }, groupId) => {
   ).sort(createdAtAsc)
 }
 
+export const attendanceByEventId = ({ attendances }, eventId) => {
+  return attendances.find(attendance =>
+    attendance.event_id = eventId
+  )
+}
+
+export const eventsByUserId = ({ currentUser, events, attendances }, userId) => {
+  return attendances
+    .filter(attendance => attendance.user_id == userId)
+    .map(attendance => events.get(attendance.event_id.toString()))
+}
+
 export const userComments = commentsByType('User')
 export const groupMessages = messagesByType('Group')
 export const eventMessages = messagesByType('Event')

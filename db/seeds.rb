@@ -1,3 +1,15 @@
+#Attendances
+puts "cleaning attendances..."
+Attendance.delete_all
+
+#Notifications
+puts "cleaning notifications..."
+Notification.delete_all
+
+#Invitations
+puts "cleaning invitations..."
+Invitation.delete_all
+
 #Tags
 Tag.delete_all
 Tagging.delete_all
@@ -69,7 +81,7 @@ users.each { |u| ahem.add_member(u) }
 #Events
 puts "creating events..."
 Event.delete_all
-event_1 = ahem.events.create(
+event_1 = ahem.events.create!(
   name: "Kick Butt", 
   description: "gonna kick some butt", 
   address: "24 avon pl arlington MA", 
@@ -77,7 +89,7 @@ event_1 = ahem.events.create(
   end: 5.days.from_now  + 2.hours,
   creator: fred
 )
-event_2 = ahem.events.create(
+event_2 = ahem.events.create!(
   name: "Chew Bubblegum", 
   description: "gonna chew some bubblegum", 
   address: "24 avon pl arlington MA", 
@@ -86,18 +98,6 @@ event_2 = ahem.events.create(
   creator: fred
 )
 events = Event.all.to_a
-
-#Invitations
-puts "creating invitations..."
-Invitation.delete_all
-users.each { |u| fred.invite(u, event_1) }
-users.each { |u| fred.invite(u, event_2) }
-
-#Attendances
-puts "creating attendances..."
-Attendance.delete_all
-fred.attend(event_1)
-fred.attend(event_2)
 
 #Direct Message
 puts "creating direct messages..."

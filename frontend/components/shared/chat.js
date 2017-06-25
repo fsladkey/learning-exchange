@@ -41,14 +41,14 @@ class Chat extends Component {
   }
 
   render() {
-    const { currentUser } = this.props
+    const { currentUser, allowSending } = this.props
     return (
       <section>
         <MessageList
           currentUser={ currentUser }
           messages={ this.props.messages }
           />
-        <MessageForm sendMessage={ this.sendMessage }/>
+        <MessageForm sendMessage={ this.sendMessage } allowSending={allowSending}/>
       </section>
     )
   }

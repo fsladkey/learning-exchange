@@ -1,7 +1,7 @@
-class Api::NotificationsController < ApplicationController
+class Api::NotificationsController < Api::ApiController
   def update
     @notification = Notification.find(params[:id])
-    @notification.update!(seen: params[:notifications][:seen])
+    @notification.update!(seen: params[:notification][:seen])
     render :show
   end
 end

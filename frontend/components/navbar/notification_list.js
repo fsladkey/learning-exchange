@@ -45,7 +45,7 @@ class NotificationList extends Component {
 export default connect(
   null,
   {
-    updateNotification: actions.updateNotifications,
+    updateNotification: actions.updateNotification,
     closeDropdown
    }
 )(withRouter(NotificationList))

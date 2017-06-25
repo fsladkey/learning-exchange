@@ -14,7 +14,6 @@ function ProfileHeader({ user }) {
           <h1>{ user.fullname}</h1>
           <hgroup>
             <h4>{ user.username }</h4>
-            <h4>{ user.email }</h4>
           </hgroup>
           <hgroup>
             <h4>{ user.zipcode }</h4>
@@ -32,7 +31,6 @@ export default function UserProfile({ user, editable }) {
     <section className="profile" ref={ fadeIn }>
       <div className="profile-left">
         <ProfileHeader user={ user }/>
-        <ProfileComments user={ user } editable={ editable }/>
       </div>
       <ProfileSidebar user={ user }/>
     </section>

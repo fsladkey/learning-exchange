@@ -12,10 +12,11 @@
 
 class Invitation < ApplicationRecord
   include Notifiable
-  validates :event, :inviter, :invitee, presence: true
 
-  belongs_to :event
-  belongs_to :inviter, class_name: :User
+  validates :event, :invitee, presence: true
+
+  belongs_to :event, inverse_of: :invitations
+  belongs_to :inviter, class_name: :User, optional: true
   belongs_to :invitee, class_name: :User
 
   def user_to_notify
@@ -23,6 +24,8 @@ class Invitation < ApplicationRecord
   end
 
   def notification_message
-    "#{inviter.fullname} has invited you to #{event.name}."
+    inviter ?
+      "#{inviter.fullname} has invited you to #{event.name}." :
+      "You've been invited to #{event.name} by #{event.group.name}."
   end
 end

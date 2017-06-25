@@ -1,7 +1,7 @@
 json.extract! group, :id, :name, :description
 
 json.events group.events do |event|
-  json.partial! "api/events/event", event: event
+  json.partial! "api/events/event.json", event: event
 end
 
 json.tags group.tags do |tag|

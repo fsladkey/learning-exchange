@@ -14,10 +14,15 @@ export const receiveResources = (resources, resourceType) => ({
 })
 
 export const removeResource = (resource, resourceType) => ({
-  type: RECEIVE_GENERIC_RESOURCES,
-  id: resource.id,
+  type: REMOVE_GENERIC_RESOURCE,
+  id: resource.id.toString(),
   resourceType
 })
+
+export const removeResult = (dispatch, resourceType) => response => {
+  dispatch(removeResource(response, pluralize(resourceType)))
+  return response
+}
 
 export const dispatchSingleResult = (dispatch, resourceType) => response => {
   const result = normalize(response, schemas[resourceType])
@@ -57,8 +62,8 @@ const patch = resourceType => data => dispatch => {
 }
 
 const destroy = resourceType => id => dispatch => {
-  return APIUtil.destroy(`/api/${pluralize(resourceType)}/${data.id}`, { [resourceType]: data })
-    .then(dispatch(removeResource, resourceType))
+  return APIUtil.destroy(`/api/${pluralize(resourceType)}/${id}`)
+    .then(removeResult(dispatch, resourceType))
 }
 
 

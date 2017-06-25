@@ -10,11 +10,15 @@ json.unseen_messages user.unseen_messages do |message|
 end
 
 json.groups user.groups do |group|
-  json.extract! group, :id, :name
+  json.partial! "api/groups/group.json", group: group
+end
+
+json.attendances user.attendances do |attendance|
+  json.partial! "api/attendances/attendance.json", attendance: attendance
 end
 
 json.events user.events_to_attend do |event|
-  json.extract! event, :id, :name
+  json.partial! "api/events/event.json", event: event
 end
 
 json.comments user.comments do |comment|

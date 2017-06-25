@@ -1,0 +1,1 @@
+json.partial! "api/attendances/attendance.json", attendance: @attendance

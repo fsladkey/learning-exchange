@@ -23,7 +23,8 @@ export default class MessageForm extends Component {
   }
 
   render() {
-    const { messages, currentUser } = this.props
+    const { messages, currentUser, allowSending } = this.props
+    if (!allowSending) return null
     return (
       <form onSubmit={ this.handleSubmit } className="message-form">
         <input
@@ -31,7 +32,7 @@ export default class MessageForm extends Component {
           placeholder="Write a message"
           value={ this.state.body }
           />
-        <button>Send</button>
+        <button className="lx-button">Send</button>
       </form>
     )
   }

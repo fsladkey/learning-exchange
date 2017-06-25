@@ -4,10 +4,20 @@ const group = new schema.Entity('groups')
 const event = new schema.Entity('events')
 const comment = new schema.Entity('comments')
 const direct_message = new schema.Entity('direct_messages')
-const user = new schema.Entity('users', { comments: [ comment ], unseen_messages: [ direct_message ] })
-const conversation = new schema.Entity('conversations', { messages: [ direct_message ] })
 const chat_message = new schema.Entity('chat_messages')
-const notifications = new schema.Entity('notifications')
+const notification = new schema.Entity('notifications')
+const attendance = new schema.Entity('attendances')
+const conversation = new schema.Entity('conversations', { 
+  messages: [ direct_message ]
+})
+const user = new schema.Entity('users', {
+  events: [ event ],
+  groups: [ group ],
+  comments: [ comment ], 
+  attendances: [ attendance ], 
+  unseen_messages: [ direct_message ],
+  notifications: [ notification ]
+})
 
 export default {
   group,
@@ -17,5 +27,6 @@ export default {
   user,
   conversation,
   chat_message,
-  notifications
+  notification,
+  attendance
 }

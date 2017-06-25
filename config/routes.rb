@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   namespace :api, defaults: { format: :json } do
+    resource :session, only: [:show]
     resources :search, only: [:index]
     resources :messages, only: [:update, :delete]
     resources :groups, except: [:new, :edit]
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     resources :direct_messages, only: [:index, :create]
     resources :chat_messages, only: [:index, :create]
     resources :comments, only: [:create]
+    resources :attendances, only: [:create, :destroy]
     resources :notifications, only: [:update]
     resources :conversations, only: [:show, :index, :create, :update], param: :username
 

@@ -37,7 +37,7 @@ class MessageForm extends Component {
           value={ this.state.body }
           placeholder="Write a message"
           />
-          <button>Send</button>
+          <button className="lx-button">Send</button>
       </form>
     )
   }

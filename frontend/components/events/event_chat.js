@@ -7,7 +7,6 @@ class EventChat extends Component {
 
   render() {
     // TODO: Protect on back end?
-    if (!this.props.isEventCreator) return null
     return (
       <Chat
         resourceType="Event"
@@ -15,6 +14,7 @@ class EventChat extends Component {
         messages={ this.props.messages }
         fetchMessges={ this.props.fetchMessages }
         sendMessge={ this.props.sendMessage }
+        allowSending={this.props.isEventCreator}
         />
     )
   }
@@ -22,7 +22,6 @@ class EventChat extends Component {
 
 function mapStateToProps(state, { params: { id } }) {
   const group = state.events.get(id)
-  debugger
   return { 
     group,
     messages: eventMessages(state, id),

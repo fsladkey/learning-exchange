@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { eventsByUserId} from '../../reducers/selectors'
 
-export default function ProfileSidebar({ user }) {
+export function ProfileSidebar({ user, events }) {
   return (
     <section className="profile-sidebar">
       <h4>Groups</h4>
@@ -19,9 +21,9 @@ export default function ProfileSidebar({ user }) {
       <h4>Events</h4>
       <ul>
         {
-          user.events.map(event =>
+          events.valueSeq().map(event =>
             <li key={event.id}>
-              <Link to={ `/event/${event.id}` }>
+              <Link to={ `/events/${event.id}` }>
                 { event.name }
               </Link>
             </li>
@@ -31,3 +33,9 @@ export default function ProfileSidebar({ user }) {
     </section>
   )
 }
+
+function mapStateToProps(state, { user }) {
+  return { events: eventsByUserId(state, user.id) };
+}
+
+export default connect(mapStateToProps)(ProfileSidebar) 
