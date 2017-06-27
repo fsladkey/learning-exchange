@@ -12,11 +12,11 @@ function ProfileForm({ value, onChange, onClick }) {
   )
 }
 
-function Bio({ bio, onClick }) {
+function Bio({ bio, editable, onClick }) {
   return (
     <div>
       <p>{ bio }</p>
-      <button onClick={ onClick } className="lx-button">Edit</button>
+      { editable && <button onClick={ onClick } className="lx-button">Edit</button> }
     </div>
   )
 }
@@ -37,16 +37,15 @@ class ProfileBio extends React.Component {
   }
 
   submit = () => {
-    debugger
     this.props.updateUser({ id: this.props.currentUser.id, bio: this.state.value })
       .then(() => this.setState({ editing: false }))
   }
 
   render() {
-    const { user } = this.props
+    const { user, currentUser } = this.props
     const content = this.state.editing ?
       <ProfileForm value={ this.state.value } onChange={ this.onChange } onClick={this.submit }/> :
-      <Bio bio={ this.props.currentUser.bio } onClick={this.toggleEditing}/>
+      <Bio bio={ this.props.user.bio } onClick={this.toggleEditing} editable={currentUser.id === user.id}/>
 
     return (
       <section className="profile-bio">
