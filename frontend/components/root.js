@@ -53,7 +53,7 @@ const routes = (
     <Route path="events/new" component={ EventForm } />
     <Route path="events/:id" component={ EventShow }>
       <IndexRoute component={ EventChat } />
-      <Route path="members" component={ EventMembers } />
+      <Route path="attendees" component={ EventMembers } />
     </Route>
     <Route path="groups/new" component={ GroupForm } />
     <Route path="groups/:id" component={ GroupShow }>

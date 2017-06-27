@@ -1,4 +1,5 @@
 class Api::UsersController < Api::ApiController
+  before_action :ensure_has_edit_permissions, only: [:update, :destroy]
 
   def index
     @users = User.within(10, origin: current_user)
@@ -14,11 +15,11 @@ class Api::UsersController < Api::ApiController
   end
 
   def update
-    if current_user.update(user_params)
-      @user = current_user
+    @user = User.find(params[:id])
+    if @user.update(user_params)
       render :show
     else
-      render json: current_user.errors, status: 422
+      render json: @user.errors, status: 422
     end
   end
 
@@ -32,11 +33,17 @@ class Api::UsersController < Api::ApiController
   def user_params
     params.require(:user).permit(
       :email,
+      :bio,
       :username,
       :firstname,
+      :middlename,
       :lastname,
       :zipcode
     )
+  end
+
+  def ensure_has_edit_permissions
+    user_params[:id] == current_user.id
   end
 
 end

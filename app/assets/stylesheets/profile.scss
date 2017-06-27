@@ -71,3 +71,13 @@
     }
   }
 }
+
+.profile-bio {
+  background-color: $white;
+  padding: 20px 20px 5px 20px;
+  border-radius: 5px;
+  .lx-button {
+    margin-top: 20px;
+    margin-left: 0;
+  }
+}

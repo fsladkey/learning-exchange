@@ -5,17 +5,11 @@ export default function sessionReducer(state = null, action) {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       return action.currentUser
-    // case RECEIVE_GENERIC_RESOURCES:
-    //   if (action.resourceType == "notifications" && state) {
-    //     let notifications = state.notifications
-    //     const id = Object.keys(action.resources)[0]
-    //     notifications = state.notifications.map(notification =>
-    //       notification.id == parseInt(id) ?
-    //       action.resources[id] :
-    //       notification
-    //     )
-    //     return Object.assign(state, { notifications })
-    //   }
+    case RECEIVE_GENERIC_RESOURCES:
+      const user =  Object.values(action.resources)[0]
+      if (state && action.resourceType == "users" && user.id === state.id) {
+        return user
+      }
     default:
       return state
   }

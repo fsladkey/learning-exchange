@@ -3,6 +3,7 @@ import ProfileComments from './profile_comments'
 import ProfileSidebar from './profile_sidebar'
 import TagList from '../shared/tag_list'
 import UserPhoto from '../shared/user_photo'
+import ProfileBio from './profile_bio'
 import { fadeIn } from '../../utils/misc'
 
 function ProfileHeader({ user }) {
@@ -22,6 +23,7 @@ function ProfileHeader({ user }) {
       </div>
       <h3>Interests</h3>
       <TagList tags={ user.tags }/>
+      <ProfileBio user={user} />
     </section>
   )
 }

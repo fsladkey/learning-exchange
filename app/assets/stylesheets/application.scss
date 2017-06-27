@@ -21,6 +21,10 @@ button, a {
   cursor: pointer;
 }
 
+textarea {
+  display: block;
+}
+
 h1 {
   font-size: 30px;
 }
@@ -114,4 +118,23 @@ h1 {
     &:hover {
       background-color: $dark-orange;
     }
+}
+
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  .member {
+    a {
+      display: flex;
+      flex-direction: row;
+    }
+    width: calc(50% - 20px);
+    border: 1px solid #ddd;
+    background-color: white;
+    margin: 10px;
+    padding: 5px;
+    h4 {
+      align-self: center;
+    }
+  }
 }

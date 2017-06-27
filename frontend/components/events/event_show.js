@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import actions from '../../actions/event_actions'
 import EventMap from './event_map'
+import EventNav from './event_nav'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
 import { fadeIn } from '../../utils/misc'
@@ -20,11 +21,12 @@ class EventShow extends Component {
       <section ref={ fadeIn }>
         <section className="event-header">
           <h2>{ event.name } <CancelEventButton event={ event } /></h2>
-          <TagList tags={ event.tags }/>
+          <TagList tags={ event.tags } />
           <p>{ event.description }</p>
-          <RSVP eventId={ event.id }/>
+          <RSVP eventId={ event.id } />
         </section>
-        <EventMap event={ event }/>
+        <EventMap event={ event } />
+        <EventNav event={ event } />
         { children }
       </section>
     )

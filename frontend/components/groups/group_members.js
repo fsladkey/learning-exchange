@@ -1,26 +1,12 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Link } from "react-router"
-import UserPhoto from "../shared/user_photo"
-
-function GroupMember({ member }) {
-  return (
-    <li className="group-member">
-      <Link to={`profile/${member.username}`}>
-        <UserPhoto user={ member } className="thumb" />
-        <h4>{ member.fullname }</h4>
-      </Link>
-    </li>
-  )
-}
+import MemberList from "../shared/member_list"
 
 export function GroupMembers({ group }) {
   return (
     <section>
       <h1>Group Members</h1>
-      <ul className="group-member-list">
-        { group.members.map(member => <GroupMember member={member} />) }
-      </ul>
+      <MemberList members={group.members} />
     </section>
   )
 }
