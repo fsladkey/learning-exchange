@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626130146) do
+ActiveRecord::Schema.define(version: 20170717034137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170626130146) do
     t.float    "longitude"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["creator_id"], name: "index_events_on_creator_id", using: :btree
     t.index ["group_id"], name: "index_events_on_group_id", using: :btree
     t.index ["latitude"], name: "index_events_on_latitude", using: :btree
