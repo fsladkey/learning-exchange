@@ -41,15 +41,21 @@ class Api::EventsController < Api::ApiController
     @event ||= current_user.created_events.find(params[:id])
   end
 
+  def normalize_event_names
+    params[:event] and params[:event][:start_time] = params[:event][:start]
+    params[:event] and params[:event][:end_time] = params[:event][:end]
+  end
+
   def event_params
+    normalize_event_names
     params.require(:event).permit(
       :id,
       :name,
       :description,
       :group_id,
       :address,
-      :start,
-      :end
+      :start_time,
+      :end_time
     )
   end
 

@@ -18,7 +18,7 @@ class Event < ApplicationRecord
   include Taggable
   include Geocodable
   include Searchable
-  validates :creator, :group, :name, :address, :start, :end, presence: true
+  validates :creator, :group, :name, :address, :start_time, :end_time, presence: true
 
   before_validation :geocode
   geocoded_by :address
@@ -36,7 +36,7 @@ class Event < ApplicationRecord
     source: :user
   )
 
-  after_create :invite_group_members, :attend_by_creator
+  after_create :invite_group_members
   after_create :attend_by_creator
 
   def self.fields_to_query
