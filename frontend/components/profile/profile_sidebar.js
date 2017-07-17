@@ -35,7 +35,7 @@ export function ProfileSidebar({ user, events }) {
 }
 
 function mapStateToProps(state, { user }) {
-  return { events: eventsByUserId(state, user.id) };
+  return { events: eventsByUserId(state, user.id) }
 }
 
 export default connect(mapStateToProps)(ProfileSidebar) 

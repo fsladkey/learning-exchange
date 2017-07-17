@@ -44,9 +44,10 @@ const messagesByType = type => ({ chat_messages }, groupId) => {
   ).sort(createdAtAsc)
 }
 
+
 export const attendanceByEventId = ({ attendances }, eventId) => {
   return attendances.find(attendance =>
-    attendance.event_id = eventId
+    attendance.event_id === eventId
   )
 }
 

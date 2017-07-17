@@ -36,8 +36,10 @@ export class RSVP extends Component {
   }
 }
 
-function mapStateToProps(state, { eventId }) {
-  const attendance = attendanceByEventId(state, eventId);
+function mapStateToProps({ currentUser, attendances }, { eventId }) {
+  const attendance = attendances.find(attendance =>
+    attendance.event_id === eventId && attendance.user_id === currentUser.id
+  )
   const attendanceId = attendance && attendance.id
   return {
     attendanceId: attendanceId,
