@@ -43,4 +43,32 @@ RSpec.describe Event, type: :model do
     it { should have_many(:taggings) }
     it { should have_many(:tags).through(:taggings) }
   end
+
+  describe "after_create" do
+
+    it "invites all users of the group" do
+      group = create(:group)
+      user = create(:user)
+      group.add_member(user)
+      event = create(:event, group: group, creator: create(:user))
+      expect(event.invited_users).to include(user)
+    end
+
+    it "doesn't set everyone in the group to attending" do
+      group = create(:group)
+      user = create(:user)
+      group.add_member(user)
+      event = create(:event, group: group, creator: create(:user))
+      expect(event.attending_users).to_not include(user)
+    end
+
+    it "sets the creator as attending" do
+      group = create(:group)
+      user = create(:user)
+      group.add_member(user)
+      event = create(:event, group: group, creator: user)
+      expect(event.attending_users).to include(user)
+    end
+
+  end
 end
