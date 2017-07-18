@@ -24,5 +24,5 @@ class CurrentUserProfile extends Component {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({ currentUser })
+const mapStateToProps = ({ currentUser, users }) => ({ currentUser: users.get(currentUser.id.toString()) })
 export default connect(mapStateToProps, { fetchCurrentUser })(CurrentUserProfile)

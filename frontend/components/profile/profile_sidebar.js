@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { eventsByUserId} from '../../reducers/selectors'
 
-export function ProfileSidebar({ user, events }) {
+export function ProfileSidebar({ events, groups }) {
   return (
     <section className="profile-sidebar">
       <h4>Groups</h4>
       <ul>
         {
-          user.groups.map(group =>
+          groups.map(group =>
             <li key={group.id}>
               <Link to={ `/groups/${group.id}` }>
                 { group.name }
@@ -35,7 +35,10 @@ export function ProfileSidebar({ user, events }) {
 }
 
 function mapStateToProps(state, { user }) {
-  return { events: eventsByUserId(state, user.id) }
+  return { 
+    events: eventsByUserId(state, user.id),
+    groups: user.groups.map(id => state.groups.get(id.toString()))
+  }
 }
 
 export default connect(mapStateToProps)(ProfileSidebar) 

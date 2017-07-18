@@ -5,7 +5,7 @@ import UserPhoto from "../shared/user_photo"
 function GroupMember({ member }) {
   return (
     <li className="member">
-      <Link to={`profile/${member.username}`}>
+      <Link to={`/profile/${member.username}`}>
         <UserPhoto user={ member } className="thumb" />
         <h4>{ member.fullname }</h4>
       </Link>
