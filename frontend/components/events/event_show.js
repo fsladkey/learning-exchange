@@ -11,7 +11,13 @@ import CancelEventButton from './cancel_event_button'
 
 class EventShow extends Component {
   componentDidMount() {
-    this.props.fetchEvent(this.props.params.id).then()
+    this.props.fetchEvent(this.props.params.id)
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.params.id !== this.props.params.id) {
+      this.props.fetchEvent(newProps.params.id)
+    }
   }
 
   render() {
@@ -32,6 +38,7 @@ class EventShow extends Component {
     )
   }
 }
+const events = [];
 
 
 const mapStateToProps = ({ events }, { params }) => ({
