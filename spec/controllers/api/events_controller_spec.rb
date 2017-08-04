@@ -8,6 +8,7 @@ require 'rails_helper'
 # `DELETE /api/events/`
 
 RSpec.describe Api::EventsController, type: :controller do
+  let(:group) { build(:group) }
   describe "while not logged in" do
     before do
       allow(controller).to receive(:user_signed_in?).and_return(false)
@@ -36,7 +37,7 @@ RSpec.describe Api::EventsController, type: :controller do
 
     describe "GET show" do
       it "renders the index template" do
-        event = create(:event, creator: current_user)
+        event = create(:event, creator: current_user, group: group)
         get :show, params: { id: event.id }
         expect(controller).to render_template(:show)
       end
@@ -51,7 +52,8 @@ RSpec.describe Api::EventsController, type: :controller do
 
     describe "POST create" do
       it "creates a new group with valid params" do
-        event_params = build(:event, name: "name").as_json
+        group = create(:group)
+        event_params = build(:event, name: "name", group_id: group.id).as_json
         post :create, params: { event: event_params }
 
         expect(controller).to render_template(:show)
@@ -68,7 +70,7 @@ RSpec.describe Api::EventsController, type: :controller do
 
     describe "PATCH update" do
       it "updates a group with valid params" do
-        event = create(:event, name: "Original", creator: current_user)
+        event = create(:event, name: "Original", creator: current_user, group: group)
         patch :update, params: {
           id: event.id,
           event: { name: "Updated" }
@@ -78,7 +80,7 @@ RSpec.describe Api::EventsController, type: :controller do
       end
 
       it "renders 422 with invalid params" do
-        event = create(:event, creator: current_user)
+        event = create(:event, creator: current_user, group: group)
         patch :update, params: { id: event.id, event: { name: "" } }
         expect(controller).to respond_with(422)
       end
@@ -86,7 +88,7 @@ RSpec.describe Api::EventsController, type: :controller do
 
     describe "DELETE destroy" do
       it "destroys the group if it exists" do
-        event = create(:event, creator: current_user)
+        event = create(:event, creator: current_user, group: group)
         delete :destroy, params: { id: event.id }
         expect(controller).to render_template(:show)
         expect(Event.exists?(id: event.id)).to be(false)

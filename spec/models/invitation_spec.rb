@@ -15,7 +15,6 @@ require 'rails_helper'
 RSpec.describe Invitation, type: :model do
   describe "validations" do
     it { should validate_presence_of(:event) }
-    it { should validate_presence_of(:inviter) }
     it { should validate_presence_of(:invitee) }
   end
 
