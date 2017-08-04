@@ -23,7 +23,6 @@ export default class MessageList extends Component {
   scrollToBottom = (speed, prev) => {
     // if (this.node.scrollTop === prev) return;
     if (this.node.scrollTop < this.node.scrollHeight) {
-      console.log(this.node.scrollTop, this.node.scrollHeight);
       this.node.scrollTop++
       setTimeout(() => {}
         // this.scrollToBottom(speed, this.node.scrollTop), speed

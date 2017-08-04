@@ -9,11 +9,9 @@ class EventChat extends Component {
     // TODO: Protect on back end?
     return (
       <Chat
-        resourceType="Event"
         resourceId={ this.props.params.id }
+        resourceType={ "Event" }
         messages={ this.props.messages }
-        fetchMessges={ this.props.fetchMessages }
-        sendMessge={ this.props.sendMessage }
         allowSending={this.props.isEventCreator}
         />
     )

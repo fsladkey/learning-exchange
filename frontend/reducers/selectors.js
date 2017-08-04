@@ -12,6 +12,10 @@ export const conversations = ({ conversations }) => {
   return conversations.sort(createdAtDesc)
 }
 
+export const getCurrentUser = ({ currentUser, users }) => {
+  return users.get(currentUser.id.toString())
+}
+
 export const currentConversation = ({ conversations }, username) => {
   return conversations.filter(convo =>
     convo.other_user.username === username

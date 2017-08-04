@@ -18,6 +18,7 @@ import EventForm from './events/event_form'
 import EventChat from './events/event_chat'
 import EventMembers from './events/event_members'
 import EventShow from './events/event_show'
+import EventLocation from './events/event_location'
 import GroupForm from './groups/group_form'
 import GroupShow from './groups/group_show'
 import GroupChat from './groups/group_chat'
@@ -52,7 +53,8 @@ const routes = (
     </Route>
     <Route path="events/new" component={ EventForm } />
     <Route path="events/:id" component={ EventShow }>
-      <IndexRoute component={ EventChat } />
+      <IndexRoute component={ EventLocation } />
+      <Route path="updates" component={ EventChat } />
       <Route path="attendees" component={ EventMembers } />
     </Route>
     <Route path="groups/new" component={ GroupForm } />

@@ -6,11 +6,20 @@
   position: relative;
   h2 {
     font-size: 30px;
+    font-weight: bold;
+    font-family: $alt-font;
     margin-bottom: 10px;
     button {
       font-size: 16px;
       padding: 10px 20px;
       margin-left: 10px;
+    }
+  }
+  h4 {
+    margin-bottom: 40px;
+    font-size: 22px;
+    &:hover {
+      text-decoration: underline;
     }
   }
   .rsvp {
@@ -19,9 +28,97 @@
       margin-top: 20px;
       top: 0;
       right: 20px;
+      .going {
+        background-color:#4BB543;
+
+      }
+      .not-going {
+        background-color: #fa4633;
+      }
+  }
+  span.event-options {
+    cursor: pointer;
+    font-size: 32px;
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+    position: relative;
   }
 }
 
 #map.event-map {
   height: 150px;
+}
+
+.event-options-dropdown {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 120%;
+  background-color: $white;
+  width: 200px;
+  border: 1px solid $blue;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #999;
+  .dropdown-option {
+    margin: 0 auto;
+    padding: 5px 10px;
+    display: block;
+    width: 100%;
+    &:hover {
+      background-color: $orange;
+      color: $white;
+    }
+  }
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    border: 10px solid transparent;
+    transform: translateX(-50%);
+  }
+  &:before {
+    bottom: 102%;
+    left: 50%;
+    border-bottom: 6px solid $blue;
+
+  }
+  &:after {
+    bottom: 100%;
+    left: 50%;
+    border-bottom: 6px solid $white;
+  }
+}
+
+.map-container {
+  display: flex;
+  text-align: center;
+  .event-address {
+    padding: 20px;
+    flex: 1;
+    margin-bottom: 40px;
+  }
+  #map {
+    margin: 20px;
+    height: 400px;
+    flex: 2;
+  }
+  .label {
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: $orange;
+    i {
+      color: $blue;
+      margin-left: 10px;
+    }
+  }
+  .event-info {
+    margin-bottom: 30px;
+  }
+}
+
+.event-members {
+  padding: 20px;
 }

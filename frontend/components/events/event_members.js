@@ -4,7 +4,7 @@ import MemberList from "../shared/member_list"
 
 export function EventMembers({ event }) {
   return (
-    <section>
+    <section className="event-members">
       <h1>Event Attendees</h1>
       <MemberList members={event.attending_users} />
     </section>

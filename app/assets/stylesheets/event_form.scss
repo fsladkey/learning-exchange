@@ -2,19 +2,71 @@
 
 .event-form {
     background-color: $white;
-    padding: 30px;
-    width: 400px;
+    padding: 100px;
     border-radius: 5px;
+    min-width: 480px;
+    .time-range {
+        // text-align: center;
+        // display: flex;
+        // justify-content: space-between;
+        color: $blue;
+        margin-bottom: 20px;
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 2px;
+            font-size: 26px;
+        }
+        .date-time {
+            display: flex;
+            margin-bottom: 20px;
+            .hour-min-space {
+                font-size: 30px;
+                margin: 0 10px;
+            }
+        }
+    }
     h2 {
-        font-size: 26px;
-    }
-    label, input, textarea, h2, p {
-        margin-bottom: 10px;
-    }
-    input, textarea {
-        width: 100%;
-    }
-    label {
+        font-family: $alt-font;
+        font-weight: bold;
+        color: $blue;
+        font-size: 30px;
         display: block;
+        margin-bottom: 60px;
+        display: flex;
+        justify-content: space-between;
+        i {
+            transform: scale(1.5);
+            color: $dark-orange;
+        }
     }
+    form {
+        label {
+            color: $blue;
+            font-weight: bold;
+            display: block;
+            font-size: 19px;
+        }
+        label, input, textarea, p {
+            margin-bottom: 10px;
+        }
+        input, textarea {
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+        button {
+            width: 100%;
+            margin: 20px 0;
+            font-size: 21px;
+        }
+    }
+}
+
+.time-input {
+    display: flex;
 }

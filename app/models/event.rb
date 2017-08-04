@@ -19,6 +19,7 @@ class Event < ApplicationRecord
   include Geocodable
   include Searchable
   validates :creator, :group, :name, :address, :start_time, :end_time, presence: true
+  validate :starts_before_it_ends
 
   before_validation :geocode
   geocoded_by :address
@@ -53,6 +54,10 @@ class Event < ApplicationRecord
 
   def locator
     :address
+  end
+
+  def starts_before_it_ends
+    start_time < end_time
   end
 
 end

@@ -7,7 +7,10 @@ export default function EventNav({ event }) {
     <nav className="sub-nav">
       <ul>
         <li>
-          <Link to={ url }>Posts</Link>
+          <Link to={ url }>Location</Link>
+        </li>
+        <li>
+          <Link to={ url + "updates" }>Updates</Link>
         </li>
         <li>
           <Link to={ url + "attendees" }>Attendees</Link>

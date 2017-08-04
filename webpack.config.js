@@ -9,6 +9,7 @@ const plugins = [
   }),
   new CopyWebpackPlugin([
     { from: 'node_modules/react-big-calendar/lib/css/react-big-calendar.css', to: 'vendor/assets/stylesheets/react-big-calendar.css' },
+    { from: 'node_modules/react-select/dist/react-select.css', to: 'vendor/assets/stylesheets/react-select.css' },
   ])
 ]
 

@@ -19,18 +19,21 @@ export class RSVP extends Component {
   }
 
   submitText() {
-    return this.props.isAttending ? "Cancel" : "Attend"
+    return this.props.isAttending ?
+      <span>Going <i className="fa fa-check"/></span> :
+      <span>Not Going <i className="fa fa-times"/></span>
   }
 
   className() {
-    return this.props.isAttending ? "cancel-button" : "attend-button"
+    return this.props.isAttending ? "going" : "not-going"
   }
 
   render() {
     return (
       <section className="rsvp">
-        <p>{this.headerText()}</p>
-        <button className="lx-button" onClick={this.handleClick}>{this.submitText()}</button>
+        <button className={ `lx-button ${this.className()}` } onClick={ this.handleClick }>
+          { this.submitText() }
+        </button>
       </section>
     )
   }

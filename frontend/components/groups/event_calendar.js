@@ -8,16 +8,14 @@ import { setFormField } from '../../actions/form_actions'
 import Spinner from '../shared/spinner'
 import events from './events'
 
-// const allViews = Object.keys(BigCalendar.views).map(k => BigCalendar.views[k])
-
 BigCalendar.momentLocalizer(moment); 
 
 function eventToCalenderElement(event) {
     return {
     id: event.id,
     title: event.name,
-    start: new Date(event.start),
-    end: new Date(event.end),
+    start: new Date(event.start_time),
+    end: new Date(event.end_time),
     desc: event.description
   }
 }
@@ -29,8 +27,8 @@ function EventCalendar({ events, setFormField, setModal, router, params }) {
     }
 
     function onSelectSlot({ start, end }) {
-        setFormField("event", "start", start)
-        setFormField("event", "end", end)
+        setFormField("event", "start_time", start.toISOString())
+        setFormField("event", "end_time", end.toISOString())
         setFormField("event", "group_id", parseInt(params.id))
         setModal("eventForm")
     }

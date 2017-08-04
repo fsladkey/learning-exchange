@@ -4,12 +4,9 @@ import NotificationList from './notification_list'
 const stopProp = e => e.stopPropagation()
 
 const NotificationDropdown = ({ notifications }) => {
-  let content
-  if (notifications.length === 0) {
-    content = <p>No notifications to display</p>
-  } else {
-    content = <NotificationList notifications={ notifications }/>
-  }
+  const content = (notifications.length === 0) ?
+    <p className="empty-notifications"><i className="fa fa-folder-open-o"/> No notifications to display</p> :
+    <NotificationList notifications={ notifications }/>
 
   return (
     <section className="notification-dropdown arrow-box" onClick={ stopProp }>

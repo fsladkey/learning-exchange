@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setDropdown } from '../../actions/dropdown_actions'
+import { getCurrentUser } from '../../reducers/selectors'
 import NotificationDropdown from './notifications_dropdown'
 import Counter from './counter'
 
@@ -37,8 +38,10 @@ class Notifications extends Component {
   }
 }
 
-function mapStateToProps({ dropdown, currentUser: { notifications } }) {
-  return { showDropdown: dropdown === 'notifications', notifications }
+function mapStateToProps(state) {
+  const currentUser = getCurrentUser(state)
+  const notifications = currentUser.notifications.map(id => state.notifications.get(id.toString()))
+  return { showDropdown: state.dropdown === 'notifications', notifications }
 }
 
 export default connect(mapStateToProps, { setDropdown })(Notifications)

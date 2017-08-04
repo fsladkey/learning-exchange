@@ -37,7 +37,7 @@ export default class SignInForm extends Component {
         <label htmlFor="password-input">Password</label>
         <input id="password-input" type="password" name="user[password]" placeholder="Password"/>
         <button>Log In</button>
-        <hr />
+        {/* <hr /> */}
         {/*<button onClick={ this.guestLogin } type="button">Guest</button>*/}
       </form>
     );
