@@ -1,0 +1,10 @@
+@import "variables";
+
+.user-form {
+    .user-lastname,
+    .user-middlename,
+    .user-firstname {
+        width: 33%;
+        float: left;
+    }
+}

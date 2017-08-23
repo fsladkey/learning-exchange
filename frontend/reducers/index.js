@@ -7,6 +7,7 @@ import searchResults from './search_results_reducer'
 import query from './query_reducer'
 import modal from './modal_reducer'
 import eventForm from './event_form_reducer'
+import userForm from './user_form_reducer'
 import attendanceReducer from './attendance_reducer'
 import { routerReducer as routing } from 'react-router-redux'
 
@@ -18,7 +19,8 @@ const reducers = {
   query,
   routing,
   searchResults,
-  eventForm
+  eventForm,
+  userForm
 }
 
 ;[

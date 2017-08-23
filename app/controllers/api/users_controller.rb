@@ -16,7 +16,9 @@ class Api::UsersController < Api::ApiController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    @user.update_password(params[:user][:password], params[:user][:password_confirmation])
+    @user.assign_attributes(user_params)
+    if @user.save
       render :show
     else
       render json: @user.errors, status: 422
@@ -42,8 +44,12 @@ class Api::UsersController < Api::ApiController
     )
   end
 
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
+
   def ensure_has_edit_permissions
-    user_params[:id] == current_user.id
+    params[:id] == current_user.id
   end
 
 end

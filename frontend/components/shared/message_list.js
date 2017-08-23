@@ -43,7 +43,7 @@ export default class MessageList extends Component {
     return (
       <ul ref={ node => this.node = node } className="message-list">
       {
-        messages.valueSeq().map(message =>
+        messages.map(message =>
           <Message key={ message.id } message={ message } currentUser={ currentUser }/>
         )
       }

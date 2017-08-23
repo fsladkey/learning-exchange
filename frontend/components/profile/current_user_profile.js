@@ -19,7 +19,7 @@ class CurrentUserProfile extends Component {
     const { fetched } = this.state
     if (!fetched) return <Spinner />
     return (
-      <Profile user={ currentUser } editable={ true } />
+      <Profile user={currentUser} isCurrentUser={true} editable={ true } />
     )
   }
 }

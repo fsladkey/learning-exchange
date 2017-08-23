@@ -27,6 +27,8 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  middlename             :string
+#  bio                    :text
 #
 
 class User < ApplicationRecord
@@ -195,6 +197,12 @@ class User < ApplicationRecord
 
   def invite(user, event)
     sent_invitations.create(invitee: user, event: event)
+  end
+
+  def update_password(password, password_confirmation)
+    if !password.blank? && password == password_confirmation
+      self.password = password
+    end
   end
 
   private

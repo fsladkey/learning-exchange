@@ -40,5 +40,4 @@ class Api::ConversationsController < ApplicationController
     params.require(:conversation).permit(:receiver_id, :body, :conversation_id)
   end
 
-
 end

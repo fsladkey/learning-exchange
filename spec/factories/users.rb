@@ -27,6 +27,8 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  middlename             :string
+#  bio                    :text
 #
 
 ny_zips = ["10001", "11215", "12137"]
