@@ -140,3 +140,49 @@ h1 {
     }
   }
 }
+
+.form {
+    background-color: $white;
+    padding: 100px;
+    border-radius: 5px;
+    min-width: 480px;
+    h2 {
+        font-family: $alt-font;
+        font-weight: bold;
+        color: $blue;
+        font-size: 30px;
+        display: block;
+        margin-bottom: 60px;
+        display: flex;
+        justify-content: space-between;
+        i {
+            transform: scale(1.5);
+            color: $dark-orange;
+        }
+    }
+    form {
+        label {
+            color: $blue;
+            font-weight: bold;
+            display: block;
+            font-size: 19px;
+        }
+        label, input, textarea, p {
+            margin-bottom: 10px;
+        }
+        input, textarea {
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+        button {
+            width: 100%;
+            margin: 20px 0;
+            font-size: 21px;
+        }
+    }
+}

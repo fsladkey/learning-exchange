@@ -10,9 +10,9 @@ export function EventLocation({ event }) {
         <section className="map-container">
           <div className="event-address">
             <p className="label">Start <i className="fa fa-clock-o" /></p>
-            <p className="event-info">{moment(event.end_time).format(FORMAT)}</p>
-            <p className="label">End <i className="fa fa-clock-o" /></p>
             <p className="event-info">{moment(event.start_time).format(FORMAT)}</p>
+            <p className="label">End <i className="fa fa-clock-o" /></p>
+            <p className="event-info">{moment(event.end_time).format(FORMAT)}</p>
             <p className="label address">Address <i className="fa fa-map-marker" /></p>
             <p className="event-info">{event.address}</p>
           </div>

@@ -10,8 +10,11 @@ import { preventDefault } from '../../utils/misc'
 import { setModal } from '../../actions/modal_actions'
 import PlacesAutocompleteInput from '../shared/places_autocomplete_input'
 
+const MERIDIEM_FORMAT = "a"
+
 const hourOptions = []
 const minuteOptions = []
+const meridiemOptions = [{ value: "AM", label: "AM" }, { value: "PM", label: "PM" }]
 
 Array(12).fill(null).forEach((_, idx) => {
   const value = (idx + 1) < 10 ? `0${idx + 1}` : `${idx + 1}`
@@ -23,9 +26,7 @@ Array(12).fill(null).forEach((_, idx) => {
 })
 
 
-function TimeInput({ time, type, setHours, setMinutes }) {
-  console.log(time.format("hh"), time.format("mm"))
-  // ADD AM/PM
+function TimeInput({ time, type, setHours, setMinutes, setMeridiem }) {
   return (
     <div className="time-input">
       <Select
@@ -43,6 +44,13 @@ function TimeInput({ time, type, setHours, setMinutes }) {
         searchable={true}
         onChange={setMinutes(type)}
       />
+      <Select
+        value={time.format(MERIDIEM_FORMAT).toUpperCase()}
+        options={meridiemOptions}
+        clearable={false}
+        searchable={true}
+        onChange={setMeridiem(type)}
+      />
     </div>
   )
 }
@@ -52,8 +60,14 @@ function TimeInput({ time, type, setHours, setMinutes }) {
 class EventForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { startFocused: false, endFocused: false }
+    this.state = {
+      startFocused: false,
+      endFocused: false,
+      start: moment(this.props.eventForm.get("start")).format(MERIDIEM_FORMAT).toUpperCase(),
+      end: moment(this.props.eventForm.get("end")).format(MERIDIEM_FORMAT).toUpperCase()
+    }
   }
+
   clearForm() {
     ["name", "description", "address"].forEach((field) => {
       this.props.setFormField("event", field, "")
@@ -73,8 +87,9 @@ class EventForm extends React.Component {
   }
 
   setHours = (name) => ({ value }) => {
+    value = parseInt(value)
     const current = moment(this.props.eventForm.get(name))
-    current.hours(value);
+    current.hours(this.state[name] == "PM" ? value + 12 : value);
     this.props.setFormField("event", name, current.toISOString())
   }
 
@@ -82,6 +97,12 @@ class EventForm extends React.Component {
     const current = moment(this.props.eventForm.get(name))
     current.minutes(value);
     this.props.setFormField("event", name, current.toISOString())
+  }
+
+  setMeridiem = (name) => ({ value }) => {
+    this.setState({ [name]: value }, () => {
+      this.setHours(name)({ value: moment(this.props.eventForm.get(name)).hours() % 12 })
+    })
   }
 
   handleFocus = (name) => ({ focused }) => {
@@ -102,16 +123,16 @@ class EventForm extends React.Component {
   }
 
   render() {
-    const { eventForm, setFormField, createEvent } = this.props;
+    const { eventForm, setFormField } = this.props;
     const titleText = this.props.eventForm.get("id") ? "Edit Event" : "Create Event";
     const submitText = this.props.eventForm.get("id") ? "Update Event" : "Create Event";
     const start = moment(eventForm.get("start_time")).format("ddd MMM YY");
     const starttime = moment(eventForm.get("start_time")).format("h:mm a");
     const end = moment(eventForm.get("end_time")).format("ddd MMM YY");
     const endtime = moment(eventForm.get("end_time")).format("h:mm a");
-  
+    debugger
     return (
-      <section className="event-form">
+      <section className="form event-form">
         <h2><span>{titleText}</span><i className="fa fa-calendar-check-o"/></h2>
         <div className="time-range">
           <label>
@@ -129,6 +150,8 @@ class EventForm extends React.Component {
               type={"start_time"}
               setHours={this.setHours}
               setMinutes={this.setMinutes}
+              setMeridiem={this.setMeridiem}
+              setMeridiem={this.setMeridiem}
             />
           </div>
           <label>
@@ -146,6 +169,7 @@ class EventForm extends React.Component {
               type={"end_time"}
               setHours={this.setHours}
               setMinutes={this.setMinutes}
+              setMeridiem={this.setMeridiem}
             />
           </div>
         </div>

@@ -12,6 +12,8 @@
 #  longitude   :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  start_time  :datetime
+#  end_time    :datetime
 #
 
 class Event < ApplicationRecord
