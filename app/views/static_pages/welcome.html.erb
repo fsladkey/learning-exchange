@@ -1,1 +1,7 @@
 <div id="welcome-content" />
+
+<script>
+    <% if flash[:alert] %>
+        window.error_message = "<%= flash[:alert] %>"
+    <% end %>
+</script>

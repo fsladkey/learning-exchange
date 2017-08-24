@@ -130,7 +130,6 @@ class EventForm extends React.Component {
     const starttime = moment(eventForm.get("start_time")).format("h:mm a");
     const end = moment(eventForm.get("end_time")).format("ddd MMM YY");
     const endtime = moment(eventForm.get("end_time")).format("h:mm a");
-    debugger
     return (
       <section className="form event-form">
         <h2><span>{titleText}</span><i className="fa fa-calendar-check-o"/></h2>
