@@ -28,8 +28,10 @@ class Messages extends Component {
 
   componentDidMount() {
     this.props.fetchConversations().then(action => {
-      const firstUser = this.firstConvo()
-      firstUser && this.props.router.push(`/messages/${firstUser.other_user.username}`)
+      if (!this.props.params.username) {
+        const firstUser = this.firstConvo()
+        firstUser && this.props.router.push(`/messages/${firstUser.other_user.username}`)
+      }
     })
   }
 
