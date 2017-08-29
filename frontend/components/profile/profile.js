@@ -25,7 +25,6 @@ function ProfileHeader({ isCurrentUser, user, setModal, setFormField, updateUser
     })
   }
   const onRemove = (tag) => {
-    debugger
     updateUser({
       id: user.id,
       tag_names: user.tags.map(tag => tag.name).filter(name => name !== tag)

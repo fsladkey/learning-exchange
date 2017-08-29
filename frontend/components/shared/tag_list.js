@@ -15,11 +15,11 @@ class TagForm extends Component {
   onSubmit = (e) => {
     e.preventDefault()
     this.onAdd()
-    this.setState({ open: false, value: "" })
   }
 
   onAdd = () => {
     this.props.onAdd(this.state.value)
+    this.setState({ open: false, value: "" })
   }
 
   toggle = () => {
@@ -45,7 +45,7 @@ class TagForm extends Component {
 export default function TagList({ tags, editable, onAdd, onRemove }) {
   let tagItems = tags.map(tag =>
     <li key={ tag.id }>
-      <Link to={ `/tags/${tag.name}` }>{ tag.name }</Link>
+      <Link to={ null && `/tags/${tag.name}` }>{ tag.name }</Link>
       {editable && <i className="fa fa-times" onClick={ () => onRemove(tag.name) } />}
     </li>
   )
