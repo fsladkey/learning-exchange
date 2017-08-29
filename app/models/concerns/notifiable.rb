@@ -10,4 +10,12 @@ module Notifiable
     notifications.create!(user: user_to_notify)
   end
 
+  def notification_header
+    raise "Not implemented"
+  end
+
+  def notification_message
+    raise "Not implemented"
+  end
+
 end

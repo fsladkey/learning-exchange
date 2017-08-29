@@ -26,4 +26,12 @@ class Notification < ApplicationRecord
       "/profile/#{notifiable.follower.username}"
     end
   end
+
+  def notification_header
+    notifiable.notification_header
+  end
+
+  def notification_message
+    notifiable.notification_message
+  end
 end

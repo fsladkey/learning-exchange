@@ -87,6 +87,11 @@
     width: 90%;
     min-height: 100px;
   }
+  form {
+    textarea {
+      font-size: 16px;
+    }
+  }
 }
 
 .direct-message-button {

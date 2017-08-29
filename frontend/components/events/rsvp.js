@@ -12,13 +12,13 @@ export class RSVP extends Component {
       this.props.createAttendance({ event_id: this.props.eventId })
   }
 
-  headerText() {
+  submitText() {
     return this.props.isAttending ?
-      "You are attending this event." :
-      "You are not attending this event."
+      "cancel" :
+      "attend"
   }
 
-  submitText() {
+  statusText() {
     return this.props.isAttending ?
       <span>Going <i className="fa fa-check"/></span> :
       <span>Not Going <i className="fa fa-times"/></span>
@@ -31,8 +31,11 @@ export class RSVP extends Component {
   render() {
     return (
       <section className="rsvp">
-        <button className={ `lx-button ${this.className()}` } onClick={ this.handleClick }>
-          { this.submitText() }
+        <button className={ `lx-button rsvp-status ${this.className()}` }>
+          { this.statusText() }
+        </button>
+        <button className={`rsvp-submit ${this.className()}`} onClick={this.handleClick}>
+          {this.submitText()}
         </button>
       </section>
     )

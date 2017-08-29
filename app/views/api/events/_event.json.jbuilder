@@ -8,6 +8,10 @@ json.tags event.tags do |tag|
   json.extract! tag, :id, :name
 end
 
+json.attendances event.attendances do |attendance|
+  json.partial! "api/attendances/attendance.json", attendance: attendance
+end
+
 json.attending_users event.attending_users do |user|
   json.extract! user, :id, :fullname, :firstname, :lastname, :username
 end

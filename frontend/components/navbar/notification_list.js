@@ -15,20 +15,23 @@ class NotificationList extends Component {
   render() {
     const { notifications } = this.props
     const notificationItems = notifications.map(notification => {
-      let className = ''
+      let classNames = ["notification"]
       let badge = null
       if (!notification.seen) {
-        className = 'new'
+        classNames.push("new")
         //TODO: Consider using pseudo content
         badge = <span className="badge">New</span>
       }
       return (
         <li
           key={ notification.id }
-          className={ className }
+          className={ classNames.join(" ") }
           onClick={ () => this.markAsRead(notification) }
           >
-          <p>{ notification.notifiable_type }</p>
+          <div>
+            <h5>{notification.notification_header }</h5>
+            <p>{notification.notification_message }</p>
+          </div>
           { badge }
         </li>
       )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import updateMarkers from '../../utils/update_markers'
+
+const MARKER_URL = 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 
 export default class Map extends Component {
 
@@ -13,15 +14,37 @@ export default class Map extends Component {
         center: { lat, lng }
       }
     )
-    updateMarkers(this, this.props.items)
+    this.updateMarkers(this.props.items)
   }
 
   componentWillReceiveProps(nextProps) {
-    updateMarkers(this, nextProps.items)
+    this.updateMarkers(nextProps.items)
   }
 
   setMap = (map) => {
     this.mapNode = map
+  }
+
+  updateMarkers(items) {
+    this.markers.forEach(marker => marker.setMap(null))
+    this.markers = []
+    items.forEach(object => {
+      const latLng = { lat: object.lat, lng: object.lng };
+      if (latLng.lat && latLng.lng) {
+        const marker = new google.maps.Marker({
+          position: latLng,
+          title: object.title,
+          map: this.map
+        });
+        this.markers.push(marker)
+      }
+    })
+    this.cluster && this.cluster.clearMarkers();
+    this.cluster = new MarkerClusterer(
+      this.map,
+      this.markers,
+      { imagePath: MARKER_URL }
+    );
   }
 
 

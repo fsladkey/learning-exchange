@@ -37,7 +37,7 @@
   text-align: left;
   top: 100%;
   left: 50%;
-  min-width: 200px;
+  min-width: 280px;
   transform: translateX(-50%);
   border: 1px solid grey;
   border-bottom-left-radius: 5px;
@@ -45,26 +45,51 @@
   background-color: white;
   color: black;
   overflow: hidden;
-  li {
+  li.notification {
     cursor: pointer;
     background-color: #ddd;
     display: flex;
     padding: 10px 20px;
+    border: none;
     border-bottom: 1px solid #aaa;
     &.new  {
       background-color: white;
     }
     &:hover  {
-      background-color: #aaa;
+      background-color: #ccc;
+      h5 {
+        color: $orange;
+      }
     }
     .badge {
-      font-size: 12px;
+      font-size: 15px;
       margin-left: auto;
-      display: block;
+      display: flex;
+      align-content: center;
       background-color: $orange;
       color: $white;
       padding: 5px 10px;
       border-radius: 3px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    div {
+      padding: 2px;
+      h5 {
+        font-weight: bold;
+        display: block
+      }
+      p {
+        font-size: 14px;
+      }
+      // &:before {
+      //   content: "";
+      //   border: 10px solid transparent;
+      //   border-bottom: 10px solid green;
+      //   position: absolute;
+      //   top: 0;
+      //   left: 50%;
+      // }
     }
   }
   .empty-notifications {

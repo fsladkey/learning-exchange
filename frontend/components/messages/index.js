@@ -22,23 +22,29 @@ function ConversationPreview({ convo, user, params: { username } }) {
 
 class Messages extends Component {
 
-  firstConvo() {
+  firstConvoUser() {
     return this.props.conversations.values().next().value
   }
 
   componentDidMount() {
-    this.props.fetchConversations().then(action => {
-      if (!this.props.params.username) {
-        const firstUser = this.firstConvo()
-        firstUser && this.props.router.push(`/messages/${firstUser.other_user.username}`)
-      }
-    })
+    this.props.fetchConversations().then(action => this.redirectToFirstConv())
+  }
+
+  componentWillReceiveProps() {
+    this.redirectToFirstConv()
+  }
+
+  redirectToFirstConv = () => {
+    if (!this.props.params.username) {
+      const firstUser = this.firstConvoUser()
+      firstUser && this.props.router.push(`/messages/${firstUser.other_user.username}`)
+    }
   }
 
   render() {
     const { currentUser, conversations, children, params } = this.props
-    const firstConvo = this.firstConvo()
-    const body = firstConvo ? children : null
+    const firstConvoUser = this.firstConvoUser()
+    const body = firstConvoUser ? children : null
     const convoItems = conversations.valueSeq().map((convo) => {
       return (
         <ConversationPreview
@@ -67,7 +73,7 @@ class Messages extends Component {
 const mapStateToProps = (state) => {
   return { currentUser: state.currentUser, conversations: conversations(state) }
 }
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { fetchConversations: actions.fetchAllConversations }
-)(withRouter(Messages))
+)(Messages))

@@ -23,6 +23,10 @@ class Invitation < ApplicationRecord
     invitee
   end
 
+  def notification_header
+    "New Event"
+  end
+
   def notification_message
     inviter ?
       "#{inviter.fullname} has invited you to #{event.name}." :

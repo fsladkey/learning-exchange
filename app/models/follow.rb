@@ -19,6 +19,10 @@ class Follow < ApplicationRecord
     followed_user
   end
 
+  def notification_header
+    "New Follower"
+  end
+
   def notification_message
     "#{following_usr.fullname} is now following you."
   end

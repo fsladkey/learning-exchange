@@ -17,9 +17,8 @@ function ProfileHeader({ isCurrentUser, user, setModal, setFormField }) {
     )
     setModal("userForm")
   }
-  const editButton = isCurrentUser ? (
-    <button onClick={editProfile}><i className="fa fa-gear" /></button>
-  ) : null
+  const editButton = isCurrentUser ? <button onClick={editProfile}><i className="fa fa-gear" /></button> : null
+  const messageButton = isCurrentUser ? null : <MessageButton user={user} />
   return (
     <section className="profile-header sub-header">
       <div className="profile-header-row">
@@ -34,7 +33,7 @@ function ProfileHeader({ isCurrentUser, user, setModal, setFormField }) {
           </hgroup>
         </section>
       </div>
-      <MessageButton user={user} />
+      { messageButton }
       <h3>Interests</h3>
       <TagList tags={ user.tags }/>
       <ProfileBio user={user} />

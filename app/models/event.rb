@@ -29,7 +29,7 @@ class Event < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :creator, class_name: :User
 
-  has_many :invitations, inverse_of: :event
+  has_many :invitations, inverse_of: :event, dependent: :destroy
   has_many :attendances, inverse_of: :event, dependent: :destroy
 
   has_many :invited_users, through: :invitations, source: :invitee

@@ -23,18 +23,35 @@
     }
   }
   .rsvp {
-      text-align: right;
-      position: absolute;
-      margin-top: 20px;
-      top: 0;
-      right: 20px;
-      .going {
-        background-color:#4BB543;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    position: absolute;
+    margin-top: 20px;
+    top: 0;
+    right: 20px;
+    .going {
+      background-color:#4BB543;
 
+    }
+    .not-going {
+      background-color: #fa4633;
+    }
+    .rsvp-status {
+      cursor: default;
+    }
+    .rsvp-submit {
+      color: #666;
+      background-color: transparent;
+      border-bottom: 1px solid #666;
+      padding-bottom: 12px;
+      transition: all 200ms;
+      margin: 0px 20px;
+      &:hover {
+        color: black;
+        border-bottom: 1px solid black;
       }
-      .not-going {
-        background-color: #fa4633;
-      }
+    }
   }
   span.event-options {
     cursor: pointer;
