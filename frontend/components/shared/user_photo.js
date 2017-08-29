@@ -4,7 +4,7 @@ function getInitials(user) {
   if (user.firstname && user.lastname) {
     return `${user.firstname[0]} ${user.lastname[0]}`.toUpperCase() 
   }
-  return user.email[0].toUpperCase()
+  return user.username[0].toUpperCase()
 }
 
 export default function UserPhoto({ user, className }) {
