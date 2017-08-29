@@ -179,6 +179,10 @@ class User < ApplicationRecord
     end
   end
 
+  def tag_names=(tags)
+    self.tags = tags.map { |tag| Tag.find_or_create_by(name: tag.downcase) }
+  end
+
   def fullname
     middlename ? "#{firstname} #{middlename} #{lastname}" : "#{firstname} #{lastname}"
   end

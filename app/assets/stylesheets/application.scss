@@ -186,3 +186,13 @@ h1 {
         }
     }
 }
+
+.spin-on-hover {
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}    
+
+.spin-on-hover:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}

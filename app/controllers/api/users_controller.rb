@@ -40,7 +40,8 @@ class Api::UsersController < Api::ApiController
       :firstname,
       :middlename,
       :lastname,
-      :zipcode
+      :zipcode,
+      tag_names: []
     )
   end
 

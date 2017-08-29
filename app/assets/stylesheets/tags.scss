@@ -2,16 +2,43 @@
 
 .tag-list {
   display: flex;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  li {
+    margin-right: 14px;
+  }
   a {
-    display: block;
     padding: 5px 10px;
-    margin-right: 20px;
     background-color: $orange;
     color: $white;
     border-radius: 10px;
+    font-size: 22px;
     &:hover {
       background-color: $blue;
+    }
+  }
+  i {
+    font-size: 22px;
+    margin: 0px 5px;
+    cursor: pointer;
+    transition: all 150ms;
+    &:hover {
+      color: $orange;
+    }
+  }
+  .tag-form {
+    input {
+      outline: none;
+      padding: 10px;
+      border-radius: 20px;
+      font-size: 16px;
+      &.open {
+
+      }
+      &.closed {
+        display: none;   
+      }
     }
   }
 }

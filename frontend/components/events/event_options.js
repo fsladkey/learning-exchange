@@ -46,7 +46,7 @@ export class EventOptions extends Component {
     const className = this.props.showDown ? " active" : "";
     return (
         <span className={`event-options${className}`} onClick={this.toggleDropdown}>
-          <i className="fa fa-gear" />
+          <i className="fa fa-gear spin-on-hover" />
           { this.dropDown() }
         </span>
     )

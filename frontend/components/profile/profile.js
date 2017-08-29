@@ -9,15 +9,29 @@ import ProfileBio from './profile_bio'
 import { setModal } from '../../actions/modal_actions'
 import { setFormField } from '../../actions/form_actions'
 import { fadeIn } from '../../utils/misc'
+import actions from '../../actions/user_actions'
 
-function ProfileHeader({ isCurrentUser, user, setModal, setFormField }) {
+function ProfileHeader({ isCurrentUser, user, setModal, setFormField, updateUser }) {
   const editProfile = () => {
     ["id", "username", "email", "firstname", "middlename", "lastname", "bio", "fullname", "lat", "lng", "zipcode"].forEach(field =>
       setFormField("user", field, user[field])
     )
     setModal("userForm")
   }
-  const editButton = isCurrentUser ? <button onClick={editProfile}><i className="fa fa-gear" /></button> : null
+  const onAdd = (tag) => {
+    updateUser({
+      id: user.id,
+      tag_names: (user.tags.map(tag => tag.name)).concat(tag)
+    })
+  }
+  const onRemove = (tag) => {
+    debugger
+    updateUser({
+      id: user.id,
+      tag_names: user.tags.map(tag => tag.name).filter(name => name !== tag)
+    })
+  }
+  const editButton = isCurrentUser ? <button onClick={editProfile}><i className="fa fa-gear spin-on-hover" /></button> : null
   const messageButton = isCurrentUser ? null : <MessageButton user={user} />
   return (
     <section className="profile-header sub-header">
@@ -35,7 +49,7 @@ function ProfileHeader({ isCurrentUser, user, setModal, setFormField }) {
       </div>
       { messageButton }
       <h3>Interests</h3>
-      <TagList tags={ user.tags }/>
+      <TagList tags={user.tags} editable={isCurrentUser} onAdd={onAdd} onRemove={onRemove} />
       <ProfileBio user={user} />
     </section>
   )
@@ -52,4 +66,4 @@ function UserProfile(props) {
   )
 }
 
-export default connect(null, { setModal, setFormField })(UserProfile)
+export default connect(null, { setModal, setFormField, updateUser: actions.updateUser })(UserProfile)
