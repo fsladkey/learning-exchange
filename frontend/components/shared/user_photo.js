@@ -1,7 +1,10 @@
 import React from 'react'
 
 function getInitials(user) {
-  return `${user.firstname[0]} ${user.lastname[0]}`.toUpperCase()
+  if (user.firstname && user.lastname) {
+    return `${user.firstname[0]} ${user.lastname[0]}`.toUpperCase() 
+  }
+  return user.email[0].toUpperCase()
 }
 
 export default function UserPhoto({ user, className }) {
