@@ -6,7 +6,7 @@ class Api::UsersController < Api::ApiController
   end
 
   def show
-    @user = User.find_by(username: params[:username])
+    @user = User.includes(:tags, attendances: :event, notifications: :notifiable).find_by(username: params[:username])
     if @user
       render :show
     else
