@@ -113,7 +113,6 @@ class User < ApplicationRecord
 
   has_many(
     :events_to_attend,
-    -> { where("events.end_time <= ?", Time.now) },
     through: :attendances,
     source: :event
   )

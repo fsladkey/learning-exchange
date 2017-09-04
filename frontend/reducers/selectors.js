@@ -59,6 +59,7 @@ export const eventsByUserId = ({ currentUser, events, attendances }, userId) => 
   return attendances
     .filter(attendance => attendance.user_id == userId)
     .map(attendance => events.get(attendance.event_id.toString()))
+    .filter(event => new Date(event.end_time) >= new Date())
 }
 
 export const userComments = commentsByType('User')
