@@ -1,11 +1,11 @@
 const defaults = { dataType: "json", contentType: "application/json" };
 
 export function fetch(url, data = {}) {
-  return $.ajax({ url, method: "GET", data, ...defaults })
+  return $.ajax({ url, method: "GET", data: JSON.stringify(data), ...defaults })
 }
 
 export function post(url, data) {
-  return $.ajax({ url, data, method: "POST", ...defaults })
+  return $.ajax({ url, data: JSON.stringify(data), method: "POST", ...defaults })
 }
 
 export function patch(url, data) {
