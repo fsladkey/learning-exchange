@@ -87,6 +87,7 @@
     }
   }
   .user-photo {
+    flex-shrink: 0;
     margin: 10px;
   }
 }
