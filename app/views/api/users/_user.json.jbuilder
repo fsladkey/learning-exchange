@@ -1,4 +1,4 @@
-json.extract! user, :id, :username, :email, :firstname, :middlename, :lastname, :bio, :fullname, :lat, :lng, :zipcode
+json.extract! user, :id, :username, :email, :firstname, :middlename, :lastname, :bio, :fullname, :lat, :lng, :zipcode, :admin
 json.thumb user.avatar.url(:thumb)
 json.medium_avatar user.avatar.url(:medium)
 json.notifications user.recent_notifications do |notification|

@@ -50,7 +50,7 @@ class Api::UsersController < Api::ApiController
   end
 
   def ensure_has_edit_permissions
-    params[:id] == current_user.id
+    current_user.admin? || params[:id] == current_user.id
   end
 
 end

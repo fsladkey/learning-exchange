@@ -22,7 +22,7 @@ export const currentConversation = ({ conversations }, username) => {
   ).values().next().value
 }
 
-export const curentProfile = ({ users }, username) => {
+export const currentProfile = ({ users }, username) => {
   return users.filter(user =>
     user.username === username
   ).values().next().value

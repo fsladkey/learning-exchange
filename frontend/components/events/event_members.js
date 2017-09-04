@@ -15,4 +15,4 @@ const mapStateToProps = ({ events }, { params }) => ({
   event: events.get(params.id)
 })
 
-export default connect(mapStateToProps)(EventMembers);
+export default connect(mapStateToProps)(EventMembers)
