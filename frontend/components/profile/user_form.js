@@ -48,6 +48,7 @@ class UserForm extends React.Component {
         const titleText = this.props.userForm.get("id") ? "User Settings" : "Create User"
         const submitText = this.props.userForm.get("id") ? "Update Profile" : "Create User"
         const { userForm, setFormField } = this.props;
+        // add maxlength to zipcode
         return (
             <section className="form user-form">
                 <h2><span>{titleText}</span><i className="fa fa-user" /></h2>
