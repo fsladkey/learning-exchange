@@ -3,7 +3,7 @@ module Taggable
   # TODO: handle null tag_names
   included do
     has_many :taggings, as: :taggable
-    has_many :tags, through: :taggings
+    has_many :tags, -> { includes(:taggings).order('taggings.created_at ASC') }, through: :taggings
     scope :with_tags, -> {
       left_joins(:tags).group(:id).select(<<-SQL)
         #{table_name}.*, STRING_AGG(tags.name, ', ') AS tag_names
