@@ -65,17 +65,31 @@
         color: $orange;
       }
     }
-    .badge {
-      font-size: 15px;
-      margin-left: auto;
+    .left-content {
+      width: 25%;
+      text-align: right;
+      padding: 5px;
+      justify-content: flex-end;
+      align-items: center;
       display: flex;
-      align-content: center;
-      background-color: $orange;
-      color: $white;
-      padding: 5px 10px;
-      border-radius: 3px;
-      margin-bottom: 20px;
-      position: relative;
+      .badge {
+        font-size: 15px;
+        margin-left: auto;
+        display: flex;
+        background-color: $orange;
+        color: $white;
+        padding: 5px 10px;
+        border-radius: 3px;
+        position: relative;
+        margin-right: 10px;
+      }
+      .delete-notification-button {
+        // background-color: $blue;
+        transition: all 140ms;
+        &:hover {
+          color: $orange;
+        }
+      }
     }
     div {
       padding: 2px;

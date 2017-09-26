@@ -3,35 +3,48 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux"
 import { attendanceByEventId } from '../../reducers/selectors'
 import AttendanceActions from '../../actions/attendance_actions'
+import Icon from '../shared/icon'
 
 export class RSVP extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { open: false }
+  }
+
   handleClick = () => {
+    this.setState(({ open }) => ({ open: false }));
     this.props.isAttending ?
       this.props.destroyAttendance(this.props.attendanceId) :
       this.props.createAttendance({ event_id: this.props.eventId })
   }
 
   submitText() {
-    return this.props.isAttending ?
-      "cancel" :
-      "attend"
+    return this.props.isAttending ? "not going" : "going"
   }
 
-  statusText() {
+  statusText() { // move into functional component
     return this.props.isAttending ?
-      <span>Going <i className="fa fa-check"/></span> :
-      <span>Not Going <i className="fa fa-times"/></span>
+      <span><Icon type="caret-down" /> Going</span> :
+      <span><Icon type="caret-down" /> Not Going</span>
+  }
+
+  toggleMenu = () => {
+    this.setState(({ open }) => ({ open: !open }));
   }
 
   className() {
-    return this.props.isAttending ? "going" : "not-going"
+    return [
+      this.props.isAttending ? "going" : "not-going",
+      this.state.open ? "open" : ""
+    ].filter(n => n).join(" ")
+
   }
 
   render() {
     return (
       <section className="rsvp">
-        <button className={ `lx-button rsvp-status ${this.className()}` }>
+        <button className={ `lx-button rsvp-status ${this.className()}` } onClick={this.toggleMenu}>
           { this.statusText() }
         </button>
         <button className={`rsvp-submit ${this.className()}`} onClick={this.handleClick}>

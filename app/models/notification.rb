@@ -24,6 +24,8 @@ class Notification < ApplicationRecord
       "/events/#{notifiable.event_id}"
     when "Follow"
       "/profile/#{notifiable.follower.username}"
+    when "Event"
+      "/events/#{notifiable.id}"
     end
   end
 

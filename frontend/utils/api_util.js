@@ -1,7 +1,11 @@
 const defaults = { dataType: "json", contentType: "application/json" };
 
-export function fetch(url, data = {}) {
-  return $.ajax({ url, method: "GET", data: JSON.stringify(data), ...defaults })
+export function fetch(url, data) {
+  const opts = { url, method: "GET" };
+  if (data) {
+    opts.data = data
+  }
+  return $.ajax(opts)
 }
 
 export function post(url, data) {

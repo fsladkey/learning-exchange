@@ -24,6 +24,7 @@ class Event < ApplicationRecord
   validate :starts_before_it_ends
 
   before_validation :geocode
+  after_update :notify_attendees
   geocoded_by :address
 
   belongs_to :group, optional: true
@@ -31,6 +32,7 @@ class Event < ApplicationRecord
 
   has_many :invitations, inverse_of: :event, dependent: :destroy
   has_many :attendances, inverse_of: :event, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :invited_users, through: :invitations, source: :invitee
   has_many(
@@ -60,6 +62,21 @@ class Event < ApplicationRecord
 
   def starts_before_it_ends
     start_time < end_time
+  end
+
+  def notify_attendees
+    notifications.where(user: attending_users, updated_at: 5.minutes.ago..Time.now).destroy_all
+    attending_users.each do |user|
+      notifications.create!(user: user)
+    end
+  end
+
+  def notification_header
+    "Event Update"
+  end
+  
+  def notification_message
+    "#{name} has been updated"
   end
 
 end

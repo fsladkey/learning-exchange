@@ -7,16 +7,15 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:show]
     resources :search, only: [:index]
-    resources :messages, only: [:update, :delete]
+    resources :messages, only: [:update, :destroy]
     resources :groups, except: [:new, :edit]
     resources :events, except: [:new, :edit]
-    resources :notifications, only: [:update]
+    resources :notifications, only: [:update, :destroy]
     resources :direct_messages, only: [:index, :create]
     resources :chat_messages, only: [:index, :create]
     resources :comments, only: [:create]
     resources :attendances, only: [:create, :destroy]
-    resources :notifications, only: [:update]
-    resources :conversations, only: [:show, :index, :create, :update], param: :username
+    resources :conversations, only: [:show, :index, :create, :update], param: :username, constraints: { username: /[^\/]+/ }
 
     resources :users, only: [:show], param: :username, constraints: { username: /[^\/]+/ }
     resources :users, only: [:update]

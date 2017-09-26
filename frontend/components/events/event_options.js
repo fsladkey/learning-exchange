@@ -21,9 +21,8 @@ export class EventOptions extends Component {
   }
 
   cancelEvent = () => {
-      this.props.destroyEvent(this.props.event.id).then(event =>
-        this.props.router.push("/")
-      )
+    this.props.setFormField("event", "id", this.props.event.id)
+    this.props.setModal("confirmDeleteEvent");
   }
 
   updateEvent = () => {

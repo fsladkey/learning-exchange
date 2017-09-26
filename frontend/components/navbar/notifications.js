@@ -40,7 +40,9 @@ class Notifications extends Component {
 
 function mapStateToProps(state) {
   const currentUser = getCurrentUser(state)
-  const notifications = currentUser.notifications.map(id => state.notifications.get(id.toString()))
+  const notifications = currentUser.notifications
+    .map(id => state.notifications.get(id.toString()))
+    .filter(n => n)
   return { showDropdown: state.dropdown === 'notifications', notifications }
 }
 

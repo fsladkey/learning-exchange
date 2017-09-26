@@ -196,3 +196,14 @@ h1 {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
 }
+
+.confirm-box {
+  background: white;
+  padding: 26px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  text-align: center; 
+  button {
+    margin-top: 40px;
+  }
+}

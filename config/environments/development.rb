@@ -2,7 +2,7 @@ Rails.application.configure do
   config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload)
   config.asset_host = Proc.new { |source|
     if source =~ /bundle\.js$/i
-      "http://localhost:8080"
+      "http://localhost:8081"
     end
   }
   # Settings specified here will take precedence over those in config/application.rb.
