@@ -53,7 +53,11 @@ class User < ApplicationRecord
   )
 
   #associations
-  has_many :memberships, foreign_key: :member_id
+  has_many(
+    :memberships,
+    -> { where(active: true) },
+    foreign_key: :member_id
+  )
   has_many :attendances, inverse_of: :user
   has_many :notifications
   has_many(
@@ -207,6 +211,10 @@ class User < ApplicationRecord
     if !password.blank? && password == password_confirmation
       self.password = password
     end
+  end
+
+  def is_member?(group)
+    memberships.where(group_id: group.id).exists?
   end
 
   private

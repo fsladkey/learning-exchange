@@ -1,4 +1,5 @@
 class Api::MembershipsController < Api::ApiController
+  before_action :ensure_has_edit_permissions
 
   def update
     if membership.update(membership_params)
@@ -16,6 +17,12 @@ class Api::MembershipsController < Api::ApiController
 
   def membership_params
     params.require(:membership).permit(:active)
+  end
+
+  def ensure_has_edit_permissions
+    if !(current_user.admin?)
+      render json: ["Not authorized"], status: 401
+    end
   end
 
 end

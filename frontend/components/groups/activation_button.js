@@ -11,6 +11,7 @@ class ActivationButton extends Component {
   }
 
   render() {
+    if (!this.props.currentUser.admin) return null
     return (
       <button onClick={this.onClick} className={`activation-button ${this.props.active ? "active" : "inactive"}`}>
         { this.props.active ? "Deactivate" : "Activate" }
@@ -19,8 +20,9 @@ class ActivationButton extends Component {
   }
 }
 
-function mapStateToProps({ memberships }, { member, groupId }) {
+function mapStateToProps({ memberships, currentUser }, { member, groupId }) {
   return {
+    currentUser: currentUser,
     membership: memberships.valueSeq().find(membership => 
       membership.member_id === member.id && membership.groupId === groupId
     )

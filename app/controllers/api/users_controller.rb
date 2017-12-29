@@ -50,7 +50,9 @@ class Api::UsersController < Api::ApiController
   end
 
   def ensure_has_edit_permissions
-    current_user.admin? || params[:id] == current_user.id
+    if !(current_user.admin? || params[:id] == current_user.id)
+      render json: ["Not authorized"], status: 401
+    end
   end
 
 end

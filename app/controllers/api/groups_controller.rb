@@ -1,4 +1,5 @@
 class Api::GroupsController < Api::ApiController
+  before_action :ensure_is_member, only: [:show]
 
   def index
     @groups = Group.within(10, origin: current_user)
@@ -43,6 +44,12 @@ class Api::GroupsController < Api::ApiController
 
   def group_params
     params.require(:group).permit(:name, :desciption, :zipcode)
+  end
+
+  def ensure_is_member
+    if !(current_user.admin? || current_user.is_member?(group))
+      render json: ["Unauthorized"], status: 401
+    end
   end
 
 end
