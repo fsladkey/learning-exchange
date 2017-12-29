@@ -1,5 +1,6 @@
-if Rails.env.development?
+if Rails.env.development? || Rails.env.staging?
   ActiveRecord::Base.transaction do
+    puts "Running seeds for #{Rails.env}"
     #Attendances
     puts "cleaning attendances..."
     Attendance.delete_all
