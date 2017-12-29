@@ -61,7 +61,7 @@ class Event < ApplicationRecord
   end
 
   def starts_before_it_ends
-    start_time < end_time
+    start_time && end_time && start_time < end_time
   end
 
   def notify_attendees

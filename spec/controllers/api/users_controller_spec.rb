@@ -42,13 +42,13 @@ RSpec.describe Api::UsersController, type: :controller do
 
     end
 
-    describe "DELETE destroy" do
+    describe "DELETE destroy" # do
       # it "allows users to destroy their account" do
       #   delete :destroy, params: { id: current_user.id }
       #   expect(controller).to render_template(:show)
       #   expect(User.exists?(id: current_user.id)).to be(false)
       # end
-    end
+    # end
 
   end
 end

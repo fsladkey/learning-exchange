@@ -21,8 +21,9 @@ RSpec.describe Api::GroupsController, type: :controller do
   end
 
   describe "while logged in" do
+    let(:current_user) { create(:user) }
     before do
-      allow(controller).to receive(:current_user) { User.new }
+      allow(controller).to receive(:current_user).and_return(current_user)
     end
 
     describe "GET index" do
@@ -33,10 +34,24 @@ RSpec.describe Api::GroupsController, type: :controller do
     end
 
     describe "GET show" do
-      it "renders the show template" do
+      it "renders the show template if the user is a member" do
         group = create(:group)
+        group.add_member(current_user)
         get :show, params: { id: group.id }
         expect(controller).to render_template(:show)
+      end
+
+      it "renders the show template if the user is an admin" do
+        group = create(:group)
+        current_user.update!(admin: true)
+        get :show, params: { id: group.id }
+        expect(controller).to render_template(:show)
+      end
+
+      it "responds with 401 if the user is not a member" do
+        group = create(:group)
+        get :show, params: { id: group.id }
+        expect(controller).to respond_with(401)
       end
     end
 
