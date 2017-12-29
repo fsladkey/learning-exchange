@@ -72,12 +72,3 @@ jobs:
                             --out test_results/rspec.xml \
                             --format progress \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-deployment:
-  staging:
-    branch: develop
-    heroku:
-      appname: learning-exchange-staging
-  production:
-    branch: master
-    heroku:
-      appname: learning-exchange
