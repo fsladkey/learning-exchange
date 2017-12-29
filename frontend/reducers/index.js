@@ -32,6 +32,7 @@ const reducers = {
   'direct_messages',
   'notifications',
   'comments',
+  'memberships'
 ].forEach(type => reducers[type] = genericReducer(type))
 
 reducers.attendances = genericReducer('attendances', attendanceReducer)

@@ -62,6 +62,23 @@ export const eventsByUserId = ({ currentUser, events, attendances }, userId) => 
     .filter(event => new Date(event.end_time) >= new Date())
 }
 
+const membersByStatus = ({ groups, memberships }, groupId, active) => {
+  return groups.get(groupId)
+    .members
+    .filter(member =>
+      memberships.find(membership =>
+        membership.member_id == member.id).active == active
+    )
+}
+
+export const activeMembers = (state, groupId) => {
+  return membersByStatus(state, groupId, true)
+}
+
+export const inactiveMembers = (state, groupId) => {
+  return membersByStatus(state, groupId, false)
+}
+
 export const userComments = commentsByType('User')
 export const groupMessages = messagesByType('Group')
 export const eventMessages = messagesByType('Event')

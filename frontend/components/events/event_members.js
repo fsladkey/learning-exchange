@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from "react-redux"
-import MemberList from "../shared/member_list"
+import EventMemberList from "./event_member_list"
 
 export function EventMembers({ event }) {
   return (
     <section className="event-members">
       <h1>Event Attendees</h1>
-      <MemberList members={event.attending_users} />
+      <EventMemberList members={event.attending_users} />
     </section>
   )
 }

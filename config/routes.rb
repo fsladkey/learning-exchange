@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :chat_messages, only: [:index, :create]
     resources :comments, only: [:create]
     resources :attendances, only: [:create, :destroy]
+    resources :memberships, only: [:update]
     resources :conversations, only: [:show, :index, :create, :update], param: :username, constraints: { username: /[^\/]+/ }
 
     resources :users, only: [:show], param: :username, constraints: { username: /[^\/]+/ }

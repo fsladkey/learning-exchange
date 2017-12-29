@@ -1,10 +1,3 @@
-# ### Groups Controller
-# `GET /api/groups/`
-# `GET /api/session/groups/`
-# `POST /api/groups/`
-# `PATCH /api/groups/`
-# `DELETE /api/groups/`
-
 class Api::GroupsController < Api::ApiController
 
   def index
