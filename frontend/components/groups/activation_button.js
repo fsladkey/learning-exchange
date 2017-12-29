@@ -12,7 +12,7 @@ class ActivationButton extends Component {
 
   render() {
     return (
-      <button onClick={this.onClick}>
+      <button onClick={this.onClick} className={`activation-button ${this.props.active ? "active" : "inactive"}`}>
         { this.props.active ? "Deactivate" : "Activate" }
       </button>
     )

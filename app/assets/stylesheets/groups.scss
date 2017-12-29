@@ -13,3 +13,17 @@
   height: 550px;
   background-color: white;
 }
+
+.activation-button {
+  margin: 5px;
+  margin-top: 20px;
+  padding: 5px 20px;
+  color: $white;
+  border-radius: 10px;
+  &.active {
+    background-color: $red;
+  }
+  &.inactive {
+    background-color: $green;
+  }
+}
