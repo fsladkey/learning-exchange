@@ -1,3 +1,3 @@
 # learning-exchange
 
-To start developing run `foreman start -f Procfile.dev`
+To start developing run `./server`
