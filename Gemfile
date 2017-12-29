@@ -28,21 +28,22 @@ gem "omniauth-google-oauth2"
 gem 'font-awesome-rails'
 gem "paperclip", "~> 5.0.0"
 
+group :test do
+  gem 'capybara'
+  gem "rspec_junit_formatter"
+  gem 'shoulda-matchers', '~> 3.1'
+end
+
 group :development, :test do
-  gem 'binding_of_caller'
-  gem 'better_errors'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'annotate'
   gem 'byebug', platform: :mri
 end
 
-group :test do
-  gem 'capybara'
-  gem 'shoulda-matchers', '~> 3.1'
-end
-
 group :development do
+  gem 'binding_of_caller'
+  gem 'better_errors'
   gem 'foreman'
   gem "guard", ">= 2.2.2", :require => false
   gem "guard-livereload",  :require => false
