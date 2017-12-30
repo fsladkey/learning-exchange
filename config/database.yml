@@ -20,7 +20,4 @@ production:
   password: <%= ENV['LEARNING-EXCHANGE_DATABASE_PASSWORD'] %>
 
 staging:
-  <<: *default
-  database: learning-exchange_staging
-  username: learning-exchange
-  password: <%= ENV['LEARNING-EXCHANGE_DATABASE_PASSWORD'] %>
+  <<: *production
