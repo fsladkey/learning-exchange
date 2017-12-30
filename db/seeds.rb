@@ -31,14 +31,16 @@ if Rails.env.development?
       username: "fsladkey",
       email: "fsladkey@gmail.com",
       password: "starwars",
-      zipcode: '11215'
+      zipcode: '11215',
+      admin: true
     )
     sophia = User.create!(
       firstname: "Sophia",
       lastname: "Sayigh",
       email: "sophia@sayigh.net",
       password: "changeme",
-      zipcode: '02474'
+      zipcode: '02474',
+      admin: true
     )
     nadia = User.create!(
       firstname: "Nadia",
