@@ -18,6 +18,3 @@ production:
   database: learning-exchange_production
   username: learning-exchange
   password: <%= ENV['LEARNING-EXCHANGE_DATABASE_PASSWORD'] %>
-
-staging:
-  <<: *production
