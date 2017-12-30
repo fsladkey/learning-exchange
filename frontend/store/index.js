@@ -18,7 +18,8 @@ export default (preloadedState = {}) => {
   )
 
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
+    const reducerPath = '../reducers'
+    module.hot.accept(reducerPath, () => {
       const nextRootReducer = require('../reducers/index');
       store.replaceReducer(nextRootReducer);
     });

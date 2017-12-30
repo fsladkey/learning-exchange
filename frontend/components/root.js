@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
+import { hot } from 'react-hot-loader'
+
 import configureStore from '../store'
 import { receiveCurrentUser } from '../actions/session_actions'
 import { dispatchSingleResult } from '../actions/generic_actions'
@@ -68,7 +70,7 @@ const routes = (
   </Route>
 )
 
-export default function Root(props) {
+function Root(props) {
   window.store = store;
   return (
     <Provider store={ store }>
@@ -77,3 +79,5 @@ export default function Root(props) {
     </Provider>
   )
 }
+
+export default hot(module)(Root)

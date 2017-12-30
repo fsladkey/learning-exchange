@@ -1,6 +1,7 @@
 {
-  "presets": ["react", "latest"],
+  "presets": ["react", ["latest", { "modules": false }]],
   "plugins": [
+    "react-hot-loader/babel",
     ["transform-class-properties", { "spec": true }]
   ]
 }

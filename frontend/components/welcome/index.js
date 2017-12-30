@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
+import { hot } from 'react-hot-loader'
+
 import configureWelcomeStore from '../../store/welcome_store'
 import WelcomeApp from './welcome_app'
 import SignInForm from './sign_in_form'
@@ -17,7 +19,7 @@ const routes = (
   </Route>
 )
 
-export default function Root(props) {
+function Root(props) {
   return (
     <Provider store={ store }>
       <Router history={ browserHistory } routes={ routes }>
@@ -25,3 +27,6 @@ export default function Root(props) {
     </Provider>
   )
 }
+
+
+export default hot(module)(Root)
