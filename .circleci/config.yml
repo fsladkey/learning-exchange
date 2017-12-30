@@ -48,7 +48,7 @@ jobs:
 
       - run:
           name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn --ignore-engines
+          command: yarn install --cache-folder ~/.cache/yarn
 
       # Store yarn / webpacker cache
       - save_cache:
