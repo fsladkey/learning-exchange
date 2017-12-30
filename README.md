@@ -4,4 +4,5 @@ Staging ![](https://circleci.com/gh/fsladkey/learning-exchange/tree/develop.png?
 
 Production ![](https://circleci.com/gh/fsladkey/learning-exchange/tree/master.png?circle-token=:circle-token)
 
-To start developing run `./server`
+Setup dev: `make setup`
+Dev server: `make server`

@@ -12,13 +12,12 @@ export default function UserPhoto({ user, className }) {
   const src = className === "medium" ?
     user.medium_avatar :
     user.thumb
-
   return (
     <div className={ `user-photo ${className}` }>
       <strong className={`initials ${className}`}>
         { initials }
       </strong>
-      <img src={ src }/>
+      { src &&  <img src={src} /> }
     </div>
   )
 }
