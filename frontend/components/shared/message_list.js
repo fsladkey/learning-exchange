@@ -5,7 +5,7 @@ function Message({ message, currentUser }) {
   if (message.sender_id === currentUser.id) {
     return (
       <li className="message-item">
-        <UserPhoto user={ currentUser } className="thumb" />
+        <UserPhoto user={ message.sender } className="thumb" />
         <p className="current-user message">{ message.body }</p>
       </li>
     )
