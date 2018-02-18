@@ -16,7 +16,7 @@ function InactiveMembers({ groupId, members, currentUser }) {
   if (!currentUser.admin) return null;
   return (
     <div>
-      <h1>InactiveMembers</h1>
+      <h1>Inactive Members</h1>
       <GroupMemberList groupId={groupId} members={members} active={false} />
     </div>
   )

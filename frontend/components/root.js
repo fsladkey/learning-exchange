@@ -1,5 +1,5 @@
-import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { hot } from 'react-hot-loader'
 
@@ -63,6 +63,7 @@ const routes = (
     <Route path="groups/:id" component={ GroupShow }>
       <IndexRoute component={ GroupEvents } />
       <Route path="events" component={ GroupEvents } />
+      <Route path="chat" component={ GroupChat } />
       <Route path="members" component={ GroupMembers } />
     </Route>
     <Route path="tags/:tagname" component={ TagShow } />

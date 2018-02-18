@@ -1,4 +1,4 @@
-json.extract! group, :id, :name, :description
+json.extract! group, :id, :name, :description, :chat_enabled
 
 json.events group.events do |event|
   json.partial! "api/events/event.json", event: event
