@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "static_pages#root"
   get "welcome", to: "static_pages#welcome"
+  get "unsubscribe", to: "static_pages#unsubscribe"
+  get "successful_unsubscribe", to: "static_pages#successful_unsubscribe"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

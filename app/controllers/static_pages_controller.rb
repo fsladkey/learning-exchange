@@ -8,4 +8,10 @@ class StaticPagesController < ApplicationController
   def welcome
   end
 
+  def unsubscribe
+    membership = Membership.find(params[:id])
+    membership.update!(digest_active: false)
+    render text: "You've successfully unsubscribed. We'll miss you!"
+  end
+
 end
