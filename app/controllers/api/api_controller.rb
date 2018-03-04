@@ -5,7 +5,13 @@ class Api::ApiController < ApplicationController
   private
   def reject_unauthorized_request
     unless user_signed_in?
-      render json: ["You must be logged in to do that"], status: 401
+      render json: ["You must be logged in to do that"], status: 403
+    end
+  end
+
+  def ensure_is_admin
+    if !(current_user.admin?)
+      render json: ["Unauthorized"], status: 401
     end
   end
 

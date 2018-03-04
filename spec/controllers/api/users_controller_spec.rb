@@ -42,6 +42,20 @@ RSpec.describe Api::UsersController, type: :controller do
 
     end
 
+    describe "POST create" do
+      it "creates a user with valid params" do
+        patch :update, params: { id: current_user.id, user: { username: "Updated" } }
+        expect(controller).to render_template(:show)
+        expect(User.find(current_user.id).username).to eq("Updated")
+      end
+
+      it "renders 422 with invalid params" do
+        patch :update, params: { id: current_user.id, user: { username: "" } }
+        expect(controller).to respond_with(422)
+      end
+
+    end
+
     describe "DELETE destroy" # do
       # it "allows users to destroy their account" do
       #   delete :destroy, params: { id: current_user.id }

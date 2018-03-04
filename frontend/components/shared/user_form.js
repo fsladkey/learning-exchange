@@ -41,7 +41,10 @@ class UserForm extends React.Component {
     }
 
     submitForm() {
-        return this.props.userForm.get("id") ? this.props.updateUser() : this.props.createUser();
+        const action = this.props.userForm.get("id") ? this.props.updateUser : this.props.createUser
+        return action(this.props.additionalFormData).then(() => {
+            if (this.props.afterSubmit) this.props.afterSubmit();
+        });
     }
 
     render() {
