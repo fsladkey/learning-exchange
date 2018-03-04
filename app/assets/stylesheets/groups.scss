@@ -27,3 +27,14 @@
     background-color: $green;
   }
 }
+
+.new-member-link {
+  display: block;
+  margin: 10px 0px;
+  color: $blue;
+  text-decoration: underline;
+  transition: color 200ms;
+  &:hover {
+    color: $orange;
+  }
+}

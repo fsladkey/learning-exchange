@@ -15,7 +15,7 @@ RSpec.describe Api::GroupsController, type: :controller do
 
     it "rejects unauthorized requests" do
       get :index
-      expect(controller).to respond_with(401)
+      expect(controller).to respond_with(403)
     end
 
   end

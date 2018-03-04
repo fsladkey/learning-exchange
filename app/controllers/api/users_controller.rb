@@ -1,5 +1,6 @@
 class Api::UsersController < Api::ApiController
   before_action :ensure_has_edit_permissions, only: [:update, :destroy]
+  before_action :ensure_is_admin, only: [:create]
 
   def index
     @users = User.within(10, origin: current_user)
@@ -11,6 +12,18 @@ class Api::UsersController < Api::ApiController
       render :show
     else
       render json: ["User not found"], status: 404
+    end
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.update_password(params[:user][:password], params[:user][:password_confirmation])
+    if @user.save
+      group_id = params[:user][:group_id]
+      Group.find(group_id).add_member(@user) if group_id
+      render :show
+    else
+      render json: @user.errors, status: 422
     end
   end
 

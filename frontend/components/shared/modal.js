@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { setModal } from '../../actions/modal_actions'
 import { stopProp } from '../../utils/misc'
 import EventForm from '../events/event_form'
-import UserForm from '../profile/user_form'
+import UserForm from '../shared/user_form'
 import ConfirmDeleteEvent from '../events/confirm_delete_event'
 
 const modalTypes = {

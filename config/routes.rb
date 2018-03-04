@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :conversations, only: [:show, :index, :create, :update], param: :username, constraints: { username: /[^\/]+/ }
 
     resources :users, only: [:show], param: :username, constraints: { username: /[^\/]+/ }
-    resources :users, only: [:update]
+    resources :users, only: [:create, :update]
 
     get "session/events", to: "events#current_user_events"
     get "session/groups", to: "groups#current_user_groups"
