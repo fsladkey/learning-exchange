@@ -9,7 +9,7 @@ RSpec.describe Api::UsersController, type: :controller do
     it "rejects unauthorized requests" do
       user = build(:user)
       get :show, params: { username: user.username }
-      expect(controller).to respond_with(401)
+      expect(controller).to respond_with(403)
     end
 
   end
