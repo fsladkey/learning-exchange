@@ -9,7 +9,7 @@ RSpec.describe Api::UsersController, type: :controller do
     it "rejects unauthorized requests" do
       user = build(:user)
       get :show, params: { username: user.username }
-      expect(controller).to respond_with(401)
+      expect(controller).to respond_with(403)
     end
 
   end
@@ -30,6 +30,20 @@ RSpec.describe Api::UsersController, type: :controller do
 
     describe "PATCH update" do
       it "updates a user with valid params" do
+        patch :update, params: { id: current_user.id, user: { username: "Updated" } }
+        expect(controller).to render_template(:show)
+        expect(User.find(current_user.id).username).to eq("Updated")
+      end
+
+      it "renders 422 with invalid params" do
+        patch :update, params: { id: current_user.id, user: { username: "" } }
+        expect(controller).to respond_with(422)
+      end
+
+    end
+
+    describe "POST create" do
+      it "creates a user with valid params" do
         patch :update, params: { id: current_user.id, user: { username: "Updated" } }
         expect(controller).to render_template(:show)
         expect(User.find(current_user.id).username).to eq("Updated")

@@ -25,6 +25,7 @@ import GroupForm from './groups/group_form'
 import GroupShow from './groups/group_show'
 import GroupChat from './groups/group_chat'
 import GroupMembers from './groups/group_members'
+import MemberForm from './groups/member_form'
 import GroupEvents from './groups/group_events'
 import TagShow from './tags/tag_show'
 import PageMissing from './error/page_missing'
@@ -65,6 +66,7 @@ const routes = (
       <Route path="events" component={ GroupEvents } />
       <Route path="chat" component={ GroupChat } />
       <Route path="members" component={ GroupMembers } />
+      <Route path="members/new" component={MemberForm } />
     </Route>
     <Route path="tags/:tagname" component={ TagShow } />
     <Route path="*" component={ PageMissing } />

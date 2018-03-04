@@ -4,10 +4,10 @@ const userActions = createResourceActions('user')
 
 export default userActions
 
-export const createUserFromStore = () => (dispatch, getState) => {
-    return dispatch(userActions.createUser(getState().userForm.toJS()))
+export const createUserFromStore = (additionalFormData = {}) => (dispatch, getState) => {
+    return dispatch(userActions.createUser({ ...getState().userForm.toJS(), ...additionalFormData }))
 }
 
-export const updateUserFromStore = () => (dispatch, getState) => {
-    return dispatch(userActions.updateUser(getState().userForm.toJS()));
+export const updateUserFromStore = (additionalFormData = {}) => (dispatch, getState) => {
+    return dispatch(userActions.updateUser({ ...getState().userForm.toJS(), ...additionalFormData }))
 }
