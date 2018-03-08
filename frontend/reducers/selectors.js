@@ -79,6 +79,14 @@ export const inactiveMembers = (state, groupId) => {
   return membersByStatus(state, groupId, false)
 }
 
+export const attendees = (state, eventId) => {
+  const event = state.events.get(eventId)
+  return event.attendances.map(attendanceId => {
+    const attendance = state.attendances.get(attendanceId.toString())
+    return state.users.get(attendance.user_id.toString())
+  })
+}
+
 export const userComments = commentsByType('User')
 export const groupMessages = messagesByType('Group')
 export const eventMessages = messagesByType('Event')
