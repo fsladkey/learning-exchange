@@ -2,8 +2,6 @@ const webpack = require('webpack')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-process.traceDeprecation = true
-
 const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV':
