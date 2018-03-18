@@ -90,3 +90,9 @@ export const attendees = (state, eventId) => {
 export const userComments = commentsByType('User')
 export const groupMessages = messagesByType('Group')
 export const eventMessages = messagesByType('Event')
+
+export const membership = ({ memberships, currentUser }, groupId) => {
+  return memberships.find(membership => {
+    return membership.group_id === groupId && membership.member_id === currentUser.id
+  })
+};
