@@ -16,7 +16,7 @@ class Api::MembershipsController < Api::ApiController
   end
 
   def membership_params
-    params.require(:membership).permit(:active)
+    params.require(:membership).permit(:active, :digest_active)
   end
 
   def ensure_has_edit_permissions

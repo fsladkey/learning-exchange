@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def redirect_unless_logged_in
+    # Should track the original destination
     redirect_to welcome_url unless user_signed_in?
   end
 

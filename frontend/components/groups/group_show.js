@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Actions from '../../actions/group_actions'
 import GroupNav from './group_nav'
+import DigestToggle from './digest_toggle'
 import TagList from '../shared/tag_list'
 import Spinner from '../shared/spinner'
 import { fadeIn } from '../../utils/misc'
 
 class GroupShow extends Component {
   componentDidMount() {
-    this.props.fetchGroup(this.props.params.id).then()
+    this.props.fetchGroup(this.props.params.id)
   }
 
   render() {
@@ -18,6 +19,7 @@ class GroupShow extends Component {
       <section ref={ fadeIn }>
         <section className="sub-header">
           <h2>{ group.name }</h2>
+          <DigestToggle groupId={group.id} />
           <TagList tags={ group.tags }/>
           <p>{ group.description }</p>
         </section>

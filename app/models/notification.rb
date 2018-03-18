@@ -15,8 +15,10 @@ class Notification < ApplicationRecord
   validates :user, :notifiable, presence: true
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
+  scope :recent, -> { where(created_at: 1.day.ago..Time.current) }
 
   def url
+    # should try to use notifiable.notifiable_url instead
     case notifiable_type
     when "DirectMessage"
       "/messages/#{notifiable.sender.username}"

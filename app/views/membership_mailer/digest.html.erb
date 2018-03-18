@@ -1,0 +1,19 @@
+<h3>
+    Hey there <%= @user.fullname %>, here's what's been happening with <%= @group.name %>
+</h3>
+
+<p>You have <%= @user.notifications.length %> notifications</p>
+
+<ul>
+    <% @user.notifications.each do |notification| %>
+        <li>
+            <a href="<%= "#{root_url}#{notification.url}" %>">
+                <%= notification.notification_header %>
+            </a>
+        </li>
+    <% end %>
+</ul>
+
+<a href="<%= unsubscribe_url id: @membership.id %>">
+    If you would no longer like to receive these emails, click here to unsubscribe
+</a>

@@ -13,5 +13,5 @@ json.members group.members do |member|
 end
 
 json.memberships group.memberships do |membership|
-  json.extract! membership, :id, :group_id, :member_id, :active
+  json.extract! membership, :id, :group_id, :member_id, :active, :digest_active
 end

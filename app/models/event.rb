@@ -65,7 +65,7 @@ class Event < ApplicationRecord
   end
 
   def notify_attendees
-    notifications.where(user: attending_users, updated_at: 5.minutes.ago..Time.now).destroy_all
+    notifications.where(user: attending_users, updated_at: 5.minutes.ago..Time.current).destroy_all
     attending_users.each do |user|
       notifications.create!(user: user)
     end
