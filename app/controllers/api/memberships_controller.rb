@@ -20,7 +20,7 @@ class Api::MembershipsController < Api::ApiController
   end
 
   def ensure_has_edit_permissions
-    if !(current_user.admin?)
+    if !(current_user.admin? || membership.member_id == current_user.id)
       render json: ["Not authorized"], status: 401
     end
   end
