@@ -5,7 +5,7 @@
 <p>You have <%= @user.notifications.length %> recent <%= @user.notifications.length == 1 ? "notification" : "notifications" %></p>
 
 <ul>
-    <% @user.notifications.each do |notification| %>
+    <% @user.notifications.recent.each do |notification| %>
         <li>
             <a href="<%= "#{root_url}#{notification.url.sub(/^\//, '')}" %>" target="_blank">
                 <%= notification.notification_header %>
