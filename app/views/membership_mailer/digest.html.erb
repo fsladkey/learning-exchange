@@ -2,10 +2,12 @@
     Hey there <%= @user.firstname %>, here's what's been happening with <%= @group.name %>
 </h3>
 
-<p>You have <%= @user.notifications.length %> recent <%= @user.notifications.length == 1 ? "notification" : "notifications" %></p>
+<% recent_notifications = @user.notifications.recent %>
+
+<p>You have <%= recent_notifications.length %> recent <%= recent_notifications.length == 1 ? "notification" : "notifications" %></p>
 
 <ul>
-    <% @user.notifications.recent.each do |notification| %>
+    <% recent_notifications.each do |notification| %>
         <li>
             <a href="<%= "#{root_url}#{notification.url.sub(/^\//, '')}" %>" target="_blank">
                 <%= notification.notification_header %>
