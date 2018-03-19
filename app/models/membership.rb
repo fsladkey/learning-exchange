@@ -14,4 +14,12 @@ class Membership < ApplicationRecord
 
   belongs_to :group
   belongs_to :member, class_name: :User
+
+  def should_send_digest?
+    [
+      active?,
+      digest_active?,
+      member.notifications.recent.length > 0
+    ].all?
+  end
 end

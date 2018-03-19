@@ -3,7 +3,9 @@ namespace :mail do
   task :send_digest => :environment do
     Group.all.each do |group|
       group.digest_memberships.each do |membership|
-        MembershipMailer.digest(membership).deliver
+        if membership.should_send_digest?
+          MembershipMailer.digest(membership).deliver
+        end
       end
     end
   end

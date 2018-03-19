@@ -9,13 +9,4 @@ class MembershipMailer < ActionMailer::Base
         mail(to: @user.email, subject: 'Updates from the Learning Exchange')
     end
 
-    private
-
-    def should_send_digest?
-        [
-            @membership.active?,
-            @membership.digest_active?,
-            @user.recent_notifications.recent.length > 0
-        ].all?
-    end
 end
