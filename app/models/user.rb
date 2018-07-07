@@ -217,6 +217,13 @@ class User < ApplicationRecord
     memberships.where(group_id: group.id).exists?
   end
 
+  def recent_notifications_for_group(group_id)
+    notifications.recent.select do |notification|
+      notification.notifiable.try(:group_id) == group_id ||
+      notification.notifiable.try(:event).try(:group_id) == group_id
+    end
+  end
+
   private
 
   def self.process_uri(uri)

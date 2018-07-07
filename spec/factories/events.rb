@@ -25,5 +25,6 @@ FactoryGirl.define do
     start_time { DateTime.current }
     end_time { DateTime.current  + 2.hours }
     address { ny_zips.sample }
+    creator { FactoryGirl.create(:user) }
   end
 end

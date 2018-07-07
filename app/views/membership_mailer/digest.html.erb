@@ -2,7 +2,7 @@
     Hey there <%= @user.firstname %>, here's what's been happening with <%= @group.name %>
 </h3>
 
-<% recent_notifications = @user.notifications.recent %>
+<% recent_notifications = @user.recent_notifications_for_group(@group.id) %>
 
 <p>You have <%= recent_notifications.length %> recent <%= recent_notifications.length == 1 ? "notification" : "notifications" %></p>
 

@@ -19,7 +19,7 @@ class Membership < ApplicationRecord
     [
       active?,
       digest_active?,
-      member.notifications.recent.length > 0
+      member.recent_notifications_for_group(group_id).length > 0
     ].all?
   end
 end

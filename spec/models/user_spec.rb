@@ -81,4 +81,17 @@ RSpec.describe User, type: :model do
     it { should have_many(:followed_users).through(:out_follows) }
     it { should have_many(:followers).through(:in_follows) }
   end
+
+  describe "#recent_notifications_for_group" do
+    let(:user) { create(:user) }
+    let(:group) { create(:group, members: [user]) }
+    let(:other_group) { create(:group, members: [user]) }
+    let!(:event) { create(:event, group: group) }
+    let!(:other_event) { create(:event, group: other_group) }
+    let!(:invitation) { Invitation.create!(event: event, invitee: user) }
+
+    it "returns only the recent notifications which belong to the specified group" do
+      expect(user.recent_notifications_for_group(group.id).count).to be(2)
+    end
+  end
 end
