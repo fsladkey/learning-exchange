@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { moment } from 'moment'
 import UserPhoto from '../shared/user_photo'
+
+const MOMENT_FORMAT = "dddd, MMMM Do YYYY, h:mm:ss a"
 
 function Message({ message, currentUser }) {
   if (message.sender_id === currentUser.id) {
@@ -7,6 +10,7 @@ function Message({ message, currentUser }) {
       <li className="message-item">
         <UserPhoto user={ message.sender } className="thumb" />
         <p className="current-user message">{ message.body }</p>
+        <p>{moment(message.created_at).format(MOMENT_FORMAT) }</p>
       </li>
     )
   }
@@ -14,6 +18,7 @@ function Message({ message, currentUser }) {
     <li className="message-item">
       <p className="other-user message">{ message.body }</p>
       <UserPhoto user={ message.sender } className="thumb" />
+      <p>{moment(message.created_at).format(MOMENT_FORMAT)}</p>
     </li>
   )
 }
