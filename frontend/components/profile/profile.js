@@ -32,6 +32,7 @@ function ProfileHeader({ isCurrentUser, editable, user, setModal, setFormField, 
   }
   const editButton = editable ? <button onClick={editProfile}><i className="fa fa-gear spin-on-hover" /></button> : null
   const messageButton = isCurrentUser ? null : <MessageButton user={user} />
+  console.log(editable)
   return (
     <section className="profile-header sub-header">
       <div className="profile-header-row">
