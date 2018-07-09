@@ -46,16 +46,27 @@
 }
 
 .message-item {
-  display: flex;
   p {
     flex-grow: 1;
+  }
+  .message-row {
+    display: flex;
   }
   .message {
     border-radius: 5px;
     padding: 10px;
     margin: 15px;
     display: block;
-    &.current-user {
+  }
+  .user-photo {
+    flex-shrink: 0;
+    margin: 10px;
+  }
+  .message-timestamp {
+    padding: 0px 10px;
+  }
+  &.left {
+    .message {
       background-color: lightblue;
       text-align: left;
       position: relative;
@@ -70,7 +81,15 @@
         left: 0px;
       }
     }
-    &.other-user {
+    .message-row {
+      flex-direction: row;
+    }
+    .message-timestamp {
+      text-align: left;
+    }
+  }
+  &.right {
+    .message {
       background-color: lightgreen;
       text-align: right;
       position: relative;
@@ -85,10 +104,12 @@
         right: 0px;
       }
     }
-  }
-  .user-photo {
-    flex-shrink: 0;
-    margin: 10px;
+    .message-row {
+      flex-direction: row-reverse;
+    }
+    .message-timestamp {
+      text-align: right;
+    }
   }
 }
 
