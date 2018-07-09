@@ -3,19 +3,29 @@
 </h3>
 
 <% recent_notifications = @user.notifications.recent %>
+<% recent_messages = @group.chat_messages.recent %>
 
-<p>You have <%= recent_notifications.length %> recent <%= recent_notifications.length == 1 ? "notification" : "notifications" %></p>
+<% if recent_notifications.length > 0 %>
+    <p>You have <%= recent_notifications.length %> recent <%= recent_notifications.length == 1 ? "notification" : "notifications" %>.</p>
+    <ul>
+        <% recent_notifications.each do |notification| %>
+            <li>
+                <a href="<%= "#{root_url}#{notification.url.sub(/^\//, '')}" %>" target="_blank">
+                    <%= notification.notification_header %>
+                </a>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
 
-<ul>
-    <% recent_notifications.each do |notification| %>
-        <li>
-            <a href="<%= "#{root_url}#{notification.url.sub(/^\//, '')}" %>" target="_blank">
-                <%= notification.notification_header %>
-            </a>
-        </li>
-    <% end %>
-</ul>
+<% if recent_messages.length > 0 %>
+    <p>There have been <%= recent_messages.length %> recent <%= recent_messages.length == 1 ? "chat message" : "chat messages" %> sent.</p>
+    <a href="<%= "#{root_url}groups/#{@group.id}/chat" %>" target="_blank">
+        You can read them here.
+    </a>
+<% end %>
 
+<br/>
 <a href="<%= unsubscribe_url id: @membership.id %>">
-    If you would no longer like to receive these emails, click here to unsubscribe
+    If you would no longer like to receive these emails, click here to unsubscribe.
 </a>
