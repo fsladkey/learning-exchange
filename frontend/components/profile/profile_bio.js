@@ -3,19 +3,22 @@ import { connect} from 'react-redux'
 import UserActions from '../../actions/user_actions'
 import { preventDefault } from '../../utils/misc'
 
+const BIO_PROMPT = "Use this space to write about you and your family"
+
 function ProfileForm({ value, onChange, onClick }) {
   return (
     <form onSubmit={preventDefault}>
-      <textarea onChange={onChange}>{ value }</textarea>
+      <textarea onChange={onChange} placeholder={BIO_PROMPT}>{ value }</textarea>
       <button onClick={ onClick } className="lx-button">Save</button>
     </form>
   )
 }
 
 function Bio({ bio, editable, onClick }) {
-  return (
+  const content = editable && !bio ? BIO_PROMPT : bio
+    return (
     <div>
-      <p>{ bio }</p>
+      <p>{ content }</p>
       { editable && <button onClick={ onClick } className="lx-button">Edit</button> }
     </div>
   )

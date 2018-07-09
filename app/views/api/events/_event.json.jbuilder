@@ -1,5 +1,9 @@
 json.extract! event, :id, :name, :group_id, :creator_id, :description, :lat, :lng, :address, :start_time, :end_time
 
+json.creator do
+  json.extract! event.creator, :id, :firstname, :lastname
+end
+
 json.group do 
   json.extract! event.group, :id, :name
 end

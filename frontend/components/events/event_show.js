@@ -30,6 +30,9 @@ class EventShow extends Component {
         <section className="event-header">
           <h2>{ event.name } <EventOptions event={ event } /></h2>
           <h4><Link to={`/groups/${event.group.id}`}>{event.group.name}</Link></h4>
+          <p className="event-creator">
+            Created by {event.creator.firstname} {event.creator.lastname}
+          </p>
           <TagList tags={ event.tags } />
           <p>{ event.description }</p>
           <RSVP eventId={ event.id } />
