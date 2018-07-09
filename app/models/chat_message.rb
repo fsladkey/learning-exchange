@@ -17,4 +17,5 @@ class ChatMessage < ApplicationRecord
   belongs_to :chattable, polymorphic: true
 
   after_create { ChatMessageBroadcastJob.perform_later self }
+  scope :recent, -> { where(created_at: 1.day.ago..Time.current) }
 end

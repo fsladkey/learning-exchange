@@ -24,7 +24,7 @@ class Group < ApplicationRecord
   has_many :active_memberships, -> { where(active: true) }, class_name: :Membership
   has_many :digest_memberships, -> { where(digest_active: true) }, class_name: :Membership
   has_many :members, through: :memberships, source: :member
-  has_many :active_members, through: :active_memberships, source: :member\
+  has_many :active_members, through: :active_memberships, source: :member
 
   def self.fields_to_query
     [:name, :description]
@@ -37,4 +37,5 @@ class Group < ApplicationRecord
   def activate_digests
     memberships.update_all(digest_active: true)
   end
+
 end
