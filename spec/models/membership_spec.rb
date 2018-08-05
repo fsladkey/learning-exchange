@@ -2,11 +2,13 @@
 #
 # Table name: memberships
 #
-#  id         :integer          not null, primary key
-#  member_id  :integer
-#  group_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  member_id     :integer
+#  group_id      :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  active        :boolean          default(TRUE)
+#  digest_active :boolean          default(FALSE)
 #
 
 require 'rails_helper'

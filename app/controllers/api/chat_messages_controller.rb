@@ -1,10 +1,11 @@
 class Api::ChatMessagesController < Api::ApiController
 
   def index
-    @messages = ChatMessage.where({
+    @messages = ChatMessage.where(
       chattable_id: params[:chattable_id],
-      chattable_type: params[:chattable_type]
-    })
+      chattable_type: params[:chattable_type],
+      created_at: (Time.now - 1.month)..Time.now
+    ).active
   end
 
   def create
