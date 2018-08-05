@@ -9,6 +9,7 @@
 #  body           :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  archived_at    :datetime
 #
 
 class ChatMessage < ApplicationRecord
@@ -18,4 +19,5 @@ class ChatMessage < ApplicationRecord
 
   after_create { ChatMessageBroadcastJob.perform_later self }
   scope :recent, -> { where(created_at: 1.day.ago..Time.current) }
+  scope :active, -> { where(archived_at: nil)}
 end

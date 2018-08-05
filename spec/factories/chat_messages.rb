@@ -9,6 +9,7 @@
 #  body           :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  archived_at    :datetime
 #
 
 FactoryGirl.define do

@@ -2,14 +2,15 @@
 #
 # Table name: groups
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  description :text
-#  zipcode     :string           not null
-#  latitude    :float
-#  longitude   :float
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  name         :string           not null
+#  description  :text
+#  zipcode      :string           not null
+#  latitude     :float
+#  longitude    :float
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  chat_enabled :boolean          default(FALSE)
 #
 
 class Group < ApplicationRecord
@@ -36,6 +37,10 @@ class Group < ApplicationRecord
 
   def activate_digests
     memberships.update_all(digest_active: true)
+  end
+
+  def archive_messages!
+    chat_messages.update_all(archived_at: Time.now.utc)
   end
 
 end
