@@ -29,6 +29,7 @@
 #  avatar_updated_at      :datetime
 #  middlename             :string
 #  bio                    :text
+#  admin                  :boolean          default(FALSE)
 #
 
 ny_zips = ["10001", "11215", "12137"]
